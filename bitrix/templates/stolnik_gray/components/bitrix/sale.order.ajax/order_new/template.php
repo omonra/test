@@ -246,7 +246,7 @@ else
             </div>
         </li>
         <li>
-            <input onClick="submitForm('Y'); return false;" type="submit" value="Отправить заказ"/>
+            <input onClick="yaCounter26116233.reachGoal('order_make'); submitForm('Y'); return false;" type="submit" value="Отправить заказ"/>
         </li>
     </ul>
     </div>
