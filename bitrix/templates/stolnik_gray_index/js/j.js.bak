@@ -1,0 +1,1286 @@
+$(document).ready(function() {
+$('.hidden').hide();
+$('.more').click(function(){
+    $(this).next().slideToggle();
+});
+
+    $('.product_content .to_basket a.submit').fancybox({
+        padding: 0
+    });
+
+    $('.basket_block dl').click(function(){
+        console.log('123')
+        ;});
+    $('input:checkbox, input:radio').c_check();
+
+    $('.c_radio').click(function(){submitForm();});
+
+    $('select').cSelect();
+
+    $('#popular_list').jcarousel({
+
+    });
+
+//	$(".top_slider ul").jcarousel({
+//		animation: 500,
+//		auto: 8,
+//        scroll: 1,
+//        wrap: 'circular',
+//        initCallback: mycarousel_initCallback,
+//        buttonNextHTML: null,
+//        buttonPrevHTML: null
+//    });
+
+    $(".top_slider .items").simpleCarousel({
+        autoplay		: true,
+        autoplayDelay	: 8000,
+        showControls	: false,
+        animationType	: 'slideHorisontal'
+    });
+
+
+    $('.input_with_holder').input_with_holder();
+
+    $('.cloud-zoom').CloudZoom();
+
+
+    $(".cities_input").autocompleteArray([
+        'Магадан',
+        'Магас',
+        'Магнитогорск',
+        'Майкоп',
+        'Майский',
+        'Макаров',
+        'Макарьев',
+        'Макушино',
+        'Малая Вишера',
+        'Малгобек',
+        'Малмыж',
+        'Малоархангельск',
+        'Малоярославец',
+        'Мамадыш',
+        'Мамоново',
+        'Мантурово',
+        'Мариинск',
+        'Мариинский Посад',
+        'Маркс',
+        'Махачкала',
+        'Мглин',
+        'Мегион',
+        'Медвежьегорск',
+        'Медногорск',
+        'Медынь',
+        'Межгорье',
+        'Междуреченск',
+        'Мезень',
+        'Меленки',
+        'Мелеуз',
+        'Менделеевск',
+        'Мензелинск',
+        'Мещовск',
+        'Миасс',
+        'Микунь',
+        'Миллерово',
+        'Минеральные Воды',
+        'Минусинск',
+        'Миньяр',
+        'Мирный',
+        'Михайлов',
+        'Михайловка',
+        'Михайловск',
+        'Мичуринск',
+        'Могоча',
+        'Можайск',
+        'Можга',
+        'Моздок',
+        'Мончегорск',
+        'Морозовск',
+        'Моршанск',
+        'Мосальск',
+        'Москва',
+        'Московский',
+        'Муравленко',
+        'Мураши',
+        'Мурманск',
+        'Муром',
+        'Мценск',
+        'Мыски',
+        'Мытищи',
+        'Мышкин'
+    ],
+        {
+            delay:			10,
+            minChars:		1,
+            matchSubset:	1,
+            autoFill:		true,
+            matchContains:	1,
+            cacheLength:	10,
+            selectFirst:	true,
+            lineSeparator:	',',
+            maxItemsToShow:	10
+        }
+    );
+    /*
+     $(".cities_input").autocomplete("/citiesList.php", {
+     delay:			10,
+     minChars:		1,
+     matchSubset:	1,
+     autoFill:		true,
+     matchContains:	1,
+     cacheLength:	10,
+     selectFirst:	true,
+     lineSeparator:	',',
+     maxItemsToShow:	10
+     });
+     */
+
+
+
+
+
+    $('.product_info_tabs .tabs a').click(function () {
+        var $this = $(this),
+            $item = $this.closest('li');
+
+        if ( !$item.hasClass('active') ) {
+            $( $this.attr('href') ).addClass('product_info_block_active').siblings('.product_info_block_active').removeClass('product_info_block_active');
+            $item.addClass('active').siblings('li.active').removeClass('active');
+        }
+
+        return false;
+    });
+
+
+
+    $('.reviews .voted li').hover(
+        function () {
+            var $el = $(this);
+            $el.addClass('hover');
+            $el.prevAll().addClass('hover');
+            $el.nextAll().removeClass('hover');
+        },
+        function () {
+            $(this).parent().children().removeClass('hover');
+        }
+    );
+
+    $('.reviews .voted input').change(function () {
+        votedChange ( $(this).closest('li') );
+    });
+    var $defaultVote = $('.reviews .voted input:radio:checked').closest('li');
+    if ( $defaultVote.length ) {
+        votedChange ( $defaultVote );
+    }
+    function votedChange (el) {
+        el.addClass('active');
+        el.prevAll().addClass('active');
+        el.nextAll().removeClass('active');
+    }
+
+
+    // список в сортировке
+    set_sort();
+
+    $(document).mousedown(function(event) {
+        var $activeSort = $('.sort_show_list');
+
+        if ( !$(event.target).closest('.sort').length && $activeSort.length ) {
+            $activeSort.removeClass('sort_show_list');
+        }
+    });
+
+
+
+    // side filter
+    $('.side_block_filter').el_checked_check({
+        active_class: 'side_block_filter_checked',
+        clear_block: 'a.clear'
+    });
+
+    $('.side_block_filter_collapsible h2 .marker').click(function () {
+        $(this).closest('.side_block_filter_collapsible').toggleClass('side_block_filter_collapsed');
+    });
+
+
+    var $color_filter_check = $('.filter_list_color input:checkbox');
+    $color_filter_check.each(function () {
+        var $this = $(this);
+        if ( $this.is(':checked') ) {
+            $this.closest('li').addClass('active');
+        }
+    });
+    $color_filter_check.change(function () {
+        $(this).closest('li').toggleClass('active');
+    });
+
+    $('.val').text($('.active label input').attr('data-price'));
+
+    $('.product_color_list input:radio').change(function () {
+        //alert($(this).attr('data-price'));
+        $('.val').text($(this).attr('data-price'));
+        $('.product_color_list li').removeClass('active');
+        $(this).closest('li').addClass('active').siblings('.active').removeClass('active');
+        product_id=$(this).closest('li').attr('rel');
+        $('#product_info_block_wh .item').hide();
+        $('#product_info_block_wh .store_product_'+product_id).show();
+        $('#product_info_block_wh .store_product_'+product_id+':even').addClass('item_odd');
+        $('#product_info_block_wh .store_product_'+product_id+':odd').addClass('item_even');
+        if($('#product_info_block_wh .store_product_'+pr_id).length==0){
+            $('.product_info_tabs .tabs li:eq(1)').hide()
+        }else{
+            $('.product_info_tabs .tabs li:eq(1)').show()
+        }
+    });
+
+
+    // color in filter & product
+    if ($.browser.msie && ( $.browser.version == 7 || $.browser.version == 8 )) {
+        // ужасный костыль
+        // но иначе клик по иконке не работает...
+        $('.product_color_list .color_icon, .filter_list_color .color_icon').click(function () {
+            var $input = $(this).siblings('input');
+            if ( $input.is(':checkbox') ) {
+                if ( $input.is(':checked') ) {
+                    $input.attr('checked', false);
+                } else {
+                    $input.attr('checked', true);
+                }
+                $input.trigger('change');
+            } else if ( $input.is(':radio') &&  !$input.is(':checked') ) {
+                $input.attr('checked', true);
+                $input.trigger('change');
+            }
+        });
+    }
+
+
+
+
+    $('.product_content .photos .img_small a').click(function () {
+        var $link = $(this),
+            $item = $link.closest('li');
+
+        if ( !$item.hasClass('active') ) {
+            $( $link.attr('href') ).closest('li').addClass('active').siblings('li.active').removeClass('active');
+            $item.addClass('active').siblings('li.active').removeClass('active');
+            /*
+             $('.product_content .photos .img_big img').attr({
+             src: $link.attr('href'),
+             width: $link.attr('data-width'),
+             height: $link.attr('data-height')
+             });
+             $('.product_content .photos .img_big a').attr({
+             href: $link.attr('data-big')
+             });
+
+             $item.addClass('active').siblings('li.active').removeClass('active');
+             */
+        }
+        return false;
+    });
+
+
+    $('.product_content .photos .arrow-right a').click(function () {
+        var $link = $(this),
+            $item = $link.closest('li'),
+            $nextItem = $item.removeClass('active').next(),
+            $list = $item.closest('ul'),
+            $listSmall = $list.siblings('.img_small'),
+            $listSmallActiveItem = $listSmall.children('.active'),
+            $listSmallNextItem = $listSmallActiveItem.next();
+
+        if ( !$nextItem.length ) {
+            $nextItem = $list.children('li').first();
+        }
+
+        if ( !$listSmallNextItem.length ) {
+            $listSmallNextItem = $listSmall.children('li').first();
+        }
+
+
+        $item.removeClass('active');
+        $nextItem.addClass('active');
+
+        $listSmallActiveItem.removeClass('active');
+        $listSmallNextItem.addClass('active');
+
+        return false;
+    });
+
+    $('.product_content .photos .arrow-left a').click(function () {
+        var $link = $(this),
+            $item = $link.closest('li'),
+            $nextItem = $item.removeClass('active').prev(),
+            $list = $item.closest('ul'),
+            $listSmall = $list.siblings('.img_small'),
+            $listSmallActiveItem = $listSmall.children('.active'),
+            $listSmallNextItem = $listSmallActiveItem.prev();
+
+        if ( !$nextItem.length ) {
+            $nextItem = $list.children('li').last();
+        }
+
+        if ( !$listSmallNextItem.length ) {
+            $listSmallNextItem = $listSmall.children('li').last();
+        }
+
+
+        $item.removeClass('active');
+        $nextItem.addClass('active');
+
+        $listSmallActiveItem.removeClass('active');
+        $listSmallNextItem.addClass('active');
+
+        return false;
+    });
+
+
+
+
+    $('.product_content .to_basket a.submit').bind('click',function(){
+        var rel = $(this).attr('rel')
+        $.ajax({
+            type: "POST",
+            url: rel,
+            dataType: "html",
+            success: function(out){
+                $("#bind_cart").html(getBasketHTML(out));
+                $("#add_url").html('Добавлено');
+            }
+
+        });
+
+
+    })
+
+
+    $('a').mouseover(function(){
+        if($(this).attr('href')=='http://vk.com/sstolnik'){
+            var soc_w = $('.social').width()+15;
+            $('#vk_w').css({
+                'right': soc_w,
+                'top':'-100px'
+            })
+            $('#vk_w').stop();
+            $('#right_arrow').stop();
+            $('#vk_w').show();
+            $('#right_arrow').show();
+        }else{
+            $('#vk_w').stop();
+            $('#right_arrow').stop();
+            $('#vk_w').hide();
+            $('#right_arrow').hide();
+        }
+    })
+    $('#vk_w').mouseleave(function(){
+        setTimeout(function(){
+            $('#vk_w').stop();
+            $('#right_arrow').stop();
+            $('#vk_w').hide();
+            $('#right_arrow').hide();
+        },500)
+    })
+
+    $("#quick_url").click(function(){
+        $.get($(this).attr('rel'), function(){
+            $.fancybox({
+              href : "/quick/",
+              type : 'ajax'
+            });
+        })
+        return false;
+    })
+
+    function quickFormSubmit(){
+        var needSend = true;
+        $($("#order_form_id input")[index]).css('border-color', "#999");
+        $("#order_form_id input").each(function(index){
+            if ($($("#order_form_id input")[index]).val().trim()  == ""){
+                needSend = false;
+                $($("#order_form_id input")[index]).css('border-color', "red");
+            }
+        })
+        if (needSend)
+            submitForm("Y");
+        return false;
+    }
+});
+
+function getBasketHTML(html)
+{
+    txt = html.split('<!--start--><div id="bind_cart">');
+    txt = txt[1];
+    txt = txt.split('</div><!--end-->');
+    txt = txt[0];
+    return txt;
+}
+
+function set_sort(){
+    $('.sort dl').click(function () {
+        var $block = $(this).closest('.sort');
+
+        if ( $block.hasClass('sort_show_list') ) {
+            $block.removeClass('sort_show_list');
+        } else {
+            $block.addClass('sort_show_list');
+        }
+    });
+    $('.sort .list input').change(function () {
+        var $input = $(this),
+            $wrap = $input.closest('.sort');
+
+        $('.selected', $wrap).text( $input.closest('label').text() );
+        $input.closest('li').addClass('current').siblings('li.current').removeClass('current')
+        $wrap.removeClass('sort_show_list');
+    });
+}
+
+function mycarousel_initCallback(carousel) {
+    $('.jcarousel-control a').bind('click', function() {
+        carousel.scroll( $.jcarousel.intval( $(this).text() ) );
+        return false;
+    });
+
+
+    $('#mycarousel-next').bind('click', function() {
+        carousel.next();
+        return false;
+    });
+
+    $('#mycarousel-prev').bind('click', function() {
+        carousel.prev();
+        return false;
+    });
+};
+
+
+
+
+// el_checked_check
+;(function ( $ ) {
+    // плагин добавляет/удаляет соответствующий класс блоку
+    // в зависимости от того, есть-ли в нём выбранные чекбоксы или радиобаттоны,
+    // а также снимает выбор со всех элементов при клике на указыннай блок
+
+    var defaults = {
+        active_class: 'block_active',
+        clear_block: ''
+    }
+
+    function el_checked_check ( block, options ) {
+        var _this = this;
+
+        _this.options = $.extend( {}, defaults, options );
+
+        _this.block = $( block );
+        _this.clear = $( _this.options.clear_block, _this.block);
+        _this.elements = $( 'input[type = checkbox], input[type = radio]', _this.block);
+        _this.checked = 0; // колличество выбранных элементов
+        _this.is_active = false; // активен ли блок
+
+
+        _this.init();
+    }
+
+    $.extend(el_checked_check.prototype, {
+        init: function () {
+            var _this = this;
+
+            _this.clear.click(function () {
+                _this.uncheck();
+                return false;
+            });
+
+            _this.elements.change(function () {
+                if ( $(this).is(':radio') ) {
+                    _this.elements_check();
+                } else {
+                    if( $(this).is(':checked') ) {
+                        _this.checked++;
+                    } else {
+                        _this.checked--;
+                    }
+                }
+                _this.class_check();
+            });
+
+            _this.elements_check();
+        },
+        elements_check: function () {
+            var _this = this;
+
+            _this.elements.each(function () {
+                if ( $(this).is(':checked') ) {
+                    _this.checked++;
+                }
+            });
+            _this.class_check();
+        },
+        class_check: function () {
+            var _this = this;
+
+            if ( _this.checked > 0 && !_this.is_active ) {
+                _this.is_active = true;
+                _this.block.addClass( _this.options.active_class );
+            } else if( _this.checked == 0 && _this.is_active ) {
+                _this.is_active = false;
+                _this.block.removeClass( _this.options.active_class );
+            }
+        },
+        uncheck: function () {
+            var _this = this;
+
+            _this.elements.filter(':checked').attr('checked', false).trigger('change');
+            _this.checked = 0;
+            _this.class_check();
+        }
+    });
+
+    $.fn.el_checked_check = function (options) {
+        return this.each(function () {
+
+            if ( !$.data(this, 'plugin_el_checked_check') ) {
+                $.data(this, 'plugin_el_checked_check', new el_checked_check( this, options ));
+            }
+
+        });
+    }
+})(jQuery);
+
+
+
+//input with holder
+;(function ($) {
+    var defaults = {
+
+    };
+
+    function input_with_holder (element, holder, options) {
+        var $this = this;
+
+        $this.options = $.extend({}, defaults, options);
+        $this.element = element;
+        $this.holder = holder;
+        $this.input = $('input', $this.element);
+
+        $this.init();
+    }
+
+    $.extend(input_with_holder.prototype, {
+        init: function () {
+            var $this = this,
+                $element = $this.element,
+                $holder = $this.holder,
+                $input = $this.input;
+
+            if (!$element.hasClass('input_value_ok')) {
+                $input.val('');
+            }
+
+            $input
+                .change(function () {
+                    if($input.val() != '') {
+                        $holder.hide();
+                    }
+                })
+                .focus(function () {
+                    $holder.hide();
+                })
+                .blur(function () {
+                    if($input.val() == '') {
+                        $holder.show();
+                    }
+                });
+            $holder.click(function () {
+                $input.trigger('change');
+            });
+        }
+    });
+
+    $.fn.input_with_holder = function (options) {
+        return this.each(function () {
+            var $this = $(this),
+                $holder = $('.holder', $this);
+
+            if (!$.data(this, 'plugin_input_with_holder') && $holder.length) {
+                $.data(this, 'plugin_input_with_holder', new input_with_holder($this, $holder, options));
+            }
+
+        });
+    }
+})(jQuery);
+
+
+
+// custom checkbox
+;(function () {
+    var defaults = {
+        custom_class: ''
+    };
+
+    function c_check (el, options) {
+
+        this.options = $.extend({}, defaults, options);
+
+        this.element = $(el);
+        this.custom = $('<span></span>');
+        this.custom_class = '';
+
+        this.is_checked = this.element.is(':checked');
+        this.is_disabled = this.element.is(':disabled');
+
+        this.type = this.element.attr('type');
+
+        if (this.type == 'radio') {
+            this.group = $( 'input[name="' + this.element.attr('name') + '"]' ).not(this.element);
+        }
+
+        this.init();
+
+    }
+
+    $.extend(c_check.prototype, {
+
+        init: function () {
+            var _this = this;
+
+
+            _this.element.after( _this.custom );
+
+
+            switch (_this.type) {
+                case 'checkbox':
+                    _this.custom_class += _this.options.custom_class + ' c_checkbox ';
+                    break;
+
+                case 'radio':
+                    _this.custom_class += _this.options.custom_class + ' c_radio ';
+                    break;
+            }
+
+            if ( _this.is_checked ) {
+                _this.custom_class += 'c_checked ';
+            }
+            if (_this.element.is(':disabled')) {
+                _this.custom_class += 'c_disabled ';
+            }
+
+            _this.custom.addClass( _this.custom_class );
+            _this.element.addClass('form_hidden').after(_this.custom);
+
+
+
+            _this.element.change(function () {
+                _this.change();
+            });
+
+            /*
+             _this.element.focus(function () {
+             console.log( _this.element );
+             });
+             */
+
+            _this.custom.click(function () {
+                _this.check();
+                return false;
+            });
+
+
+
+        },
+        change: function () {
+            var _this = this;
+
+            _this.is_checked = _this.element.is(':checked');
+
+            if ( _this.is_checked ) {
+                _this.custom.addClass('c_checked').removeClass('c_checked_part');
+            } else {
+                _this.custom.removeClass('c_checked');
+            }
+
+            if ( _this.type == 'radio' ) {
+                _this.group.each(function () {
+                    var $input = $(this);
+                    $input.data('plugin_c_check').custom.removeClass('c_checked');
+                    $input.data('plugin_c_check').is_checked = false;
+                });
+            }
+
+        },
+        check: function () {
+            var _this = this;
+            if ( !_this.is_disabled ) {
+                if ( !_this.is_checked ) {
+                    _this.element.attr('checked', true).trigger('change');
+                } else if ( _this.type != 'radio' ) {
+                    _this.element.removeAttr('checked', '').trigger('change');
+                }
+            }
+        }
+
+    });
+
+
+    $.fn.c_check = function ( options) {
+        return this.each(function () {
+            if ( !$.data( this, 'plugin_c_check' ) ) {
+                $.data( this, 'plugin_c_check', new c_check ( this, options ) );
+            }
+
+        });
+    }
+
+})( jQuery );
+
+
+
+
+
+
+
+//custom select
+;(function ($) {
+    var defaults = {
+        addClass: ''
+    };
+
+    function cSelect (element, options) {
+        var $this = this;
+
+        $this.options = $.extend({}, defaults, options);
+        $this.element = $(element);
+
+        $this.wrapper;
+        $this.link;
+        $this.text;
+        $this.list;
+
+        $this.isActive = false;
+
+        $this.init();
+    }
+
+    $.extend(cSelect.prototype, {
+        init: function () {
+            var $this = this;
+
+            if (!$("#c_form_select_wrap").length) {
+                $('body').append('<div id="c_form_select_wrap"></div>');
+            };
+
+
+            // формируем кастомный селект и привязываемся к его элементам
+            $this.element.addClass('form_hidden').wrap('<div class="custom_select ' + $this.options.addClass + '"></div>');
+            $this.wrapper = $this.element.parent();
+
+            $this.wrapper.prepend('<div class="select_in"> <span class="select_text"></span><a href="#" class="jNiceSelectOpen"><i></i></a></div> <div class="select_bg"></div><ul class="jNiceSelectList"></ul>');
+            $this.link = $('a.jNiceSelectOpen', $this.wrapper);
+            $this.text = $('span.select_text', $this.wrapper);
+
+            $this.list = $('ul', $this.wrapper);
+            $('option', $this.element).each(function(i){
+                $this.list.append('<li><a href="#" data-index="'+ i +'">'+ this.text +'</a></li>');
+            });
+
+
+            // устанавливаем дефолтное значение
+            $('option', $this.element).each(function (index) {
+                var $el = $(this);
+                if ($el.is(':selected')) {
+                    $('a', $this.list).eq( index ).addClass('selected');
+                    $this.text.html( $el.html() );
+                }
+
+            });
+
+
+            // навешиваем события
+
+            $this.link.click(function () {
+                $this.showList();
+                return false;
+            });
+
+            $('a', $this.list).click(function () {
+                $this.select(this);
+                return false;
+            });
+
+            $(document).mousedown(function(event) {
+                if ( !$(event.target).closest('#c_form_select_wrap').length  && !$(event.target).closest($this.wrapper).length ) {
+                    $this.hideList();
+                }
+            });
+
+
+        },
+        showList: function () {
+            var $this = this;
+
+            if ($this.isActive == true) {
+                $this.hideList();
+                return false;
+            }
+
+            $this.isActive = true;
+
+            var elOffset = $this.wrapper.offset();
+            var elWidth = $this.wrapper.width();
+            var elHeight = $this.wrapper.height();
+            $this.list.appendTo('#c_form_select_wrap');
+            $('#c_form_select_wrap').addClass('c_form_select_wrap_active').css({
+                'left': elOffset.left,
+                'top': elOffset.top+elHeight,
+                'width': elWidth
+            });
+
+
+        },
+        hideList: function () {
+            var $this = this;
+
+            $('#c_form_select_wrap').removeClass('c_form_select_wrap_active').find('ul').appendTo( $this.wrapper );
+            $this.isActive = false;
+
+        },
+        select: function (el) {
+            var $this = this;
+
+            var $el = $(el),
+                selectIndex = $el.attr('data-index');
+
+            if (!$el.hasClass('selected')) {
+
+                $('a.selected', $this.list).removeClass('selected');
+                $el.addClass('selected');
+
+                $this.element[0].selectedIndex = selectIndex;
+                $this.text.html( $el.html() );
+
+                $this.element.trigger('change');
+
+            }
+
+            $this.hideList();
+
+        }
+
+
+    });
+
+    $.fn.cSelect = function (options) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_cSelect')) {
+                $.data(this, 'plugin_cSelect', new cSelect(this, options));
+            }
+
+        });
+    }
+})(jQuery);
+
+
+
+
+
+
+//cloud zoom 
+(function ($) {
+    function format(str) {
+        for (var i = 1; i < arguments.length; i++) {
+            str = str.replace('%' + (i - 1), arguments[i]);
+        }
+        return str;
+    }
+
+    function CloudZoom(jWin, opts) {
+        //console.log(opts);
+        var sImg = $('img', jWin);
+        var	img1;
+        var	img2;
+        var zoomDiv = null;
+        var	$mouseTrap = null;
+        var	lens = null;
+        var	$tint = null;
+        var	softFocus = null;
+        var	$ie6Fix = null;
+        var	zoomImage;
+        var controlTimer = 0;
+        var cw, ch;
+        var destU = 0;
+        var	destV = 0;
+        var currV = 0;
+        var currU = 0;
+        var filesLoaded = 0;
+        var mx,
+            my;
+        var ctx = this, zw;
+        // Display an image loading message. This message gets deleted when the images have loaded and the zoom init function is called.
+        // We add a small delay before the message is displayed to avoid the message flicking on then off again virtually immediately if the
+        // images load really fast, e.g. from the cache.
+        //var	ctx = this;
+        setTimeout(function () {
+            //						 <img src="/images/loading.gif"/>
+            if ($mouseTrap === null) {
+                var w = jWin.width();
+                jWin.parent().append(format('<div style="width:%0px;position:absolute;top:75%;left:%1px;text-align:center" class="cloud-zoom-loading" >Loading...</div>', w / 3, (w / 2) - (w / 6))).find(':last').css('opacity', 0.5);
+            }
+        }, 200);
+
+
+        var ie6FixRemove = function () {
+
+            if ($ie6Fix !== null) {
+                $ie6Fix.remove();
+                $ie6Fix = null;
+            }
+        };
+
+        // Removes cursor, tint layer, blur layer etc.
+        this.removeBits = function () {
+            //$mouseTrap.unbind();
+            if (lens) {
+                lens.remove();
+                lens = null;
+            }
+            if ($tint) {
+                $tint.remove();
+                $tint = null;
+            }
+            if (softFocus) {
+                softFocus.remove();
+                softFocus = null;
+            }
+            ie6FixRemove();
+
+            $('.cloud-zoom-loading', jWin.parent()).remove();
+        };
+
+
+        this.destroy = function () {
+            jWin.data('zoom', null);
+
+            if ($mouseTrap) {
+                $mouseTrap.unbind();
+                $mouseTrap.remove();
+                $mouseTrap = null;
+            }
+            if (zoomDiv) {
+                zoomDiv.remove();
+                zoomDiv = null;
+            }
+            //ie6FixRemove();
+            this.removeBits();
+            // DON'T FORGET TO REMOVE JQUERY 'DATA' VALUES
+        };
+
+
+        // This is called when the zoom window has faded out so it can be removed.
+        this.fadedOut = function () {
+
+            if (zoomDiv) {
+                zoomDiv.remove();
+                zoomDiv = null;
+            }
+            this.removeBits();
+            //ie6FixRemove();
+        };
+
+        this.controlLoop = function () {
+            if (lens) {
+                var x = (mx - sImg.offset().left - (cw * 0.5)) >> 0;
+                var y = (my - sImg.offset().top - (ch * 0.5)) >> 0;
+
+                if (x < 0) {
+                    x = 0;
+                }
+                else if (x > (sImg.outerWidth() - cw)) {
+                    x = (sImg.outerWidth() - cw);
+                }
+                if (y < 0) {
+                    y = 0;
+                }
+                else if (y > (sImg.outerHeight() - ch)) {
+                    y = (sImg.outerHeight() - ch);
+                }
+
+                lens.css({
+                    left: x,
+                    top: y
+                });
+                lens.css('background-position', (-x) + 'px ' + (-y) + 'px');
+
+                destU = (((x) / sImg.outerWidth()) * zoomImage.width) >> 0;
+                destV = (((y) / sImg.outerHeight()) * zoomImage.height) >> 0;
+                currU += (destU - currU) / opts.smoothMove;
+                currV += (destV - currV) / opts.smoothMove;
+
+                zoomDiv.css('background-position', (-(currU >> 0) + 'px ') + (-(currV >> 0) + 'px'));
+            }
+            controlTimer = setTimeout(function () {
+                ctx.controlLoop();
+            }, 30);
+        };
+
+        this.init2 = function (img, id) {
+            //console.log(img);
+            filesLoaded++;
+            //console.log(img.src + ' ' + id + ' ' + img.width);
+            if (id === 1) {
+                zoomImage = img;
+            }
+            //this.images[id] = img;
+            if (filesLoaded === 2) {
+                this.init();
+            }
+        };
+
+        /* Init function start.  */
+        this.init = function () {
+            // Remove loading message (if present);
+            $('.cloud-zoom-loading', jWin.parent()).remove();
+
+
+            /* Add a box (mouseTrap) over the small image to trap mouse events.
+             It has priority over zoom window to avoid issues with inner zoom.
+             We need the dummy background image as IE does not trap mouse events on
+             transparent parts of a div.
+             */
+            $mouseTrap = jWin.parent().append(format("<div class='mousetrap' style='background-image:url(\".\");z-index:999;position:absolute;width:%0px;height:%1px;left:%2px;top:%3px;\'></div>", sImg.outerWidth(), sImg.outerHeight(), 0, 0)).find(':last');
+
+            //////////////////////////////////////////////////////////////////////
+            /* Do as little as possible in mousemove event to prevent slowdown. */
+            $mouseTrap.bind('mousemove', this, function (event) {
+                // Just update the mouse position
+                mx = event.pageX;
+                my = event.pageY;
+            });
+            //////////////////////////////////////////////////////////////////////
+            $mouseTrap.bind('mouseleave', this, function (event) {
+                clearTimeout(controlTimer);
+                //event.data.removeBits();
+                if(lens) { lens.fadeOut(299); }
+                if($tint) { $tint.fadeOut(299); }
+                if(softFocus) { softFocus.fadeOut(299); }
+                zoomDiv.fadeOut(300, function () {
+                    ctx.fadedOut();
+                });
+                return false;
+            });
+            //////////////////////////////////////////////////////////////////////
+            $mouseTrap.bind('mouseenter', this, function (event) {
+                mx = event.pageX;
+                my = event.pageY;
+                zw = event.data;
+                if (zoomDiv) {
+                    zoomDiv.stop(true, false);
+                    zoomDiv.remove();
+                }
+
+                var xPos = opts.adjustX,
+                    yPos = opts.adjustY;
+
+                var siw = sImg.outerWidth();
+                var sih = sImg.outerHeight();
+
+                var w = opts.zoomWidth;
+                var h = opts.zoomHeight;
+                if (opts.zoomWidth == 'auto') {
+                    w = siw;
+                }
+                if (opts.zoomHeight == 'auto') {
+                    h = sih;
+                }
+                //$('#info').text( xPos + ' ' + yPos + ' ' + siw + ' ' + sih );
+                var appendTo = jWin.parent(); // attach to the wrapper
+                switch (opts.position) {
+                    case 'top':
+                        yPos -= h; // + opts.adjustY;
+                        break;
+                    case 'right':
+                        xPos += siw; // + opts.adjustX;
+                        break;
+                    case 'body':
+                        yPos = sImg.offset().top;
+                        xPos = siw + sImg.offset().left + 3;
+                        appendTo = $(opts.position);
+                        break;
+                    case 'bottom':
+                        yPos += sih; // + opts.adjustY;
+                        break;
+                    case 'left':
+                        xPos -= w; // + opts.adjustX;
+                        break;
+                    case 'inside':
+                        w = siw;
+                        h = sih;
+                        break;
+                    // All other values, try and find an id in the dom to attach to.
+                    default:
+                        appendTo = $('#' + opts.position);
+                        // If dom element doesn't exit, just use 'right' position as default.
+                        if (!appendTo.length) {
+                            appendTo = jWin;
+                            xPos += siw; //+ opts.adjustX;
+                            yPos += sih; // + opts.adjustY;
+                        } else {
+                            w = appendTo.innerWidth();
+                            h = appendTo.innerHeight();
+                        }
+                }
+                zoomDiv = appendTo.append(format('<div id="cloud-zoom-big" class="cloud-zoom-big" style="display:none;position:absolute;left:%0px;top:%1px;width:%2px;height:%3px;background-image:url(\'%4\');z-index:999;"></div>', xPos, yPos, w, h, zoomImage.src)).find(':last');
+
+                // Add the title from title tag.
+                if (sImg.attr('title') && opts.showTitle) {
+                    zoomDiv.append(format('<div class="cloud-zoom-title">%0</div>', sImg.attr('title'))).find(':last').css('opacity', opts.titleOpacity);
+                }
+
+                // Fix ie6 select elements wrong z-index bug. Placing an iFrame over the select element solves the issue...
+                if ($.browser.msie && $.browser.version < 7) {
+                    $ie6Fix = $('<iframe class="cloud-iframe" frameborder="0" src="#"></iframe>').css({
+                        position: "absolute",
+                        left: xPos,
+                        top: yPos,
+                        zIndex: 99,
+                        width: w,
+                        height: h
+                    }).insertBefore(zoomDiv);
+                }
+
+                zoomDiv.fadeIn(500);
+
+                if (lens) {
+                    lens.remove();
+                    lens = null;
+                } /* Work out size of cursor */
+                cw = (sImg.outerWidth() / zoomImage.width) * zoomDiv.width();
+                ch = (sImg.outerHeight() / zoomImage.height) * zoomDiv.height();
+
+                // Attach mouse, initially invisible to prevent first frame glitch
+                lens = jWin.append(format("<div class = 'cloud-zoom-lens' style='display:none;z-index:98;position:absolute;width:%0px;height:%1px;'></div>", cw, ch)).find(':last');
+
+                $mouseTrap.css('cursor', lens.css('cursor'));
+
+                var noTrans = false;
+
+                // Init tint layer if needed. (Not relevant if using inside mode)
+                if (opts.tint) {
+                    lens.css('background', 'url("' + sImg.attr('src') + '")');
+                    $tint = jWin.append(format('<div style="display:none;position:absolute; left:0px; top:0px; width:%0px; height:%1px; background-color:%2;" />', sImg.outerWidth(), sImg.outerHeight(), opts.tint)).find(':last');
+                    $tint.css('opacity', opts.tintOpacity);
+                    noTrans = true;
+                    $tint.fadeIn(500);
+
+                }
+                if (opts.softFocus) {
+                    lens.css('background', 'url("' + sImg.attr('src') + '")');
+                    softFocus = jWin.append(format('<div style="position:absolute;display:none;top:2px; left:2px; width:%0px; height:%1px;" />', sImg.outerWidth() - 2, sImg.outerHeight() - 2, opts.tint)).find(':last');
+                    softFocus.css('background', 'url("' + sImg.attr('src') + '")');
+                    softFocus.css('opacity', 0.5);
+                    noTrans = true;
+                    softFocus.fadeIn(500);
+                }
+
+                if (!noTrans) {
+                    lens.css('opacity', opts.lensOpacity);
+                }
+                if ( opts.position !== 'inside' ) { lens.fadeIn(500); }
+
+                // Start processing.
+                zw.controlLoop();
+
+                return; // Don't return false here otherwise opera will not detect change of the mouse pointer type.
+            });
+        };
+
+        img1 = new Image();
+        $(img1).load(function () {
+            ctx.init2(this, 0);
+        });
+        img1.src = sImg.attr('src');
+
+        img2 = new Image();
+        $(img2).load(function () {
+            ctx.init2(this, 1);
+        });
+        img2.src = jWin.attr('href');
+    }
+
+    $.fn.CloudZoom = function (options) {
+        //console.log('ss');
+        // IE6 background image flicker fix
+        try {
+            document.execCommand("BackgroundImageCache", false, true);
+        } catch (e) {}
+        this.each(function () {
+            var	relOpts, opts;
+            // Hmm...eval...slap on wrist.
+            eval('var	a = {' + $(this).attr('rel') + '}');
+            relOpts = a;
+            if ($(this).is('.cloud-zoom')) {
+                $(this).css({
+                    'position': 'relative',
+                    'display': 'block'
+                });
+                $('img', $(this)).css({
+                    'display': 'block'
+                });
+                // Wrap an outer div around the link so we can attach things without them becoming part of the link.
+                // But not if wrap already exists.
+                if ($(this).parent().attr('id') != 'wrap') {
+                    $(this).wrap('<div id="wrap" style="top:0px;z-index:9999;position:relative;"></div>');
+                }
+                opts = $.extend({}, $.fn.CloudZoom.defaults, options);
+                opts = $.extend({}, opts, relOpts);
+                $(this).data('zoom', new CloudZoom($(this), opts));
+
+            } else if ($(this).is('.cloud-zoom-gallery')) {
+                opts = $.extend({}, relOpts, options);
+                $(this).data('relOpts', opts);
+                $(this).bind('click', $(this), function (event) {
+                    var data = event.data.data('relOpts');
+                    // Destroy the previous zoom
+                    $('#' + data.useZoom).data('zoom').destroy();
+                    // Change the biglink to point to the new big image.
+                    $('#' + data.useZoom).attr('href', event.data.attr('href'));
+                    // Change the small image to point to the new small image.
+                    $('#' + data.useZoom + ' img').attr('src', event.data.data('relOpts').smallImage);
+                    // Init a new zoom with the new images.
+                    $('#' + event.data.data('relOpts').useZoom).CloudZoom();
+                    return false;
+                });
+            }
+        });
+        return this;
+    };
+
+    $.fn.CloudZoom.defaults = {
+        zoomWidth: 'auto',
+        zoomHeight: 'auto',
+        position: 'right',
+        tint: false,
+        tintOpacity: 0.5,
+        lensOpacity: 0.5,
+        softFocus: false,
+        smoothMove: 3,
+        showTitle: true,
+        titleOpacity: 0.5,
+        adjustX: 0,
+        adjustY: 0
+    };
+
+
+
+})(jQuery);
+
+function getProductHTML(html)
+{
+
+    txt = html.split('<!-- PRODUCT_START -->');
+    txt = txt[1];
+    txt = txt.split('<!-- PRODUCT_END -->');
+    txt = txt[0];
+    return txt;
+}
+
+

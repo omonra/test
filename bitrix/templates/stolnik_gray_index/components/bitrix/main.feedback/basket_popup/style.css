@@ -1,0 +1,10 @@
+div.mfeedback {}
+#basket_popup_form { width: 250px;}
+div.mf-text { font-size: 15px; line-height: 20px; text-align: center; color: #FF4200; margin-bottom: 15px;}
+div.mf-name, div.mf-email, div.mf-captcha, div.mf-message {width: 100%; padding-bottom:0.4em;}
+div.mf-name input, div.mf-email input, div.mf-name textarea {width:95%; padding: 3px; border: 1px solid #bababa; border-radius: 5px; }
+div.mf-message textarea {width: 95%;}
+span.mf-req {color:red;}
+div.mf-ok-text {color:green; font-weight:bold; padding-bottom: 1em;}
+
+.popup-window-center-column { text-align: center; }

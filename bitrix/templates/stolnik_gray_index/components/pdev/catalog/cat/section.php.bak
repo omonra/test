@@ -1,0 +1,913 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?CModule::IncludeModule("iblock")?>
+
+<?
+$preFilter=array();
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("news_women"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>105,
+        //прод
+        "SECTION_ID"=>314,
+        "INCLUDE_SUBSECTIONS"=>"Y",
+        "ACTIVE"=>"Y",
+        array(
+            "LOGIC"=>"OR",
+            ">=DATE_CREATE"=>ConvertTimeStamp(time()-3600*24*7,"FULL"),
+            "PROPERTY_NOVINKA"=>"true",
+        ),
+    );
+}
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("spec_women"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>105,
+        //прод
+        "SECTION_ID"=>314,
+        "ACTIVE"=>"Y",
+        "PROPERTY_RASPRODAZHA"=>"true",
+        "INCLUDE_SUBSECTIONS"=>"Y"
+    );
+}
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("news_men"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>127,
+        //прод
+        "SECTION_ID"=>284,
+        "INCLUDE_SUBSECTIONS"=>"Y",
+        "ACTIVE"=>"Y",
+        array(
+            "LOGIC"=>"OR",
+            ">DATE_CREATE"=>ConvertTimeStamp(time()-3600*24*7,"FULL"),
+            "PROPERTY_NOVINKA"=>"true",
+        ),
+    );
+}
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("spec_men"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>127,
+        //прод
+        "SECTION_ID"=>284,
+        "ACTIVE"=>"Y",
+        "PROPERTY_RASPRODAZHA"=>"true",
+        "INCLUDE_SUBSECTIONS"=>"Y"
+    );
+}
+
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("news_aksessuary"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>274,
+        //прод
+        "SECTION_ID"=>308,
+        "INCLUDE_SUBSECTIONS"=>"Y",
+        "ACTIVE"=>"Y",
+        array(
+            "LOGIC"=>"OR",
+            ">DATE_CREATE"=>ConvertTimeStamp(time()-3600*24*7,"FULL"),
+            "PROPERTY_NOVINKA"=>"true",
+        ),
+    );
+}
+if(in_array($arResult["VARIABLES"]["SECTION_CODE"],array("spec_aksessuary"))){
+    $arResult["VARIABLES"]["SECTION_CODE"]='';
+    $preFilter=array(
+        //дев
+        //"SECTION_ID"=>274,
+        //прод
+        "SECTION_ID"=>308,
+        "ACTIVE"=>"Y",
+        "PROPERTY_RASPRODAZHA"=>"true",
+        "INCLUDE_SUBSECTIONS"=>"Y"
+    );
+}
+
+if(isset($_SESSION["CAT_URL"]) && $_SESSION["CAT_URL"]!=$APPLICATION->GetCurPage()){
+    unset($_SESSION["arrFSize"]);
+    unset($_SESSION["arrFColor"]);
+    unset($_SESSION["arrFBrand"]);
+    unset($_SESSION["arrFCollection"]);
+    unset($_SESSION["arrFPricemax"]);
+    unset($_SESSION["arrFPricemin"]);
+    $arrFPricemax=0;
+}
+
+$_SESSION["CAT_URL"]=$APPLICATION->GetCurPage();
+
+if(isset($_SESSION["arrFNews"]))
+    $arrFNews=$_SESSION["arrFNews"];
+else
+    $arrFNews=false;
+
+if(isset($_SESSION["arrFSpec"]))
+    $arrFSpec=$_SESSION["arrFSpec"];
+else
+    $arrFSpec=false;
+
+if(isset($_SESSION["arrFCategory"]))
+    $arrFCategory=$_SESSION["arrFCategory"];
+else
+    $arrFCategory=array();
+
+if(isset($_SESSION["arrFCollection"]))
+    $arrFCollection=$_SESSION["arrFCollection"];
+else
+    $arrFCollection=array();
+
+if(isset($_SESSION["arrFSize"]))
+    $arrFSize=$_SESSION["arrFSize"];
+else
+    $arrFSize=array();
+
+if(isset($_SESSION["arrFColor"]))
+    $arrFColor=$_SESSION["arrFColor"];
+else
+    $arrFColor=array();
+
+if(isset($_SESSION["arrFBrand"]))
+    $arrFBrand=$_SESSION["arrFBrand"];
+else
+    $arrFBrand=array();
+
+if(isset($_SESSION["arrFPricemin"]))
+    $arrFPricemin=$_SESSION["arrFPricemin"];
+else
+    $arrFPricemin=0;
+
+?>
+<?$APPLICATION->IncludeComponent(
+    "bitrix:breadcrumb",
+    "",
+    Array(
+        "START_FROM" => "0",
+        "PATH" => "",
+        "SITE_ID" => "s1"
+    ),
+    false
+);?>
+<div class="sidebar">
+
+<?if($arParams["USE_FILTER"]=="Y"):?>
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:catalog.filter",
+        "",
+        Array(
+            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+            "FILTER_NAME" => $arParams["FILTER_NAME"],
+            "FIELD_CODE" => $arParams["FILTER_FIELD_CODE"],
+            "PROPERTY_CODE" => $arParams["FILTER_PROPERTY_CODE"],
+            "PRICE_CODE" => $arParams["FILTER_PRICE_CODE"],
+            "OFFERS_FIELD_CODE" => $arParams["FILTER_OFFERS_FIELD_CODE"],
+            "OFFERS_PROPERTY_CODE" => $arParams["FILTER_OFFERS_PROPERTY_CODE"],
+            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+            "CACHE_TIME" => $arParams["CACHE_TIME"],
+            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+        ),
+        $component
+    );
+    ?>
+<?endif?>
+<?/*---------используем свой фильтр---------*/?>
+<?
+$IBLOCK_ID=$arParams["IBLOCK_ID"];
+$IBLOCK_ID_OFFERS=5;
+$IBLOCK_ID_COLOR=10;
+?>
+
+<?
+$maxprice=0;
+$arFilterPrice=array(
+    "IBLOCK_ID"=>$IBLOCK_ID,
+    "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
+    "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
+);
+$arFilterPrice=array_merge($arFilterPrice,$preFilter);
+
+$res=CIBlockElement::GetList(
+    array("PROPERTY_PRICE"=>"desc"),
+    $arFilterPrice,
+    false,
+    array("nTopCount"=>1),
+    array("ID","IBLOCK_ID","PROPERTY_PRICE")
+);
+if ($arFields=$res->GetNext()){
+    $maxprice=$arFields["PROPERTY_PRICE_VALUE"];
+}
+if(isset($_SESSION["arrFPricemax"]) && intval($maxprice)>0)
+    $arrFPricemax=$_SESSION["arrFPricemax"];
+else
+    $arrFPricemax=$maxprice;
+
+
+
+$arCollection=array();
+//$arBrand=array();
+$arSize=array();
+$arColor=array();
+$arNews=false;
+$arSpec=false;
+$arFilter = Array(
+    "IBLOCK_ID"=>$IBLOCK_ID,
+    "ACTIVE"=>"Y",
+    "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
+    "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
+);
+$arFilter=array_merge($arFilter,$preFilter);
+$res = CIBlockElement::GetList(Array(), $arFilter,false,false,array("ID","IBLOCK_ID","PROPERTY_COLECTION","PROPERTY_BRAND","PROPERTY_NEWS","PROPERTY_SPEC"));
+$idlist=array();
+while($ar_fields = $res->GetNext())
+{
+    $idlist[]=$ar_fields["ID"];
+
+    $key=array_search($ar_fields["PROPERTY_COLECTION_VALUE"],$arCollection);
+    if($key===false && strlen($ar_fields["PROPERTY_COLECTION_VALUE"])>0){
+        $arCollection[$ar_fields["PROPERTY_COLECTION_ENUM_ID"]]=$ar_fields["PROPERTY_COLECTION_VALUE"];
+    }
+    /*$key=array_search($ar_fields["PROPERTY_BRAND_VALUE"],$arBrand);
+    if($key===false && strlen($ar_fields["PROPERTY_BRAND_VALUE"])>0){
+        $arBrand[$ar_fields["PROPERTY_BRAND_ENUM_ID"]]=$ar_fields["PROPERTY_BRAND_VALUE"];
+    }*/
+
+    if($ar_fields["PROPERTY_NEWS_VALUE"]=="true"){
+        $arNews=true;
+    }
+    if($ar_fields["PROPERTY_SPEC_VALUE"]=="true"){
+        $arSpec=true;
+    }
+
+}
+$arFilter2 = Array(
+    "IBLOCK_ID"=>$IBLOCK_ID_OFFERS,
+    "ACTIVE"=>"Y",
+    "PROPERTY_CML2_LINK"=>$idlist,
+);
+
+$res2 = CIBlockElement::GetList(Array(), $arFilter2,false,false,array("ID","IBLOCK_ID","PROPERTY_ITEM_COLOR_LIST","PROPERTY_SIZE"));
+while($ar_fields2 = $res2->GetNext())
+{
+    if(strlen($ar_fields2["PROPERTY_SIZE_VALUE"])>0)
+        if(array_search($ar_fields2["PROPERTY_SIZE_VALUE"],$arSize)===false)
+            $arSize[]=$ar_fields2["PROPERTY_SIZE_VALUE"];
+
+    /*$key=array_search("Размер",$ar_fields2["PROPERTY_CML2_ATTRIBUTES_DESCRIPTION"]);
+    if(!($key===false) && $ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key]!='0'){
+        if(array_search($ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key],$arSize)===false){
+            $arSize[]=$ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key];
+        }
+    }*/
+    if(strlen($ar_fields2["PROPERTY_ITEM_COLOR_LIST_VALUE"])>0)
+        if(array_search($ar_fields2["PROPERTY_ITEM_COLOR_LIST_VALUE"],$arColor)===false)
+            $arColor[]=$ar_fields2["PROPERTY_ITEM_COLOR_LIST_VALUE"];
+    /*$key=array_search("Цвет",$ar_fields2["PROPERTY_CML2_ATTRIBUTES_DESCRIPTION"]);
+    if(!($key===false) && $ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key]!='0'){
+        if(array_search($ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key],$arColor)===false){
+            $arColor[]=$ar_fields2["PROPERTY_CML2_ATTRIBUTES_VALUE"][$key];
+        }
+    }*/
+}
+
+//Обработка цветов
+$temp=array();
+foreach($arColor as $item){
+    $arFilter = Array(
+        "IBLOCK_ID"=>$IBLOCK_ID_COLOR,
+        "ACTIVE"=>"Y",
+        array(
+            "LOGIC"=>"OR",
+            "NAME" => $item,
+            "PROPERTY_item_color_list" => $item,
+        )
+
+    );
+    $res = CIBlockElement::GetList(Array(), $arFilter,false,false,array("ID","NAME","IBLOCK_ID","PREVIEW_PICTURE"));
+    $url='';
+    while($ar_fields = $res->GetNext())
+    {
+        $url=CFile::GetPath($ar_fields["PREVIEW_PICTURE"]);
+        $temp[]=array("NAME"=>$item,"TEXT"=>$ar_fields["NAME"],"URL"=>$url);
+    }
+
+}
+$arColor=$temp;
+
+?>
+<script>
+    $(document).ready(function(){
+        var priceChangeTimeout,
+            filter_price_input_from = $( "#filter_price_range_input_from" ),
+            filter_price_text_from = $( "#filter_price_range_text_from" ),
+            filter_price_input_to = $( "#filter_price_range_input_to" ),
+            filter_price_text_to = $( "#filter_price_range_text_to" ),
+            filter_price_range_from, filter_price_range_to;
+
+
+        $( "#filter_price_range" ).slider({
+            range: true,
+            min: 0,
+            max: <?=round($maxprice)?>,
+            step: <?=round($maxprice/20)?>,
+            values: [ <?=$arrFPricemin?>, <?=$arrFPricemax?> ],
+            slide: function( event, ui ) {
+
+                if ( filter_price_input_from.val() != ui.values[ 0 ] ) {
+                    filter_price_input_from.val( ui.values[ 0 ] );
+                    filter_price_text_from.html( price( ui.values[ 0 ] ) );
+
+                    clearTimeout(priceChangeTimeout);
+                    priceChangeTimeout = setTimeout(function () {
+                        load_data( filter_price_input_from );
+                    }, 500);
+                } else if ( filter_price_input_to.val() != ui.values[ 1 ] ) {
+                    filter_price_input_to.val( ui.values[ 1 ] );
+                    filter_price_text_to.html( price( ui.values[ 1 ] ) );
+
+                    clearTimeout(priceChangeTimeout);
+                    priceChangeTimeout = setTimeout(function () {
+                        load_data( filter_price_input_to );
+                    }, 500);
+                }
+
+            }
+        });
+        filter_price_range_from = $( "#filter_price_range" ).slider( "values", 0 );
+        filter_price_range_to = $( "#filter_price_range" ).slider( "values", 1 );
+
+        filter_price_input_from.val( filter_price_range_from );
+        filter_price_text_from.html( price( filter_price_range_from ) );
+
+        filter_price_input_to.val( filter_price_range_to );
+        filter_price_text_to.html( price( filter_price_range_to ) );
+
+
+        $('.filter_list .checkbox').bind('change',function(){
+            load_data(this);
+        });
+
+
+        $('.side_block .clear').bind('click',function(){
+            load_data(this)
+        });
+
+    });
+
+    function price (val) {
+        val = val.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,');
+        return '<strong>' + val + '</strong> руб';
+    }
+
+    function load_data(obj){
+        $("#product_html").append('<div id="load_filter"></div>');
+
+        $.ajax({
+            type: "GET",
+            url: "<?=$APPLICATION->GetCurPage()?>",
+            data: "SET_FILTER=Y&"+$(obj).attr('rel')+"="+$(obj).val()+"&set="+$(obj).attr('checked')<?if(isset($_REQUEST["sort"]) && isset($_REQUEST["order"])):?>+"&sort=<?if(isset($_REQUEST["sort"]))echo $_REQUEST["sort"]?>&order=<?if(isset($_REQUEST["order"]))echo $_REQUEST["order"]?>"<?endif;?>,
+            success: function(data){
+                $("#product_html").html(getProductHTML(data));
+                set_sort();
+
+            }
+        });
+    }
+</script>
+
+<form action="#">
+
+    <?if($arNews || $arSpec):?>
+        <div class="side_block side_block_filter side_block_first ">
+            <h2>Интересные предложения</h2>
+
+            <ul class="filter_list">
+                <?if($arNews):?><li><label for="product_news"><input <?if ($arrFNews=="Y"):?>checked="checked" <?endif;?>rel="product_news" id="product_news" class="checkbox" type="checkbox" name="product_news" value="Y"> Новинки</label></li><?endif;?>
+                <?if($arSpec):?><li><label for="product_spec"><input <?if ($arrFSpec=="Y"):?>checked="checked" <?endif;?>rel="product_spec" id="product_spec" class="checkbox" type="checkbox" name="product_spec" value="Y"> Распродажа</label></li><?endif;?>
+            </ul>
+
+            <a class="clear" rel="news_spec" href="#">очистить</a>
+        </div>
+    <?endif;?>
+
+
+    <?if(isset($preFilter["INCLUDE_SUBSECTIONS"]) && $preFilter["INCLUDE_SUBSECTIONS"]=="Y"):?>
+        <?
+        //выбераем только те категории которые есть у товаров
+        $seclist=array();
+        $res = CIBlockElement::GetList(Array(), $preFilter,array("IBLOCK_SECTION_ID"));
+        while($ar_fields = $res->GetNext())
+        {
+            $seclist[]=($ar_fields["IBLOCK_SECTION_ID"]);
+        }
+
+        $arFilterCat = Array(
+            'IBLOCK_ID'=>$IBLOCK_ID,
+            'ID'=>$seclist,
+        );
+        $arFilterCat["SECTION_ID"]=$preFilter["SECTION_ID"];
+        $arFilterCat["ACTIVE"]="Y";
+        $arCategory=array();
+        if(!empty($seclist)){
+            $db_list = CIBlockSection::GetList(Array('name'=>'asc'), $arFilterCat,false,array("UF_BANNER_NAME"));
+            while($ar_result = $db_list->GetNext())
+            {
+                $arCategory[$ar_result["ID"]]=$ar_result["NAME"];
+            }
+        }
+
+        //Очищаем категории от лишних выбранных
+        $temp_cat=array_keys($arCategory);
+        $temp_1=$arrFCategory;
+        foreach($temp_1 as $key=>$item){
+            if(!in_array($item,$temp_cat)){
+                unset($arrFCategory[$key]);
+            }
+        }
+
+        $temp_cat=array_keys($arCollection);
+        $temp_1=$arrFCollection;
+        foreach($temp_1 as $key=>$item){
+            if(!in_array($item,$temp_cat)){
+                unset($arrFCollection[$key]);
+            }
+        }
+
+        $temp_cat=array_keys($arSize);
+        $temp_1=$arrFSize;
+        foreach($temp_1 as $key=>$item){
+            if(!in_array($item,$temp_cat)){
+                unset($arrFSize[$key]);
+            }
+        }
+
+        $temp_cat=array_keys($arColor);
+        $temp_1=$arrFColor;
+        foreach($temp_1 as $key=>$item){
+            if(!in_array($item,$temp_cat)){
+                unset($arrFColor[$key]);
+            }
+        }
+
+        unset($temp_cat);
+        unset($temp_1);
+        ?>
+
+        <div class="side_block side_block_filter side_block_first ">
+            <h2>Категории продукта</h2>
+            <ul class="filter_list">
+                <?foreach($arCategory as $key=>$item):?>
+                    <li><label for="product_category_<?=$key?>"><input <?if(in_array($key,$arrFCategory)):?>checked="checked" <?endif;?>rel="category" id="product_category_<?=$key?>" class="checkbox" type="checkbox" name="product_category[]" value="<?=$key?>"> <?=$item?></label></li>
+                <?endforeach;?>
+            </ul>
+
+            <a class="clear" rel="clear_category" href="#">очистить</a>
+        </div>
+    <?endif;?>
+    <?if(count($arCollection)>0):?>
+        <div class="side_block side_block_filter side_block_first side_block_filter_collapsible">
+			<h2><span class="marker">Сезон</span></h2>
+            <ul class="filter_list">
+                <?foreach($arCollection as $key=>$item):?>
+                    <li><label for="product_type_<?=$key?>"><input <?if(in_array($key,$arrFCollection)):?>checked="checked" <?endif;?>rel="collection" id="product_type_<?=$key?>" class="checkbox" type="checkbox" name="product_type[]" value="<?=$key?>"> <?=$item?></label></li>
+                <?endforeach;?>
+            </ul>
+
+            <a class="clear" rel="clear_collection" href="#">очистить</a>
+        </div>
+    <?endif;?>
+    <?if(count($arSize)>0):?>
+        <div class="side_block side_block_filter side_block_filter_collapsible">
+            <h2><span class="marker">Размеры</span></h2>
+
+            <ul class="filter_list filter_list_two_col">
+
+                <?foreach($arSize as $key=>$item):?>
+                    <li><label for="product_size_<?=$key?>"><input <?if(in_array($item,$arrFSize)):?>checked="checked" <?endif;?>rel="size" autocomplete="off" id="product_size_<?=$key?>" class="checkbox in_t_size" type="checkbox" name="product_size[]" value="<?=$item?>"><?=$item?></label></li>
+                <?endforeach;?>
+
+            </ul>
+
+            <a class="clear" rel="clear_size" href="#">очистить</a>
+        </div>
+    <?endif;?>
+    <div class="side_block side_block_filter">
+        <h2>Диапазон цены</h2>
+
+
+        <div class="filter_price_range_wrap"><div id="filter_price_range"></div></div>
+
+        <div id="filter_price_range_text_from" class="filter_price_range_text_from"></div>
+        <div id="filter_price_range_text_to" class="filter_price_range_text_to"></div>
+
+        <input rel="pricemin" id="filter_price_range_input_from" type="hidden" name="price_range_from" value="">
+        <input rel="pricemax" id="filter_price_range_input_to" type="hidden" name="price_range_to" value="">
+
+    </div>
+    <?if(count($arColor)>0):?>
+        <div class="side_block side_block_filter side_block_filter_collapsible side_block_filter_collapsed">
+            <h2><span class="marker">Цвета</span></h2>
+
+            <ul class="filter_list filter_list_two_col filter_list_color">
+                <?foreach($arColor as $key=>$item):?>
+                    <li><label for="product_color_<?=$key?>"><input <?if(in_array($item["NAME"],$arrFColor)):?>checked="checked" <?endif;?>rel="color" id="product_color_<?=$key?>" class="checkbox" type="checkbox" name="product_color[]" value="<?=$item["NAME"]?>"><?=$item["TEXT"]?><img class="color_icon" src="<?=$item["URL"]?>" width="10" height="10" alt="" title="<?=$item["NAME"]?>"></label></li>
+                <?endforeach;?>
+            </ul>
+
+            <a class="clear" rel="clear_color" href="#">очистить</a>
+        </div>
+    <?endif;?>
+    <?/*if(count($arBrand)>0):?>
+    <div class="side_block side_block_filter side_block_filter_collapsible">
+        <h2><span class="marker"></span> Фирма</h2>
+
+        <ul class="filter_list">
+            <?foreach($arBrand as $key=>$item):?>
+            <li><label for="product_firm_<?=$key?>"><input <?if(in_array($key,$arrFBrand)):?>checked="checked" <?endif;?>rel="brand" id="product_firm_<?=$key?>" class="checkbox" type="checkbox" name="product_firm" value="<?=$key?>"> <?=$item?></label></li>
+            <?endforeach;?>
+        </ul>
+
+        <a class="clear" rel="clear_brand" href="#">очистить</a>
+    </div>
+    <?endif;*/?>
+</form>
+
+<?
+$VISITED = $APPLICATION->get_cookie("VISITED");
+
+if (isset($VISITED) && strlen($VISITED)>0)
+    $VISITED=unserialize($VISITED);
+else
+    $VISITED=array();
+
+
+$arVisite=array();
+
+if(count($VISITED)>0 && $VISITED[0]>0){
+    $arFilter = Array(
+        "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+        "ID"=>$VISITED,
+        "ACTION"=>"Y",
+    );
+    $res = CIBlockElement::GetList(Array(), $arFilter,false,false,array("ID","IBLOCK_ID","NAME","DETAIL_PAGE_URL","DETAIL_PICTURE","PROPERTY_PRICE"));
+    while($ar_fields = $res->GetNext())
+    {
+        $arVisite[]=$ar_fields;
+    }
+}
+?>
+<?if(count($arVisite)>0):?>
+    <div class="recently_viewed">
+        <h2>Вы недавно смотрели</h2>
+
+        <ul class="item_popular_list">
+            <?foreach($arVisite as $item):?>
+                <li class="item">
+                    <?if($item["DETAIL_PICTURE"]>0):?>
+                        <? $cfile=CFile::ResizeImageGet($item["DETAIL_PICTURE"], array('width'=>103, 'height'=>300), BX_RESIZE_IMAGE_PROPORTIONAL, true);?>
+                        <a href="<?=$item["DETAIL_PAGE_URL"]?>"><img class="preview" src="<?=$cfile["src"]?>" width="103" alt=""></a>
+                    <?else:?>
+                        <a href="<?=$item["DETAIL_PAGE_URL"]?>"><img class="preview" src="<?=SITE_TEMPLATE_PATH?>/images/nopic.jpg" width="103" alt=""></a>
+                    <?endif;/*?>
+                    <div class="name"><a href="<?=$item["DETAIL_PAGE_URL"]?>"><?=$item["NAME"]?></a></div>
+                    <?if(strlen($item["PROPERTY_PRICE_VALUE"])>0):?>
+                        <div class="price"><?=$item["PROPERTY_PRICE_VALUE"]?> руб.</div>
+                    <?endif;*/?>
+                </li>
+            <?endforeach;?>
+        </ul>
+
+    </div>
+<?endif;?>
+</div>
+
+<?
+//Обрабатываем фильтр
+global $arrFilterCat;
+
+//if(isset($_SESSION["arrFilterCat"]))
+//    $arrFilterCat=$_SESSION["arrFilterCat"];
+//else
+$arrFilterCat=array();
+
+
+
+/*-----------------filter size-------------------*/
+if (isset($_REQUEST["size"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFSize[]=$_REQUEST["size"];
+    else{
+        $key=array_search($_REQUEST["size"],$arrFSize);
+        unset($arrFSize[$key]);
+    }
+}
+
+
+if(isset($_REQUEST["clear_size"])){
+    $arrFSize=array();
+}
+
+if(count($arrFSize)>0){
+    $arrFilterCat["OFFERS"]["PROPERTY_SIZE"]=$arrFSize;
+}
+
+/*-----------------filter color-------------------*/
+if (isset($_REQUEST["color"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFColor[]=$_REQUEST["color"];
+    else{
+        $key=array_search($_REQUEST["color"],$arrFColor);
+        unset($arrFColor[$key]);
+    }
+}
+
+if(isset($_REQUEST["clear_color"])){
+    $arrFColor=array();
+}
+
+if(count($arrFColor)>0){
+    $arrFilterCat["OFFERS"]["PROPERTY_ITEM_COLOR_LIST"]=$arrFColor;
+}
+
+/*-----------------filter brand-------------------*/
+if (isset($_REQUEST["brand"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFBrand[]=iconv('UTF-8','CP1251',$_REQUEST["brand"]);
+    else{
+        $key=array_search($_REQUEST["brand"],$arrFBrand);
+        unset($arrFBrand[$key]);
+    }
+}
+
+if(isset($_REQUEST["clear_brand"])){
+    $arrFBrand=array();
+}
+
+if(count($arrFBrand)>0){
+    $arrFilterCat["PROPERTY_BRAND"]=$arrFBrand;
+}
+
+/*-----------------filter new spec--------------------*/
+
+if (isset($_REQUEST["product_news"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFNews=$_REQUEST["product_news"];
+    else{
+        $arrFNews=false;
+    }
+}
+
+if (isset($_REQUEST["product_spec"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFSpec=$_REQUEST["product_spec"];
+    else{
+        $arrFSpec=false;
+    }
+}
+
+if(isset($_REQUEST["clear_news_spec"])){
+    $arrFNews=false;
+    $arrFSpec=false;
+}
+
+
+/*-----------------filter category-------------------*/
+if (isset($_REQUEST["category"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFCategory[]=$_REQUEST["category"];
+    else{
+        $key=array_search($_REQUEST["category"],$arrFCategory);
+        unset($arrFCategory[$key]);
+    }
+}
+
+if(isset($_REQUEST["clear_category"])){
+    $arrFCategory=array();
+}
+if(count($arrFCategory)>0){
+    $arrFilterCat["SECTION_ID"]=$arrFCategory;
+    //$arResult["VARIABLES"]["SECTION_ID"]=$arrFCategory;
+}
+
+/*-----------------filter kollection-------------------*/
+if (isset($_REQUEST["collection"])){
+    if(isset($_REQUEST["set"]) && $_REQUEST["set"]=="checked")
+        $arrFCollection[]=$_REQUEST["collection"];
+    else{
+        $key=array_search($_REQUEST["collection"],$arrFCollection);
+        unset($arrFCollection[$key]);
+    }
+}
+
+if(isset($_REQUEST["clear_collection"])){
+    $arrFCollection=array();
+}
+if(count($arrFCollection)>0){
+    $arrFilterCat["PROPERTY_COLECTION"]=$arrFCollection;
+}
+
+/*-----------------filter pricemin-------------------*/
+if (isset($_REQUEST["pricemin"])){
+    $arrFPricemin=$_REQUEST["pricemin"];
+}
+
+if($arrFPricemin>0){
+    $arrFilterCat[">=PROPERTY_PRICE"]=$arrFPricemin;
+}
+
+
+/*-----------------filter pricemax-------------------*/
+if (isset($_REQUEST["pricemax"])){
+    $arrFPricemax=$_REQUEST["pricemax"];
+}
+
+
+
+if($arrFPricemax>0){
+    $arrFilterCat["<=PROPERTY_PRICE"]=$arrFPricemax;
+}
+
+
+/*-------news--------*/
+/*if (isset($_REQUEST["product_news"])){
+    $arrFilterCat["PROPERTY_NEWS"]='true';
+}*/
+
+
+
+if ($arrFNews=="Y"){
+    $arrFilterCat["PROPERTY_NEWS"]='true';
+}
+
+/*-------news--------*/
+/*if (isset($_REQUEST["product_spec"])){
+    $arrFilterCat["PROPERTY_SPEC"]='true';
+}*/
+
+if ($arrFSpec=="Y"){
+    $arrFilterCat["PROPERTY_SPEC"]='true';
+}
+
+$_SESSION["arrFNews"]=$arrFNews;
+$_SESSION["arrFSpec"]=$arrFSpec;
+$_SESSION["arrFSize"]=$arrFSize;
+$_SESSION["arrFColor"]=$arrFColor;
+$_SESSION["arrFBrand"]=$arrFBrand;
+$_SESSION["arrFCategory"]=$arrFCategory;
+$_SESSION["arrFCollection"]=$arrFCollection;
+$_SESSION["arrFPricemax"]=$arrFPricemax;
+$_SESSION["arrFPricemin"]=$arrFPricemin;
+
+
+$arAvailableSort = array(
+    "price" => Array("PROPERTY_PRICE", "asc"),
+);
+
+//$sort = array_key_exists("sort", $_REQUEST) && array_key_exists(ToLower($_REQUEST["sort"]), $arAvailableSort) ? $arAvailableSort[ToLower($_REQUEST["sort"])][0] : "PROPERTY_PRICE";
+//$sort_order = array_key_exists("order", $_REQUEST) && in_array(ToLower($_REQUEST["order"]), Array("asc", "desc")) ? ToLower($_REQUEST["order"]) : $arAvailableSort[$sort][1];
+
+if ($arrFNews!="Y")
+{
+    $sort = array_key_exists("sort", $_REQUEST) && array_key_exists(ToLower($_REQUEST["sort"]), $arAvailableSort) ? $arAvailableSort[ToLower($_REQUEST["sort"])][0] : "created_date";
+    $sort_order = array_key_exists("order", $_REQUEST) && in_array(ToLower($_REQUEST["order"]), Array("asc", "desc")) ? ToLower($_REQUEST["order"]) : "desc";
+}
+else
+{
+    $sort = array_key_exists("sort", $_REQUEST) && array_key_exists(ToLower($_REQUEST["sort"]), $arAvailableSort) ? $arAvailableSort[ToLower($_REQUEST["sort"])][0] : "PROPERTY_PRICE";
+    $sort_order = array_key_exists("order", $_REQUEST) && in_array(ToLower($_REQUEST["order"]), Array("asc", "desc")) ? ToLower($_REQUEST["order"]) : $arAvailableSort[$sort][1];
+}
+
+?>
+<?
+$banner=array();
+$arFilter = Array(
+    'IBLOCK_ID'=>$arParams["IBLOCK_ID"],
+    'CODE'=>$arResult["VARIABLES"]["SECTION_CODE"],
+);
+$db_list = CIBlockSection::GetList(Array(), $arFilter,false,array("UF_BANNER_NAME"));
+while($ar_result = $db_list->GetNext())
+{
+    if(strlen($ar_result["UF_BANNER_NAME"])>0){
+        $banner[]=array(
+            "NAME"=>$ar_result["UF_BANNER_NAME"],
+            "DETAIL_PICTURE"=>$ar_result["PICTURE"],
+            "PREVIEW_TEXT" =>$ar_result["DESCRIPTION"],
+        );
+    }else{
+        $arFilter2 = Array(
+            "IBLOCK_ID"=>6,
+            "ACTIVE"=>"Y",
+            "PROPERTY_TYPE"=>46,
+            "PROPERTY_LINK"=>$ar_result['ID']
+        );
+
+        $res2 = CIBlockElement::GetList(Array("rand"=>"ASC"), $arFilter2, false,array("nTopCount"=>1),array("ID","NAME","DETAIL_PICTURE","PREVIEW_TEXT"));
+        while($ar_fields2 = $res2->GetNext())
+        {
+            $banner[]=$ar_fields2;
+        }
+    }
+	global $USER;
+	if ($USER->IsAdmin()){
+		//print_r($ar_result);
+	}
+}
+//Если выбраны новинки или распродажи и выбрана категория то обрезаем секцию из префильтра
+
+if(isset($preFilter["INCLUDE_SUBSECTIONS"]) && $preFilter["INCLUDE_SUBSECTIONS"]=="Y" && !empty($arrFCategory))
+    unset($preFilter["SECTION_ID"]);
+$arrFilterCat=array_merge($arrFilterCat,$preFilter);
+/*if($USER->IsAdmin()){
+
+
+echo "<pre>";
+print_r($arrFilterCat);
+echo "</pre>";
+
+}*/
+?>
+
+<div class="base_content" id="product_html"><!-- PRODUCT_START -->
+    <?if(count($banner)>0):?>
+        <? $cfile=CFile::ResizeImageGet($banner[0]['DETAIL_PICTURE'], array('width'=>726, 'height'=>136), BX_RESIZE_IMAGE_PROPORTIONAL, true);?>
+        <img width="726" height="136" alt="" src="<?=$cfile["src"]?>" class="collection_head_img">
+        <h1><?=$banner[0]["NAME"]?></h1>
+        <div class="collection_description"><?=$banner[0]["PREVIEW_TEXT"]?></div>
+    <?endif;?>
+
+    <?
+    /*if($USER->IsAdmin()){
+    echo "<pre>";
+    print_r($arrFilterCat);
+        print_r($_REQUEST);
+    echo "</pre>";
+    }*/
+	
+    ?>
+    <?$APPLICATION->IncludeComponent(
+        "pdev:catalog.section",
+        "",
+        Array(
+            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+            "ELEMENT_SORT_FIELD" => $sort,
+            "ELEMENT_SORT_ORDER" => $sort_order,
+            "SHOW_ALL_WO_SECTION"=>"Y",
+            "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
+            "META_KEYWORDS" => $arParams["LIST_META_KEYWORDS"],
+            "META_DESCRIPTION" => $arParams["LIST_META_DESCRIPTION"],
+            "BROWSER_TITLE" => $arParams["LIST_BROWSER_TITLE"],
+            "INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
+            "BASKET_URL" => $arParams["BASKET_URL"],
+            "ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
+            "PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
+            "SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
+            "FILTER_NAME" => "arrFilterCat",
+            "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
+            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+            "CACHE_TIME" => $arParams["CACHE_TIME"],
+            "CACHE_FILTER" => $arParams["CACHE_FILTER"],
+            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+            "SET_TITLE" => $arParams["SET_TITLE"],
+            "SET_STATUS_404" => $arParams["SET_STATUS_404"],
+            "DISPLAY_COMPARE" => $arParams["USE_COMPARE"],
+            "PAGE_ELEMENT_COUNT" => $arParams["PAGE_ELEMENT_COUNT"],
+            "LINE_ELEMENT_COUNT" => $arParams["LINE_ELEMENT_COUNT"],
+            "PRICE_CODE" => $arParams["PRICE_CODE"],
+            "USE_PRICE_COUNT" => $arParams["USE_PRICE_COUNT"],
+            "SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
+
+            "PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
+
+            "DISPLAY_TOP_PAGER" => $arParams["DISPLAY_TOP_PAGER"],
+            "DISPLAY_BOTTOM_PAGER" => $arParams["DISPLAY_BOTTOM_PAGER"],
+            "PAGER_TITLE" => $arParams["PAGER_TITLE"],
+            "PAGER_SHOW_ALWAYS" => $arParams["PAGER_SHOW_ALWAYS"],
+            "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
+            "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
+            "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
+            "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
+
+            "OFFERS_CART_PROPERTIES" => $arParams["OFFERS_CART_PROPERTIES"],
+            "OFFERS_FIELD_CODE" => $arParams["LIST_OFFERS_FIELD_CODE"],
+            "OFFERS_PROPERTY_CODE" => $arParams["LIST_OFFERS_PROPERTY_CODE"],
+            "OFFERS_SORT_FIELD" => $arParams["OFFERS_SORT_FIELD"],
+            "OFFERS_SORT_ORDER" => $arParams["OFFERS_SORT_ORDER"],
+            "OFFERS_LIMIT" => $arParams["LIST_OFFERS_LIMIT"],
+
+            "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
+            "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
+            "SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+            "DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+            "COUNT_ELEMENTS" => "N",
+        ),
+        $component
+    );
+
+    ?>
+
+    <!-- PRODUCT_END --></div>

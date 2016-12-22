@@ -1,0 +1,1 @@
+<a href="/"><img src="/include/bx_default_logo.jpg"  /></a>

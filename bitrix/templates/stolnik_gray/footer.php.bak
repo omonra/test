@@ -1,0 +1,310 @@
+<?if(isset($_REQUEST["PRINT"]) && $_REQUEST["PRINT"]=="Y"):?>
+<div style="display: inline-block;text-align: center;">"Copyright 2005-2012 © Stok-stolnik.ru - модный интернет-магазин одежды, обуви и аксесуаров. Все права защищены. Доставка по всей России! Телефон: +7(351)750-12-70"</div>
+<?endif;?>
+<?if($code_page!="catalog"):?></div><?endif;?>
+<?CModule::IncludeModule('sale');?>
+
+</div>
+<!--    /content -->
+
+</div>
+
+
+<?if(!(isset($_REQUEST["PRINT"]) && $_REQUEST["PRINT"]=="Y")):?>
+
+<div id="popup-base" class="popup-base" style="display:none;">
+	<div class="close"></div>
+	<div id="popup-base-in"></div>
+</div>
+
+<div id="quick_view-base" class="size-popup" style="display: none;">
+	<div class="close"></div>
+	<div id="quick_view-base-in">
+		<div class="quick_view-pic"></div>
+		<div class="quick_view-content"></div>
+	</div>
+</div>
+
+<!--    footer -->
+<div class="footer">
+    <div class="block_menu">
+        <div class="footer_in">
+            <div class="footer_menu">
+                <?$APPLICATION->IncludeComponent(
+                "bitrix:menu",
+                "footer_bottom",
+                Array(
+                    "ROOT_MENU_TYPE" => "bottom",
+                    "MAX_LEVEL" => "1",
+                    "CHILD_MENU_TYPE" => "bottom",
+                    "USE_EXT" => "Y",
+                    "DELAY" => "N",
+                    "ALLOW_MULTI_SELECT" => "N",
+                    "MENU_CACHE_TYPE" => "N",
+                    "MENU_CACHE_TIME" => "3600",
+                    "MENU_CACHE_USE_GROUPS" => "Y",
+                    "MENU_CACHE_GET_VARS" => array()
+                ),
+                false);?>
+
+                <?$APPLICATION->IncludeComponent(
+                        "bitrix:catalog.section",
+                        "footer_social_group",
+                        Array(
+                            "AJAX_MODE" => "N",
+                            "IBLOCK_TYPE" => "services",
+                            "IBLOCK_ID" => "9",
+                            "SECTION_ID" => "",
+                            "SECTION_CODE" => "",
+                            "SECTION_USER_FIELDS" => array(),
+                            "ELEMENT_SORT_FIELD" => "sort",
+                            "ELEMENT_SORT_ORDER" => "asc",
+                            "FILTER_NAME" => "arrFilter",
+                            "INCLUDE_SUBSECTIONS" => "N",
+                            "SHOW_ALL_WO_SECTION" => "Y",
+                            "SECTION_URL" => "",
+                            "DETAIL_URL" => "",
+                            "BASKET_URL" => "/personal/basket.php",
+                            "ACTION_VARIABLE" => "action",
+                            "PRODUCT_ID_VARIABLE" => "id",
+                            "PRODUCT_QUANTITY_VARIABLE" => "quantity",
+                            "PRODUCT_PROPS_VARIABLE" => "prop",
+                            "SECTION_ID_VARIABLE" => "SECTION_ID",
+                            "META_KEYWORDS" => "-",
+                            "META_DESCRIPTION" => "-",
+                            "BROWSER_TITLE" => "-",
+                            "ADD_SECTIONS_CHAIN" => "N",
+                            "DISPLAY_COMPARE" => "N",
+                            "SET_TITLE" => "N",
+                            "SET_STATUS_404" => "N",
+                            "PAGE_ELEMENT_COUNT" => "30",
+                            "LINE_ELEMENT_COUNT" => "1",
+                            "PROPERTY_CODE" => array("LINK"),
+                            "PRICE_CODE" => array(),
+                            "USE_PRICE_COUNT" => "N",
+                            "SHOW_PRICE_COUNT" => "1",
+                            "PRICE_VAT_INCLUDE" => "N",
+                            "PRODUCT_PROPERTIES" => array(),
+                            "USE_PRODUCT_QUANTITY" => "N",
+                            "CACHE_TYPE" => "A",
+                            "CACHE_TIME" => "36000000",
+                            "CACHE_FILTER" => "N",
+                            "CACHE_GROUPS" => "Y",
+                            "DISPLAY_TOP_PAGER" => "N",
+                            "DISPLAY_BOTTOM_PAGER" => "N",
+                            "PAGER_TITLE" => "Товары",
+                            "PAGER_SHOW_ALWAYS" => "N",
+                            "PAGER_TEMPLATE" => "",
+                            "PAGER_DESC_NUMBERING" => "N",
+                            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                            "PAGER_SHOW_ALL" => "N",
+                            "AJAX_OPTION_JUMP" => "N",
+                            "AJAX_OPTION_STYLE" => "Y",
+                            "AJAX_OPTION_HISTORY" => "N"
+                        ),
+                        false
+                    );?>
+
+                <?$APPLICATION->IncludeComponent(
+                "bitrix:catalog.section",
+                "footer_pay_list",
+                Array(
+                    "AJAX_MODE" => "N",
+                    "IBLOCK_TYPE" => "services",
+                    "IBLOCK_ID" => "8",
+                    "SECTION_ID" => "",
+                    "SECTION_CODE" => "",
+                    "SECTION_USER_FIELDS" => array(),
+                    "ELEMENT_SORT_FIELD" => "sort",
+                    "ELEMENT_SORT_ORDER" => "asc",
+                    "FILTER_NAME" => "arrFilter",
+                    "INCLUDE_SUBSECTIONS" => "N",
+                    "SHOW_ALL_WO_SECTION" => "Y",
+                    "SECTION_URL" => "",
+                    "DETAIL_URL" => "",
+                    "BASKET_URL" => "/personal/basket.php",
+                    "ACTION_VARIABLE" => "action",
+                    "PRODUCT_ID_VARIABLE" => "id",
+                    "PRODUCT_QUANTITY_VARIABLE" => "quantity",
+                    "PRODUCT_PROPS_VARIABLE" => "prop",
+                    "SECTION_ID_VARIABLE" => "SECTION_ID",
+                    "META_KEYWORDS" => "-",
+                    "META_DESCRIPTION" => "-",
+                    "BROWSER_TITLE" => "-",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "DISPLAY_COMPARE" => "N",
+                    "SET_TITLE" => "N",
+                    "SET_STATUS_404" => "N",
+                    "PAGE_ELEMENT_COUNT" => "30",
+                    "LINE_ELEMENT_COUNT" => "1",
+                    "PROPERTY_CODE" => array("LINK"),
+                    "PRICE_CODE" => array(),
+                    "USE_PRICE_COUNT" => "N",
+                    "SHOW_PRICE_COUNT" => "1",
+                    "PRICE_VAT_INCLUDE" => "N",
+                    "PRODUCT_PROPERTIES" => array(),
+                    "USE_PRODUCT_QUANTITY" => "N",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_FILTER" => "N",
+                    "CACHE_GROUPS" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "DISPLAY_BOTTOM_PAGER" => "N",
+                    "PAGER_TITLE" => "Товары",
+                    "PAGER_SHOW_ALWAYS" => "N",
+                    "PAGER_TEMPLATE" => "",
+                    "PAGER_DESC_NUMBERING" => "N",
+                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                    "PAGER_SHOW_ALL" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "AJAX_OPTION_HISTORY" => "N"
+                ),
+                false
+            );?>
+			</div>
+        </div>
+
+    </div>
+    <div class="block_info">
+        <div class="footer_in">
+            <div class="info">
+                <?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
+                        "AREA_FILE_SHOW" => "file",
+                        "PATH" => SITE_DIR."include/company_description.php"),
+                    false
+                );?>
+            </div>
+            <div class="develop">
+                <span class="color"><?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
+                        "AREA_FILE_SHOW" => "file",
+                        "PATH" => SITE_DIR."include/developer.php"),
+                    false
+                );?></span> <br><?$APPLICATION->IncludeComponent("bitrix:main.include", "develop", array(
+	"AREA_FILE_SHOW" => "file",
+	"PATH" => SITE_DIR."include/company_name.php",
+	"EDIT_TEMPLATE" => "standard.php"
+	),
+	false
+);?>
+            </div>
+        </div>
+    </div>
+</div>
+    <?if($APPLICATION->GetProperty("UP")=="ACTIVE"):?>
+    <div class="go_top"></div>
+    <script type="text/javascript">
+        $(window).scroll(function () {
+            //$(".go_top").css("display", "inline").fadeOut("hide");
+            //$(".go_top").css("top",$(document).scrollTop()+'px')
+            if($(document).scrollTop()>200)
+                $(".go_top").show('300');
+            else
+                $(".go_top").hide('300');
+
+
+
+            //console.log($(document).scrollTop())
+        });
+
+        $(document).ready(function(){
+            $(".go_top").bind('mouseover',function(){
+                $(".go_top").animate({opacity:'1.0'},600);
+            })
+            $(".go_top").bind('mouseout',function(){
+                $(".go_top").animate({opacity:'0.4'},600);
+            })
+            $(".go_top").click(function(){
+                $(window).scrollTop(0);
+            })
+        });
+
+        var $win = $(window);
+        var $marker = $('.footer_in');
+        $win.scroll(function() {
+            set_top_go();
+        });
+
+        $(window).resize(function() {
+            set_top_go();
+        });
+
+        function set_top_go(){
+            k=$win.scrollTop() + $win.height();
+            m=$marker.offset().top-15;
+            l1=$('.footer_in').width()+$('.content').offset().left-120;
+            if (k >= m) {
+                $(".go_top").css("bottom",k-m+'px')
+                //$(".go_top").css("left",l1+'px')
+            }else{
+                $(".go_top").css("bottom",'0px')
+                //$(".go_top").css("left",l1+'px')
+            }
+        }
+    </script>
+    <?endif;?>
+<!--    /footer -->
+<?endif;?>
+
+    <div style="display: none">
+
+        <div id="item_in_basket" class="popup popup_item_in_basket">
+            <div class="popup_in">
+
+                <h1>Товар в корзине</h1>
+
+                <div class="mess">продолжить выбор товаров или перейти к оформлению заказа</div>
+
+                <ul class="options">
+                    <li><a class="button button_1" href="#" onclick="$.fancybox.close();return false;">Продолжить выбор</a></li>
+                    <li><a class="button button_1" href="/personal/cart/">Перейти в корзину</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="clearBasketModal" class="popup popup_item_in_basket">
+            <div class="popup_in">
+
+                <h1>Очистить корзину</h1>
+
+                <div class="mess">Удалить все товары или вернуться в корзину</div>
+
+                <ul class="options">
+                    <li><a class="button button_1" href="#" onclick="$.fancybox.close();return false;">Отменить</a></li>
+                    <li><a data-user="<?=CSaleBasket::GetBasketUserID()?>" id="clearButton3" class="button button_1" href="#">Очистить корзину</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript"> _shcp = []; _shcp.push({widget_id : 527400, widget : "Chat", side : "bottom", position : "left" }); (function() { var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true; hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://widget.siteheart.com/apps/js/sh.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hcc, s.nextSibling); })(); </script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter19018114 = new Ya.Metrika({id:19018114,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/19018114" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</div>
+</body>
+</html>

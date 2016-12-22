@@ -1,0 +1,33 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?
+$column = 1;
+?>
+<?if (is_array($arResult["ITEMS"]) || count($arResult["ITEMS"]) > 0):?>
+    <table style="margin: auto; width: 750px;">
+        <tr>
+            <?foreach($arResult["ITEMS"] as $key => $arItem):?>
+                <td  style="text-align: left; width: 190px; position:relative;">
+                    <a href="http://stolnik24.ru<?=$arItem["DETAIL_PAGE_URL"]?>"  title="<?=$arItem["NAME"]?>">
+                        <span style="background-image: url('data:image/png;base64,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'); width: 60px; height: 60px; display: block; position: absolute; z-index: 9; top: 18px; right: 10px;"></span>
+                        <img src="http://stolnik24.ru/<?=$arItem['PICTURE']['SRC']?>" alt="<?=$arItem["NAME"]?>">
+                    </a>
+                    <a style="color: #555; font-size: 13px; padding: 0 16px 6px 10px; margin: 0 0 0px; display: block;"
+                       href="http://stolnik24.ru<?=$arItem["DETAIL_PAGE_URL"]?>"
+                       title="<?=$arItem["NAME"]?>">
+                        <?=$arItem["NAME"]?>
+                    </a>
+                    <div>
+                        <?if($arItem['PROPERTIES']['PRICE']['VALUE'] > 0):?>
+                            <strong style="font-weight: bold; color: #353535; padding-left: 10px;"><?= $arItem['PROPERTIES']['PRICE']['VALUE'] . ' руб'?></strong>
+                        <?endif;?>
+                    </div>
+                </td>
+                <?
+                $column++;
+                if ($column%5 == 0){ echo "</tr><tr>";}
+                ?>
+            <?endforeach;?>
+        </tr>
+    </table>
+<?endif;?>
+<? #echo "<pre>"; print_r($arResult['ITEMS'][0]); echo "</pre>";?>

@@ -1,0 +1,13 @@
+***************
+*** 1,5 ****
+  <?
+! define("SHORT_INSTALL_CHECK", true);
+  define("SHORT_INSTALL", true);
+  
+  define("DBPersistent", false);
+--- 1,5 ----
+  <?
+! //define("SHORT_INSTALL_CHECK", true);
+  define("SHORT_INSTALL", true);
+  
+  define("DBPersistent", false);

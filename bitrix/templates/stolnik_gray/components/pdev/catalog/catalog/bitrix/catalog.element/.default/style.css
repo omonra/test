@@ -1,0 +1,224 @@
+.b-product-card__info .realCount{
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+
+.b-product-card__info .sizes{
+    margin: 10px 0 0;
+}
+.b-product-card__info .sizes .item{
+    color: #959595;
+    font-size: 12px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 20px 10px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #f0f0f0; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f0f0f0 0%, #dddddd 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f0f0f0 0%,#dddddd 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+
+}
+.b-product-card__info .sizes .item.empty,.b-product-card__info .sizes .item.empty:hover{
+    color: #959595;
+    border: 1px solid #dbdbdb;
+    cursor:not-allowed;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.b-product-card__info .sizes .item:hover,
+.b-product-card__info .sizes .item.active{
+    background: #ff9a00; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ff9a00 0%, #ff9312 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9a00), color-stop(100%,#ff9312)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ff9a00 0%,#ff9312 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9a00', endColorstr='#ff9312',GradientType=0 ); /* IE6-9 */
+    color: #fff;
+    border-color:#ff9a00;
+}
+.b-product-card__info .cost i{
+    font-style: normal;
+    color: #ff4200;
+}
+.b-product-card__info .colors{
+    margin: 10px 0;
+}
+.b-product-card__info .colors .item{
+    background-repeat: no-repeat;
+    background-size: 50px 25px;
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    color: #959595;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 20px 0 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    width: 50px;
+}
+.b-product-card__info .colors .item:hover:after,
+.b-product-card__info .colors .item.active:after{
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 15px;
+
+    background-image: url(../img/checked.png);
+    background-repeat: no-repeat;
+}
+.b-product-card__info .colors .item.disabled:hover:after {
+    display: none;
+}
+.b-product-card__info .colors .item.disabled:hover {
+    cursor: default;
+}
+.b-product-card__info .colors .item.disabled:before {
+    background: url(../images/nosc.png);
+    background-size: 50px 25px;
+    content: "";
+    display: block;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+}
+.b-product-card__info .sizes{
+    margin: 10px 0 0;
+}
+.b-product-card__info .sizes .item{
+    color: #959595;
+    font-size: 12px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    border: 1px solid #dbdbdb;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 20px 10px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #f0f0f0; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f0f0f0 0%, #dddddd 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f0f0f0 0%,#dddddd 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f0f0f0 0%,#dddddd 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+
+}
+.b-product-card__info .sizes .item.empty,.b-product-card__info .sizes .item.empty:hover{
+    color: #959595;
+    border: 1px solid #dbdbdb;
+    cursor:not-allowed;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.b-product-card__info .sizes .item:hover,
+.b-product-card__info .sizes .item.active{
+    background: #ff9a00; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ff9a00 0%, #ff9312 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9a00), color-stop(100%,#ff9312)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ff9a00 0%,#ff9312 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ff9a00 0%,#ff9312 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9a00', endColorstr='#ff9312',GradientType=0 ); /* IE6-9 */
+    color: #fff;
+    border-color:#ff9a00;
+}
+.b-product-card__info .cost i{
+    font-style: normal;
+    color: #ff4200;
+}
+.b-product-card__info .colors{
+    margin: 10px 0;
+}
+.b-product-card__info .colors .item{
+    background-repeat: no-repeat;
+    background-size: 50px 25px;
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    color: #959595;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 20px 0 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    width: 50px;
+}
+.b-product-card__info .colors .item:hover:after,
+.b-product-card__info .colors .item.active:after{
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 15px;
+
+    background-image: url(./img/checked.png);
+    background-repeat: no-repeat;
+}
+.b-product-card__info .colors .item.disabled:hover:after {
+    display: none;
+}
+.b-product-card__info .colors .item.disabled:hover {
+    cursor: default;
+}
+.b-product-card__info .colors .item.disabled:before {
+    background: url(../images/nosc.png);
+    background-size: 50px 25px;
+    content: "";
+    display: block;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+}
+
+.b-product-card__info .b-btn.in_basket {
+    background: green;
+}

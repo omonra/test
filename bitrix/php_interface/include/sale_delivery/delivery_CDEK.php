@@ -1,0 +1,1 @@
+<?require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/newit.cdek/delivery/delivery_CDEK.php");?>
