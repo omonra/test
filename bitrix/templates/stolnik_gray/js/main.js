@@ -515,6 +515,7 @@ var stolnik = {
 
     AddToBasket: function(id) {
         var data = {id: id};
+        yaCounter26116233.reachGoal('add_basket');
         this.query({
             action: 'AddToBasket',
             data: data,

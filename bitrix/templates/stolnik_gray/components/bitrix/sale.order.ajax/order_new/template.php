@@ -462,7 +462,7 @@ else
                 <?}?>
             </div>
             <div class="clearall"></div>
-            <input onClick="submitForm('Y'); return false;" class="btn" value="ќформить покупку" type="submit"/>
+            <input onClick="yaCounter26116233.reachGoal('order_make'); submitForm('Y'); return false;" class="btn" value="ќформить покупку" type="submit"/>
             <input class="button button_clear_basket" value="ќчистить корзину" type="button" />
         </td>
     </tr>
