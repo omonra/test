@@ -333,7 +333,7 @@ $(document).ready(function () {
         $('.b-product-card__info .button-buy, .b-product-card__text .button-buy').on('click', function() {
             $(this).css('background', 'green');
             $(this).text('Перейти в корзину');
-            $(this).attr('href', '/personal/order/make/');
+            $(this).attr('href', '/personal/cart/');
             if (!$(this).hasClass('in_basket')){
                 stolnik.AddToBasket(parseInt($(this).closest('.item').data('offer-id'), 10));
                 $(this).addClass('in_basket');

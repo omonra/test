@@ -417,10 +417,10 @@ else
         <td class="text-left">
             При заказе товара на сумму свыше 5000 руб доставка Почтой России и ТК <br/> бесплатно.
             <div class="b-promo">
-                <strong>Промокод</strong>
+                <!--<strong>Промокод</strong>
                 <input type="text" id="COUPON" name="COUPON" value="" size="21" class="good">
 
-                <input onClick="submitForm('N'); return false;" type="submit" value="Применить"/>
+                <input onClick="submitForm('N'); return false;" type="submit" value="Применить"/>-->
 
                 <?
                 if (!empty($arResult['COUPON_LIST'])) {
