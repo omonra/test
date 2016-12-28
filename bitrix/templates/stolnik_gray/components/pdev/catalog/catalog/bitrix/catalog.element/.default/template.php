@@ -119,7 +119,7 @@ foreach($arResult['SIZE_TO_COLORS'] as $size => $oneSize){
                 
                 
                 $(this).text('Перейти в корзину');
-                $(this).attr('href', '/personal/order/make/');
+                $(this).attr('href', '/personal/cart/');
                 if (!$(this).hasClass('in_basket')) {
                     event.preventDefault();
                     stolnik.AddToBasket(currentOffer);

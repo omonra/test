@@ -3,7 +3,7 @@ define("DBPersistent", false);
 $DBType = "mysql";
 $DBHost = "localhost";
 $DBLogin = "root";
-$DBPassword = "Pa\$\$word123";
+$DBPassword = "Pa\$\$w0rd123";
 $DBName = "product_db";
 $DBDebug = false;
 $DBDebugToFile = false;
