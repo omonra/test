@@ -1,0 +1,327 @@
+
+.bx_ordercart_order_table_container > table {
+    width: 100%;
+    border: 1px solid #efefef;
+    border-collapse: collapse;
+}
+
+.bx_ordercart_order_table_container >  table > thead > tr > td, .bx_ordercart_order_table_container >  table > tbody > tr > td {
+    padding: 10px;
+    border-bottom: 1px solid #efefef;
+}
+
+.bx_ordercart_order_table_container > table thead td {
+    border-bottom: 1px solid #efefef;
+    color: #999;
+}
+
+.bx_ordercart_order_table_container > table .type_price, 
+.bx_ordercart_order_table_container > table .type_price_value {
+    display: none;
+}
+
+.bx_ordercart_order_table_container > table .item h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.bx_ordercart_order_table_container > table td.price {
+    min-width: 120px;
+    text-align: center;
+}
+
+.bx_ordercart_order_table_container > table td .old_price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.bx_ordercart_order_table_container > table .item h2 a {
+    color: #333;
+    text-decoration: none;
+        font-size: 15px;
+}
+
+.bx_ordercart_order_table_container > table .current_price {
+    font-size: 15px;
+}
+
+.bx_ordercart_order_table_container > table .itemphoto {
+    
+}
+
+.bx_ordercart_order_table_container > table .bx_ordercart_photo_container a {
+    
+}
+
+.bx_ordercart_order_table_container > table .bx_ordercart_photo_container div {
+        width: 116px;
+    height: 142px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bx_sort_container {
+    margin-bottom: 20px;
+}
+
+.bx_sort_container > span {
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+}
+
+.bx_sort_container > a {
+    display: inline-block;
+    line-height: 35px;
+    padding: 0 15px;
+    text-decoration: none;
+    border: 1px solid #efefef;
+    color: #999;
+    margin: 0 10px;
+    border-radius: 2px;
+}
+
+.bx_sort_container > a:hover {
+    text-decoration: none;
+    color: #fff!important;
+    background: #e94a4b;
+    border: 1px solid #e94a4b;
+}
+
+.bx_sort_container > a.current {
+    color: #fff!important;
+    background: #e94a4b;
+    border: 1px solid #e94a4b;
+}
+
+.bx_sort_container > a .flat {
+    display: inline-block;
+    color: #e5e5e5;
+}
+
+
+.basket_quantity_control  {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 29px;
+    width: 83px;
+}
+
+.basket_quantity_control .plus, .basket_quantity_control .minus {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    display: block;
+    text-decoration: none;
+    font-size: 10px;
+    color: #999;
+    border: 1px solid #ccc;
+}
+
+.basket_quantity_control .plus:before, .basket_quantity_control .minus:before {
+    content: "\f067";
+    font-family: 'FontAwesome';
+    text-align: center;
+    width: 27px;
+    height: 27px;
+    display: block;
+    text-decoration: none!important;
+    line-height: 27px;
+}
+
+.basket_quantity_control .minus:before {
+    content: "\f068";
+}
+
+.basket_quantity_control .minus {
+    background-position: center -18px;
+    left: 0;
+    top: 0;
+}
+
+.basket_quantity_control .plus {
+    right: 0;
+    top: 0;
+}
+
+table.counter {
+    position: relative;
+    width: 116px;
+    
+}
+
+table.counter td {
+    margin: 0;
+    padding: 0;
+}
+
+table.counter input[type=text] {
+    color: #555;
+    width: 27px;
+    border: none;
+    text-align: center;
+    background-color: #fff;
+    height: 23px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #efefef;
+    margin-left: 27px;
+}
+
+.bx_ordercart tbody td.control a:last-of-type {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    font-size: 0;
+    line-height: 0;
+}
+
+.bx_ordercart tbody td.control a:last-of-type:before {
+    content: "\f08a";
+    font-size: 15px;
+    position: absolute;
+    font-family: 'FontAwesome';
+    color: #ccc;
+}
+
+.bx_ordercart tbody td.control a:first-of-type {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.bx_ordercart tbody td.control a:first-of-type:before {
+    content: "\f00d";
+    font-size: 15px;
+    position: absolute;
+    font-family: 'FontAwesome';
+    color: #ccc;
+    top: 18px;
+    right: -10px;
+}
+
+.bx_ordercart tbody td.control {
+    position: relative;
+}
+
+.bx_ordercart_order_pay {
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.bx_ordercart_order_pay .bx_ordercart_order_pay_left {
+    float: left;
+    width: 60%;
+}
+
+.bx_ordercart_order_pay .bx_ordercart_order_pay_right {
+    float: right;
+    width: 30%;
+    text-align: right;
+}
+
+.bx_ordercart_order_pay_center {
+    text-align: right;
+    
+}
+
+.bx_ordercart_order_pay_center .checkout {
+    color: #fff!important;
+    background: #e94a4b;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid #e94a4b;
+    font-size: 14px;
+    padding: 6px 20px 8px 20px;
+}
+
+.bx_ordercart .bx_ordercart_order_sum {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.bx_ordercart .bx_ordercart_order_sum tr td:first-child {
+    width: 40%;
+    font-size: 16px;
+}
+
+.bx_ordercart .bx_ordercart_order_sum tr #allSum_FORMATED, .bx_ordercart .bx_ordercart_order_sum tr #allSum_wVAT_FORMATED {
+    text-align: right;
+    font-size: 20px;
+}
+
+.bx_ordercart_coupon {
+    height: 27px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.bx_ordercart_coupon span {
+    display: block;
+    float: left;
+    height: 30px;
+    width: 30%;
+}
+
+.bx_ordercart_coupon span.good {
+    display: none;
+}
+
+.bx_ordercart_coupon input[type=text] {
+    color: #555;
+    width: 40%;
+    border: none;
+    text-align: left;
+    text-indent: 10px;
+    background-color: #fff;
+    height: 23px;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-left: 10px;
+    float: left;
+    display: block;
+    
+}
+
+.bx_ordercart_coupon input[type=text]:disabled {
+    border: none;
+}
+
+.bx_ordercart_coupon input.good {
+    color: green;
+    position: absolute;
+    left: 30%;
+    text-indent: 0;
+}
+
+.bx_ordercart_coupon .bx_ordercart_coupon_notes {
+        position: absolute;
+    top: 4px;
+    width: 30%;
+    text-align: right;
+    left: 0;
+}
+
+.bx_ordercart_coupon a.bx_bt_button {
+    color: #fff!important;
+    background: #e94a4b;
+    text-decoration: none;
+    border: 1px solid #e94a4b;
+    font-size: 14px;
+    height: 25px;
+    display: block;
+    float: left;
+    width: 43px;
+    text-align: center;
+    line-height: 25px;
+}

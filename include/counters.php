@@ -48,22 +48,6 @@
 var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
 <!-- {/literal} END JIVOSITE CODE -->
 
-<!-- BEGIN TIZER CODE {literal} -->
-<script type="text/javascript"> 
-(function () { 
-window.admixer_retarg = window.admixer_retarg || []; 
-window.admixer_retarg.push({  subs: "ca2813cb-6a63-44cf-b18f-77d86abb1d71", group: 692 }) 
-var id = 'AdmixerRetarg'; 
-if (document.getElementById(id)) {return;} 
-var s = document.createElement('script'); 
-s.async = true; s.id = id; 
-var r = (new Date).getDate(); 
-s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//cdn.admixer.net/tscripts/retarg.js?r='+r; 
-var a = document.getElementsByTagName('script')[0] 
-a.parentNode.insertBefore(s, a); 
-})() 
-</script>
-<!-- {/literal} END TIZER CODE -->
 
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KDV48R"

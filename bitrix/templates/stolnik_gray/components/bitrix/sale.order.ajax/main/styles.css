@@ -452,6 +452,7 @@ span.bx-authform-starrequired {
     display: table-cell;
     padding: 10px!important;
     border-bottom: 1px solid #efefef;
+        min-width: 100px!important;
 }
 
 .bx-soa-item-table .bx-soa-item-tr:first-child .bx-soa-item-td {
@@ -487,4 +488,16 @@ span.bx-authform-starrequired {
 
 .bx-soa-item-table .bx-soa-item-tr .bx-soa-item-content {
     padding-left: 90px;
+}
+
+#bx-soa-properties .bx-soa-tooltip {
+    display: none!important;
+}
+
+.bx-price-old {
+    font-weight: normal;
+    font-size: 11px;
+    text-decoration: line-through;
+    min-width: 70px;
+    display: block;
 }

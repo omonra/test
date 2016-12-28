@@ -14,7 +14,13 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/bitrix/php_interface/general/CUser.ph
 require_once($_SERVER["DOCUMENT_ROOT"] . '/bitrix/php_interface/general/CSaleOrder.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/bitrix/php_interface/general/CIblock.php');
 
-
+CModule::AddAutoloadClasses (
+    '', // не указываем имя модуля
+    array(
+        "USubscribe" => "/bitrix/php_interface/classes/USubscribe.php",                             // Инструменты по работе с Подписками
+        "UTools" => "/bitrix/php_interface/classes/UTools.php",                                     // Инструменты по работе с Пользователями
+        )
+);
 
 
 // Кешируем склады

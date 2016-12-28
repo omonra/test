@@ -5,9 +5,9 @@ $APPLICATION->SetTitle("Корзина");
 <?
 $APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket",
-	"",
+	"main",
 	Array(
-		"COLUMNS_LIST" => array(0=>"NAME",1=>"PROPS",2=>"PRICE",3=>"TYPE",4=>"QUANTITY",5=>"DELETE",6=>"DELAY",7=>"WEIGHT",8=>"DISCOUNT",),
+		"COLUMNS_LIST" => array(0=>"NAME",1=>"PROPS",2=>"PRICE",3=>"TYPE",4=>"QUANTITY",5=>"DELETE",6=>"DELAY",),
 		"PATH_TO_ORDER" => "/personal/order/make/",
 		"HIDE_COUPON" => "N",
 		"QUANTITY_FLOAT" => "N",

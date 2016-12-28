@@ -27,7 +27,7 @@ $isIndexPage = $curPage == SITE_DIR . 'index.php';
             'vendors/jquery.jscrollpane.css',
             'css/core.css',
             'css/bootstrap.min.css',
-
+            'css/fontawesome/css/font-awesome.min.css',
         ));?>
         <?ShowTemplateJs(array(
             'vendors/jq.1.11.1.js',
