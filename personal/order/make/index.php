@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("ќформление заказа");?>
 		"DELIVERY_NO_AJAX" => "Y",
 		"DELIVERY_NO_SESSION" => "Y",
 		"TEMPLATE_LOCATION" => "popup",
-		"DELIVERY_TO_PAYSYSTEM" => "p2d",
+		"DELIVERY_TO_PAYSYSTEM" => "d2p",
 		"USE_PREPAYMENT" => "N",
 		"COMPATIBLE_MODE" => "Y",
 		"USE_PRELOAD" => "Y",
