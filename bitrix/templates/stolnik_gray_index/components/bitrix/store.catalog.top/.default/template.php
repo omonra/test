@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<? if (count($arResult['ITEMS']) > 0): ?>
 <div class="b-carousel-novelty">
     <div class="b-title">
 		<?=($arParams['FLAG_PROPERTY_CODE']=='RASPRODAZHA')?'Распродажа':'Новинки из коллекции';?>
@@ -69,17 +70,15 @@
                 </a>
                 <a class="title" href="<?=$arItem["DETAIL_PAGE_URL"]?>" title="<?=$arItem["NAME"]?>"><?=$arItem["NAME"]?></a>
                 <div class="cost">
-                    <?if((int)$arItem["PROPERTIES"]["STARYE_TSENY"]["VALUE"] > 0):?>
-                        <strike><?=intval($arItem["PROPERTIES"]["STARYE_TSENY"]["VALUE"])?> руб.</strike>
-                        <?if($arItem["PROPERTIES"]["PRICE"]["VALUE"]>0):?>
-                            <i><?=$arItem["PROPERTIES"]["PRICE"]["VALUE"]?> руб.</i>
-                        <?endif;?>
-                    <?else:?>
-                        <?if($arItem["PROPERTIES"]["MAXIMUM_PRICE"]["VALUE"]>0):?>
-                            <?$max = explode(".",$arItem["PROPERTIES"]["MAXIMUM_PRICE"]['VALUE']);?>
-                            <strong><?=$max[0]?> руб.</strong>
-                        <?endif;?>
-                    <?endif;?>
+
+                    <? if (!empty($arItem['PRICE']['OLD'])): ?>
+                        <strike><?=$arItem['PRICE']['OLD']['PRINT_VALUE']?></strike>
+                        <i><?=$arItem['PRICE']['PRINT_VALUE']?></i>
+                    <? else: ?>
+                        <strong><?=$arItem['PRICE']['PRINT_VALUE']?></strong>
+                    <? endif; ?>
+                    
+                    
                 </div>
                 <span class="stars">
                     <?for ($i = round(intval($arItem['PROPERTIES']['comments_sum']['VALUE']) / intval($arItem['PROPERTIES']['comments_count']['VALUE'])); $i > 0; $i--):?>
@@ -118,3 +117,4 @@
     </ul>
     </div>
 </div>
+<? endif; ?>

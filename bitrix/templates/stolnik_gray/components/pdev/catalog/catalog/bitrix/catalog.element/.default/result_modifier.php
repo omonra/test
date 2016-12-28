@@ -1,9 +1,9 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-$arResult['NEW_DESIGN'] = ($USER->IsAdmin()) ? true : false;
+$arResult['NEW_DESIGN'] = true;
 $arSizes = GetSizes();
 $arColors = array();
 
-$arInfo1C = PControl::GetQuantityByXmlID($arResult["XML_ID"], true);
+//$arInfo1C = PControl::GetQuantityByXmlID($arResult["XML_ID"], true);
 $arResult["REAL_COUNT"] = $arInfo1C["COUNT"];
 
 
@@ -165,7 +165,7 @@ if (count($arItemColors) > 0) {
 }
 
 $arColors = array_flip(array_keys($arResult['COLORS']));
-$arResult['PRICE'] = 0;
+$arResult['PRICE'] = CExFunctions::GetOptimalPrice($arResult['ID']);;
 $arResult['CURRENCY'] = 'RUB';
 foreach ($arResult['OFFERS'] as $key => $row) {
     $size_fare[$key] = !isset($arSizes[$row['PROPERTIES']['SIZE']['VALUE']]) ? 500 : $arSizes[$row['PROPERTIES']['SIZE']['VALUE']];
@@ -176,7 +176,7 @@ array_multisort($size_fare, SORT_ASC, $color_fare, SORT_ASC, $arResult['OFFERS']
 foreach ($arResult['OFFERS'] as $key => $arOffer) {
     if ($arOffer['CATALOG_QUANTITY'] > 0) {
         $arResult['CURRENT_SIZE'] = $arOffer['PROPERTIES']['SIZE']['VALUE'];
-        $arResult['PRICE'] = $arOffer['MIN_PRICE']['VALUE'];
+        //$arResult['PRICE'] = $arOffer['MIN_PRICE']['VALUE'];
         $arResult['CURRENCY'] = $arOffer['MIN_PRICE']['CURRENCY'];
         $arResult['OFFER_ID'] = $arOffer['ID'];
         break;

@@ -65,8 +65,7 @@
         );?>
 
 		<?
-        global $arrSaleFilter;
-        $arrSaleFilter['PROPERTY_RASPRODAZHA'] = 'true';
+        $GLOBALS['arrSaleFilter']['!PROPERTY_SALE'] = false;
         //$arrNewProductsFilter['!PROPERTY_NOVINKA'] = 'true';
         ?>
 

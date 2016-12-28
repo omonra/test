@@ -55,7 +55,7 @@ $sort_order = $arParams["ELEMENT_SORT_ORDER"];
                     <?endif;?>
 	            <?endif;?>
 
-	            <?if($arElement["PROPERTIES"]["RASPRODAZHA"]["VALUE"]=="true"):?>
+	            <?if($arElement["PROPERTIES"]["SALE"]["VALUE"]=="Y"):?>
 	            <span class="icon icon_product_sale"></span>
 	            <?endif;?>
             </a>

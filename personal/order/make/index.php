@@ -1,41 +1,75 @@
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
-
-<?
-$APPLICATION->IncludeComponent(
-	"bitrix:sale.order.ajax",	"order_new",
-	Array(
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetTitle("Оформление заказа");?>
+    <?$APPLICATION->IncludeComponent(
+	"bitrix:sale.order.ajax", 
+	"main", 
+	array(
+		"COMPONENT_TEMPLATE" => "main",
 		"PAY_FROM_ACCOUNT" => "Y",
-		"COUNT_DELIVERY_TAX" => "N",
-		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
-		"ONLY_FULL_PAY_FROM_ACCOUNT" => "N",
+		"ONLY_FULL_PAY_FROM_ACCOUNT" => "Y",
 		"ALLOW_AUTO_REGISTER" => "Y",
 		"SEND_NEW_USER_NOTIFY" => "Y",
-		"DELIVERY_NO_AJAX" => "N",
-		"DELIVERY_NO_SESSION" => "N",
-		"TEMPLATE_LOCATION" => ".default",
-		"DELIVERY_TO_PAYSYSTEM" => "d2p",
-		"DELIVERY2PAY_SYSTEM" =>  array(
-			array(
-				"sheepla:sheepla_1_3702" => array(5,14),
-				"sheepla:sheepla_2_6101" => array(13),
-				"1" => array(11,1,9,5,14),
-				"5" => array(11,1,9,5,14),
-				"6" => array(11,5,14),
-				"8" => array(11,5,14)
-			)
-		),
+		"DELIVERY_NO_AJAX" => "Y",
+		"DELIVERY_NO_SESSION" => "Y",
+		"TEMPLATE_LOCATION" => "popup",
+		"DELIVERY_TO_PAYSYSTEM" => "p2d",
 		"USE_PREPAYMENT" => "N",
-		"PROP_1" => array(0 => "25"),
-		"PROP_2" => array(),
-		"PATH_TO_BASKET" => "/",
-		"PATH_TO_PERSONAL" => "/personal/order/",
-		"PATH_TO_PAYMENT" => "/personal/order/payment/",
+		"COMPATIBLE_MODE" => "Y",
+		"USE_PRELOAD" => "Y",
+		"ALLOW_USER_PROFILES" => "N",
+		"ALLOW_NEW_PROFILE" => "N",
+		"TEMPLATE_THEME" => "blue",
+		"SHOW_ORDER_BUTTON" => "always",
+		"SHOW_TOTAL_ORDER_BUTTON" => "Y",
+		"SHOW_PAY_SYSTEM_LIST_NAMES" => "Y",
+		"SHOW_PAY_SYSTEM_INFO_NAME" => "Y",
+		"SHOW_DELIVERY_LIST_NAMES" => "Y",
+		"SHOW_DELIVERY_INFO_NAME" => "Y",
+		"SHOW_DELIVERY_PARENT_NAMES" => "Y",
+		"SHOW_STORES_IMAGES" => "Y",
+		"SKIP_USELESS_BLOCK" => "Y",
+		"BASKET_POSITION" => "after",
+		"SHOW_BASKET_HEADERS" => "Y",
+		"DELIVERY_FADE_EXTRA_SERVICES" => "N",
+		"SHOW_COUPONS_BASKET" => "Y",
+		"SHOW_COUPONS_DELIVERY" => "N",
+		"SHOW_COUPONS_PAY_SYSTEM" => "N",
+		"SHOW_NEAREST_PICKUP" => "Y",
+		"DELIVERIES_PER_PAGE" => "8",
+		"PAY_SYSTEMS_PER_PAGE" => "8",
+		"PICKUPS_PER_PAGE" => "5",
+		"SHOW_MAP_IN_PROPS" => "N",
+		"PROPS_FADE_LIST_1" => array(
+			0 => "1",
+			1 => "2",
+			2 => "3",
+		),
+		"PATH_TO_BASKET" => "basket.php",
+		"PATH_TO_PERSONAL" => "index.php",
+		"PATH_TO_PAYMENT" => "payment.php",
 		"PATH_TO_AUTH" => "/auth/",
 		"SET_TITLE" => "Y",
-                "DISABLE_BASKET_REDIRECT" => "Y"
-	)
-);?>
-
+		"DISABLE_BASKET_REDIRECT" => "N",
+		"PRODUCT_COLUMNS_VISIBLE" => array(
+			0 => "PREVIEW_PICTURE",
+			1 => "PROPS",
+			2 => "DISCOUNT_PRICE_PERCENT_FORMATED",
+			3 => "PRICE_FORMATED",
+		),
+		"ADDITIONAL_PICT_PROP_4" => "-",
+		"ADDITIONAL_PICT_PROP_5" => "-",
+		"BASKET_IMAGES_SCALING" => "standard",
+		"SERVICES_IMAGES_SCALING" => "standard",
+		"PRODUCT_COLUMNS_HIDDEN" => array(
+		),
+		"USE_YM_GOALS" => "N",
+		"USE_CUSTOM_MAIN_MESSAGES" => "N",
+		"USE_CUSTOM_ADDITIONAL_MESSAGES" => "N",
+		"USE_CUSTOM_ERROR_MESSAGES" => "N"
+	),
+	false
+);
+?>
 <?
 /*хер знает, кто и зачем это делал
 global $USER;
@@ -45,23 +79,15 @@ if (defined('USER_URDER_HIDE') && $USER->IsAuthorized()){
 */
 
 ?>
-
 <?$APPLICATION->IncludeComponent(
 	"vvi:main.feedback",
 	".default",
-	array(
+	Array(
 		"COMPONENT_TEMPLATE" => ".default",
-		"USE_CAPTCHA" => "N",
-		"OK_TEXT" => "Спасибо, ваше сообщение принято.",
 		"EMAIL_TO" => "info@stolnik24.ru",
-		"REQUIRED_FIELDS" => array(
-		),
-		"EVENT_MESSAGE_ID" => array(
-			0 => "47",
-		)
-	),
-	false
-);?>
-
-
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+		"EVENT_MESSAGE_ID" => array(0=>"47",),
+		"OK_TEXT" => "Спасибо, ваше сообщение принято.",
+		"REQUIRED_FIELDS" => array(),
+		"USE_CAPTCHA" => "N"
+	)
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

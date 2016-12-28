@@ -66,6 +66,7 @@ $this->setFrameMode(true);
 					});
 				</script>
 			<?endif;?>
+                                
 			<?if (is_array($arResult['COLORS']) && count($arResult['COLORS']) > 0):?>
 				<div class="clearall"></div>
 				Доступные цвета

@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
 #$APPLICATION->SetAdditionalCSS( SITE_TEMPLATE_PATH . '/css/bootstrap.min.css');
-#$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . '/js/bootstrap.min.js');
+//$APPLICATION->AddHeadScript($templateFolder . '/script.js');
 ?>
 <?if (!is_array($arResult["ITEMS"]) || count($arResult["ITEMS"]) <= 0):?>
     <?ShowNote('Не найдено ни одного товара соответствующего установленным параметрам отбора. Измените параметры и повторите отбор')?>
@@ -70,14 +70,15 @@
             </a>
             <a class="title" href="<?=$arItem["DETAIL_PAGE_URL"]?>" title="<?=$arItem["NAME"]?>"><?=$arItem["NAME"]?></a>
             <div class="cost">
-                <?if(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > 0 && intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > $arItem['PRICE']):?>
+                
+                <?if(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > 0 && intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > $arItem['PRICE']['VALUE']):?>
                     <strike><?=FormatPrice(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']), $arItem['CURRENCY'])?></strike>
-                    <?if($arItem['PRICE'] > 0):?>
-                        <i><?=FormatPrice($arItem['PRICE'], $arItem['CURRENCY'])?></i>
+                    <?if($arItem['PRICE']['VALUE'] > 0):?>
+                        <i><?=$arItem['PRICE']['PRINT_VALUE']?></i>
                     <?endif;?>
                 <?else:?>
-                    <?if($arItem['PRICE'] > 0):?>
-                        <strong><?=FormatPrice($arItem['PRICE'], $arItem['CURRENCY'])?></strong>
+                    <?if($arItem['PRICE']['VALUE'] > 0):?>
+                        <strong><?=$arItem['PRICE']['PRINT_VALUE']?></strong>
                     <?endif;?>
                 <?endif;?>
             </div>
@@ -113,7 +114,7 @@
                 </div>
             <?endif;?>
 
-            <button type="button" class="btn show_fast btn-primary btn-small" data-id="<?=$arItem['ID']?>" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn show_fast btn-primary btn-small" data-href="<?=$arItem['DETAIL_PAGE_URL']?>?popup=y&is_ajax=y" data-toggle="modal" data-target="#myModal">
                 Быстрый просмотр
             </button>
         </li>
@@ -145,8 +146,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                Loading...
+                Загрузка...
             </div>
         </div>
     </div>
 </div>
+
+<script>
+$('body').on('click' ,'[data-toggle="modal"]', function(e) {
+            e.preventDefault();
+
+            if ($(this).hasClass('show_fast')) {
+                $('.modal-body').html('Загрузка...');
+                var href = $(this).attr('data-href');
+
+                $.get(href, function (data) {
+                    $('.modal-body').html(data);
+                });
+            }
+        });
+</script>

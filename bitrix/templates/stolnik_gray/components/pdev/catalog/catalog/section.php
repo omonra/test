@@ -45,7 +45,8 @@ if (substr($arResult["VARIABLES"]['SECTION_CODE'], 0, strlen('news_')) == 'news_
                     'PROPERTY_NOVINKA' => 'true',
                 );
             } else {
-                $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY_RASPRODAZHA'] = 'true';
+                //$GLOBALS[$arParams['FILTER_NAME']]['PROPERTY_RASPRODAZHA'] = 'true';
+                $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_SALE'] = false;
             }
         }
         $arParams["INCLUDE_SUBSECTIONS"] = 'Y';

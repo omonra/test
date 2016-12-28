@@ -1,3 +1,69 @@
+var ImgGallery = function (el) {
+        //var el = $('.b-img-gallery');
+        if (el.length > 0) {
+            el.carouFredSel({
+                items: 1,
+                auto: false,
+                scroll: {
+                    items: 1,
+                    fx: 'crossfade',
+                    duration: 1000,
+                    pauseOnHover: true
+                },
+                pagination: {
+                    container: '.js-pager',
+                    event: 'mouseover',
+                    duration: 0,
+                    anchorBuilder: function (nr) {
+                        var src = $('.js-img-gallery a').find('img').eq(nr - 1).attr('src');
+                        var url_full = $('.js-img-gallery a').eq(nr - 1).attr('href');
+                        return '<a class="js-fancy" rel="gallery1" href="' + url_full + '"><img width="40"  src="' + src + '" border="0" /></a>';
+                    }
+                },
+                onCreate: function(a) {
+                    var pagerBlock = $('.b-img-pager');
+                    var pager = pagerBlock.find('.js-pager');
+                    var prev = pagerBlock.find('.prev');
+                    var next = pagerBlock.find('.next');
+                    prev.on('click', function() {
+                        var length = pager.find('a').length;
+                        var pos = pager.data('pos');
+                        if (typeof pos === 'undefined') {
+                            pos = 0;
+                        }
+                        if (pos < Math.ceil(length / 5) - 1) {
+                            pos += 1;
+                            next.removeClass('disabled');
+                        }
+                        if (pos >= Math.ceil(length / 5) - 1) {
+                            prev.addClass('disabled');
+                        }
+                        pager.data('pos', pos);
+                        pager.animate({'margin-top':  '-' + pos * 370 + 'px'});
+                        return false;
+                    });
+                    next.on('click', function() {
+                        var length = pager.find('a').length;
+                        var pos = pager.data('pos');
+                        if (typeof pos === 'undefined') {
+                            pos = 0;
+                        }
+                        if (pos > 0) {
+                            pos -= 1;
+                            prev.removeClass('disabled');
+                        }
+                        if (pos <= 0) {
+                            next.addClass('disabled');
+                        }
+                        pager.data('pos', pos);
+                        pager.animate({'margin-top':  '-' + pos * 370 + 'px'});
+                        return false;
+                    });
+                }
+            });
+        }
+    };
+
 $(document).ready(function () {
 	
 	$('#mcat').click(function(){
@@ -103,71 +169,10 @@ $(document).ready(function () {
         }
     })();
 
-    (function() {
-        var el = $('.b-img-gallery');
-        if (el.length > 0) {
-            el.carouFredSel({
-                items: 1,
-                auto: false,
-                scroll: {
-                    items: 1,
-                    fx: 'crossfade',
-                    duration: 1000,
-                    pauseOnHover: true
-                },
-                pagination: {
-                    container: '.js-pager',
-                    event: 'mouseover',
-                    duration: 0,
-                    anchorBuilder: function (nr) {
-                        var src = $('.js-img-gallery a').find('img').eq(nr - 1).attr('src');
-                        var url_full = $('.js-img-gallery a').eq(nr - 1).attr('href');
-                        return '<a class="js-fancy" rel="gallery1" href="' + url_full + '"><img width="40"  src="' + src + '" border="0" /></a>';
-                    }
-                },
-                onCreate: function(a) {
-                    var pagerBlock = $('.b-img-pager');
-                    var pager = pagerBlock.find('.js-pager');
-                    var prev = pagerBlock.find('.prev');
-                    var next = pagerBlock.find('.next');
-                    prev.on('click', function() {
-                        var length = pager.find('a').length;
-                        var pos = pager.data('pos');
-                        if (typeof pos === 'undefined') {
-                            pos = 0;
-                        }
-                        if (pos < Math.ceil(length / 5) - 1) {
-                            pos += 1;
-                            next.removeClass('disabled');
-                        }
-                        if (pos >= Math.ceil(length / 5) - 1) {
-                            prev.addClass('disabled');
-                        }
-                        pager.data('pos', pos);
-                        pager.animate({'margin-top':  '-' + pos * 370 + 'px'});
-                        return false;
-                    });
-                    next.on('click', function() {
-                        var length = pager.find('a').length;
-                        var pos = pager.data('pos');
-                        if (typeof pos === 'undefined') {
-                            pos = 0;
-                        }
-                        if (pos > 0) {
-                            pos -= 1;
-                            prev.removeClass('disabled');
-                        }
-                        if (pos <= 0) {
-                            next.addClass('disabled');
-                        }
-                        pager.data('pos', pos);
-                        pager.animate({'margin-top':  '-' + pos * 370 + 'px'});
-                        return false;
-                    });
-                }
-            });
-        }
-    })();
+    
+    
+    
+    ImgGallery($('.b-img-gallery'));
 
     $('.js-fancy').fancybox();
     $('.js-fancy-all').fancybox({autoSize:false,minWidth:400});
@@ -471,22 +476,7 @@ $(document).ready(function () {
         });
     })();
 
-    (function() {
-
-        $('[data-toggle="modal"]').on('click',function(e) {
-            e.preventDefault();
-
-            if ($(this).hasClass('show_fast')) {
-                $('.modal-body').html('Loading...');
-                var id = $(this).attr('data-id');
-                var url = '/ajax/popup_show_fast.php?ID=' + id;
-
-                $.get(url, function (data) {
-                    $('.modal-body').html(data);
-                });
-            }
-        });
-    })();
+    
 
     $('li.item').hover(function(){
         $(this).find('.show_fast').show();

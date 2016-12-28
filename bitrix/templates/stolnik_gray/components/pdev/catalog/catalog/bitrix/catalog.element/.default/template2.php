@@ -211,7 +211,7 @@
             <div class="title">Товар успешно добавлен в корзину</div>
             <div class="g-clear b-btn-group">
                 <a title="продолжить" class="b-btn close" href="">Продолжить</a>
-                <a title="в корзину" class="b-btn" href="/personal/order/make/">В корзину</a>
+                <a title="в корзину" class="b-btn" href="/personal/order/_make">В корзину</a>
             </div>
         </div>
     </div>
