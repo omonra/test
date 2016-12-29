@@ -272,7 +272,7 @@ table.counter input[type=text] {
     width: 30%;
 }
 
-.bx_ordercart_coupon span.good {
+.bx_ordercart_coupon span.good, .bx_ordercart_coupon span.bad, .bx_ordercart_coupon span.disabled {
     display: none;
 }
 
@@ -297,11 +297,19 @@ table.counter input[type=text] {
     border: none;
 }
 
-.bx_ordercart_coupon input.good {
+.bx_ordercart_coupon input.good, .bx_ordercart_coupon input.bad, .bx_ordercart_coupon input.disabled {
     color: green;
     position: absolute;
     left: 30%;
     text-indent: 0;
+}
+
+.bx_ordercart_coupon input.bad {
+    color: red;
+}
+
+.bx_ordercart_coupon input.disabled {
+    color: #999;
 }
 
 .bx_ordercart_coupon .bx_ordercart_coupon_notes {
