@@ -8,67 +8,11 @@ class CExIblock
     function OnAfterIBlockElementUpdateHandler($arFields)
     {
         
-        //echo $arFields['IBLOCK_ID'] . " - " . defined(CATALOG_IBLOCK_ID) . "\n";
         // Костыльно проверяем, что инфоблок это основной каталог
         if ($arFields['IBLOCK_ID'] == 4)
         {
             $_SESSION['BX_CML2_IMPORT']['ELEMENTS_CATALOG_UPDATE'][] = $arFields['ID'];
-            /*$offers = CIBlockPriceTools::GetOffersArray(array(
-                                    'IBLOCK_ID' => $arFields['IBLOCK_ID'],
-                                    'HIDE_NOT_AVAILABLE' => 'Y',
-                                    //'CHECK_PERMISSIONS' => 'Y'
-            ), array($arFields['ID']), null, null, null, null, null, null, array('CURRENCY_ID' => 'RUB'), null, null);
-
-            $arOffers = Array ();
-            foreach ($offers as $offer)
-            {
-                $price = CCatalogProduct::GetOptimalPrice($offer['ID'], 1);
-                $arOffers[] = $price['RESULT_PRICE']['DISCOUNT_PRICE'];
-            }
             
-            echo $arFields['IBLOCK_ID'] . ":" . $arFields['ID'] . "\n";
-            print_r($offers);
-
-            sort($arOffers);
-
-            if (is_array($arOffers) && count($arOffers) > 0)
-            {
-                $arProps = Array (
-                    'MINIMUM_PRICE' => $arOffers[0],
-                    'MAXIMUM_PRICE' => end($arOffers)
-                );
-
-                // Получаем старую цену
-                $rsNeedProps = CIBlockElement::GetProperty($arFields['IBLOCK_ID'], $arFields['ID'], array("sort" => "asc"), Array("CODE"=> Array ("PRICE_OLD", "SALE") ));
-                while ($arNeedProp = $rsNeedProps->fetch())
-                        $arNeedProps[$arNeedProp['CODE']] = $arNeedProp;
-
-                if ($arNeedProps['PRICE_OLD'] && !empty($arNeedProps['PRICE_OLD']['VALUE']))
-                {
-                    // Товар точно не новый - старая цена указана, проводим сравнение - если есть 
-                    if (floatval($arNeedProps['PRICE_OLD']['VALUE']) > $arProps['MINIMUM_PRICE']
-                        && $arNeedProps['SALE']['VALUE'] == '')
-                    {
-                        // Ставим распродажу
-                        $arProps['SALE'] == 'Y';
-                        $arProps['PRICE_OLD'] = $arProps['MINIMUM_PRICE'];
-                    }
-                    elseif (floatval($arNeedProps['PRICE_OLD']['VALUE']) < $arProps['MINIMUM_PRICE']
-                            && $arNeedProps['SALE']['VALUE'] == 'Y'
-                    )
-                    {
-                        // Произошла переоценка в большую сторону
-                        $arProps['SALE'] == '';
-                        $arProps['PRICE_OLD'] = $arProps['MINIMUM_PRICE'];
-                    }
-                }
-                else
-                {
-                    $arProps['PRICE_OLD'] = $arProps['MINIMUM_PRICE'];
-                }
-
-                CIBlockElement::SetPropertyValuesEx($arFields['ID'], $arFields['IBLOCK_ID'], $arProps);
-            }*/
         }
     }
     
