@@ -103,8 +103,8 @@ class CExIblock
 AddEventHandler("iblock", "OnBeforeIBlockElementAdd", Array ("CExIblock", "DoIBlockBeforeSave"));
 AddEventHandler("iblock", "OnAfterIBlockSectionAdd", array("CExIblock", "OnAfterIBlockSectionAddHandler"));
 AddEventHandler("iblock", "OnAfterIBlockSectionUpdate", array("CExIblock", "OnAfterIBlockSectionUpdateHandler"));
-AddEventHandler("iblock", "OnAfterIBlockElementAdd", array("CExIblock", "OnAfterIBlockElementUpdateHandler2")); // осталось от предыдущих рукожопов, надо слить в одну функцию
-AddEventHandler("iblock", "OnAfterIBlockElementUpdate", array("CExIblock", "OnAfterIBlockElementUpdateHandler2")); // осталось от предыдущих рукожопов, надо слить в одну функцию
+//AddEventHandler("iblock", "OnAfterIBlockElementAdd", array("CExIblock", "OnAfterIBlockElementUpdateHandler2")); // осталось от предыдущих рукожопов, надо слить в одну функцию
+//AddEventHandler("iblock", "OnAfterIBlockElementUpdate", array("CExIblock", "OnAfterIBlockElementUpdateHandler2")); // осталось от предыдущих рукожопов, надо слить в одну функцию
 
 class CExIblockCatalog
 {
@@ -130,8 +130,8 @@ class CExIblockCatalog
     }
 }
 
-AddEventHandler("catalog", "OnStoreProductAdd", Array ("CExIblockCatalog", "DoStoreSave2"));
-AddEventHandler("catalog", "OnStoreProductUpdate", Array ("CExIblockCatalog", "DoStoreSave2"));
+//AddEventHandler("catalog", "OnStoreProductAdd", Array ("CExIblockCatalog", "DoStoreSave2"));
+//AddEventHandler("catalog", "OnStoreProductUpdate", Array ("CExIblockCatalog", "DoStoreSave2"));
 
 
 

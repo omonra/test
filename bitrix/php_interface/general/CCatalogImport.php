@@ -51,7 +51,7 @@ class CExCatalogImport
                 }
 
                 
-                print_r($offers);
+                //print_r($offers);
 
                 sort($arOffers);
 
