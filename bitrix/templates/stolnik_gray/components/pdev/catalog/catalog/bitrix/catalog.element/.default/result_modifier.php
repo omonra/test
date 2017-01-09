@@ -30,7 +30,7 @@ if ($arResult['NEW_DESIGN'])
     }
     
     $arResult['OFFERS_LIST'] = Array ();
-    $arOffers = CCatalogSKU::getOffersList(Array ($arResult['ID']), CATALOG_IBLOCK_ID, Array('ACTIVE' => 'Y'), Array (
+    $arOffers = CCatalogSKU::getOffersList(Array ($arResult['ID']), CATALOG_IBLOCK_ID, Array('ACTIVE' => 'Y', '>CATALOG_QUANTITY' => 0), Array (
         'NAME', 'ID', 'XML_ID', 'CATALOG_QUANTITY'
     ), Array (
         'CODE' => Array (
