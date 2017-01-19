@@ -27,11 +27,21 @@ if ($formSid == 'login') {
     <?
 } elseif ($formSid == 'registration') {
     ?>
-    <?$APPLICATION->IncludeComponent("bitrix:system.auth.registration", ".default", Array(
-            "SHOW_TITLE" => "Y",
-        ),
-        false
-    );?>
+        <?$APPLICATION->IncludeComponent("bitrix:main.register","main",Array(
+            "USER_PROPERTY_NAME" => "", 
+            "SEF_MODE" => "Y", 
+            "SHOW_FIELDS" => Array("NAME", "LAST_NAME", "EMAIL"), 
+            "REQUIRED_FIELDS" => Array("NAME", "LAST_NAME"), 
+            "AUTH" => "Y", 
+            "USE_BACKURL" => "Y", 
+            "SUCCESS_PAGE" => "", 
+            "SET_TITLE" => "Y", 
+            "USER_PROPERTY" => Array("UF_SUBSCRIBE"), 
+            "SEF_FOLDER" => "/", 
+            "VARIABLE_ALIASES" => Array()
+        )
+    );?> 
+    
     <?
 } else {
     $arForm = array();

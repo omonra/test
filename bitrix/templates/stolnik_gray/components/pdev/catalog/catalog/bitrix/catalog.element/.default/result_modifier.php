@@ -12,6 +12,7 @@ if ($arResult['NEW_DESIGN'])
 {
 
     $arColors = Array ();
+    $arColorsIDs = Array ();
     $rsColors = CIBlockElement::GetList(array(), array(
             "IBLOCK_ID" => COLORS_IBLOCK_ID,
             "ACTIVE" => "Y",
@@ -28,6 +29,8 @@ if ($arResult['NEW_DESIGN'])
         $arColors[$arColor['NAME']] = $arColor['PREVIEW_PICTURE'];
         //print_r($arColor);
     }
+
+
     
     $arResult['OFFERS_LIST'] = Array ();
     $arOffers = CCatalogSKU::getOffersList(Array ($arResult['ID']), CATALOG_IBLOCK_ID, Array('ACTIVE' => 'Y', '>CATALOG_QUANTITY' => 0), Array (
@@ -35,9 +38,21 @@ if ($arResult['NEW_DESIGN'])
     ), Array (
         'CODE' => Array (
             'SIZE',
+            'RAZMER',
+            'TSVET',
             'COLOR'
         )
     ));
+
+    if ($USER->IsAdmin())
+    {
+
+        
+        //echo "<pre>";
+        //print_r($arColorsIDs);
+        //print_r($arOffers[$arResult['ID']]['458591']);
+        //echo "</pre>";
+    }
     
     $bFirst = true;
     /*echo "<pre>";
@@ -46,6 +61,13 @@ if ($arResult['NEW_DESIGN'])
     
     foreach ($arOffers[$arResult['ID']] as $offerId => $arItem)
     {
+
+        if (empty($arItem['PROPERTIES']['COLOR']['VALUE']) && !empty($arItem['PROPERTIES']['TSVET']['VALUE']))
+                $arItem['PROPERTIES']['COLOR']['VALUE'] = $arItem['PROPERTIES']['TSVET']['VALUE'];
+
+            if (empty($arItem['PROPERTIES']['SIZE']['VALUE']) && !empty($arItem['PROPERTIES']['RAZMER']['VALUE']))
+                $arItem['PROPERTIES']['SIZE']['VALUE'] = $arItem['PROPERTIES']['RAZMER']['VALUE'];
+
         if ($bFirst)
         {
             $arResult['COLOR_SELECTED'] = $arItem['PROPERTIES']['COLOR']['VALUE'];

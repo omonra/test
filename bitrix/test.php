@@ -14,8 +14,19 @@ $rsProducts = CIBlockElement::GetList(array(), $arFilter, false, false, array('I
 //echo "fff";
 while ($arProduct = $rsProducts->Fetch())
 {
+
+    if ($arProduct['PROPERTY_RASPRODAZHA_VALUE'] == "Да")
+    {
+        CIBlockElement::SetPropertyValuesEx($arProduct['ID'], $arProduct['IBLOCK_ID'], Array (
+            'SALE' => 'Y'
+        ));
+    }
+    /*CIBlockElement::SetPropertyValuesEx($arProduct['ID'], $arProduct['IBLOCK_ID'], Array (
+        'SALE' => ''
+    ));*/
+
     //print_r($arProduct);
-    $offers = CIBlockPriceTools::GetOffersArray(array(
+    /*$offers = CIBlockPriceTools::GetOffersArray(array(
                 'IBLOCK_ID' => $arProduct['IBLOCK_ID'],
                 'HIDE_NOT_AVAILABLE' => 'Y',
                     //'CHECK_PERMISSIONS' => 'Y'
@@ -45,7 +56,7 @@ while ($arProduct = $rsProducts->Fetch())
 
 
         CIBlockElement::SetPropertyValuesEx($arProduct['ID'], $arProduct['IBLOCK_ID'], $arProps);
-    }
+    }*/
 
 
     echo $arProduct['ID'] . "\n";

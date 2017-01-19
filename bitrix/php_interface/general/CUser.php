@@ -1,13 +1,13 @@
 <?php
 
-AddEventHandler("main", "OnBeforeUserUpdate", "OnBeforeUserUpdateHandler");
-AddEventHandler("main", "OnBeforeUserAdd", "OnBeforeUserAddRegisterHandler");
-AddEventHandler("main", "OnBeforeUserRegister", "OnBeforeUserAddRegisterHandler");
+AddEventHandler("main", "OnBeforeUserUpdate", array("CExUser" ,"OnBeforeUserUpdateHandler"));
+AddEventHandler("main", "OnBeforeUserAdd", array("CExUser" ,"OnBeforeUserAddRegisterHandler"));
+AddEventHandler("main", "OnBeforeUserRegister", array("CExUser" ,"OnBeforeUserAddRegisterHandler"));
 
-AddEventHandler("main", "OnAfterUserAdd", "OnAfterUserAddHandler");
+AddEventHandler("main", "OnAfterUserAdd", array("CExUser" ,"OnAfterUserAddHandler"));
 
-AddEventHandler("main", "OnAfterUserAdd", "OnAfterUserRegisterHandler");
-AddEventHandler("main", "OnAfterUserRegister", "OnAfterUserRegisterHandler");
+AddEventHandler("main", "OnAfterUserAdd", array("CExUser" ,"OnAfterUserRegisterHandler"));
+AddEventHandler("main", "OnAfterUserRegister", array("CExUser" ,"OnAfterUserRegisterHandler"));
 
 class CExUser
 {

@@ -17,6 +17,7 @@
             </div>
             <div class="cost">
                 
+                <? if (!empty($arResult['PRICE']['PRINT_VALUE'])): ?>
                 <? if (!empty($arResult['PRICE']['OLD'])): ?>
                 <div class="cost">
                     <strike><?=$arResult['PRICE']['OLD']['PRINT_VALUE']?></strike>
@@ -28,7 +29,7 @@
                 <? else: ?>
                 <strong class="value"><?=$arResult['PRICE']['PRINT_VALUE']?></strong>
                 <? endif; ?>
-                
+                <? endif; ?>
                 
                 
             </div>

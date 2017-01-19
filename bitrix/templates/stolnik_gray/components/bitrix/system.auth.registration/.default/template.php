@@ -25,17 +25,21 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 <div class="reg_block">
     <h1>Регистрация</h1>
-
-    <?if (isset($APPLICATION->arAuthResult) && is_array($APPLICATION->arAuthResult) && $APPLICATION->arAuthResult['TYPE'] == 'ERROR'){?>
-        <?ShowError($APPLICATION->arAuthResult['MESSAGE']);?>
-    <?}elseif(isset($APPLICATION->arAuthResult)){
-        UTools::Update($USER->GetID(), array("ACTIVE" => "N"));
-        $USER->Logout();?>
-        <script>
+    <pre>
+    <? print_r($arParams); ?>
+</pre>
+    <?if($arResult["USE_EMAIL_CONFIRMATION"] === "Y" && is_array($arParams["AUTH_RESULT"]) &&  $arParams["AUTH_RESULT"]["TYPE"] === "OK"):?>
+    <p><?echo GetMessage("AUTH_EMAIL_SENT")?></p>
+    <script>
             $.fancybox.close();
+            window.location = '/?newRegisterSuccess=y';
         </script>
-        <meta http-equiv="refresh" content="0;/?newRegisterSuccess=y">
-    <?}?>
+    <?else:?>
+        <?if($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):?>
+            <p><?echo GetMessage("AUTH_EMAIL_WILL_BE_SENT")?></p>
+        <?endif?>
+
+    
 
     <?
     ShowMessage($arParams["~AUTH_RESULT"]);
@@ -55,11 +59,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
         <div class="field">
             <label for="reg_name">Имя <span class="footnote">*</span></label>
-            <input id="reg_name" class="text_input text_input_1" name="USER_NAME" type="text" value="<?=$arResult["USER_NAME"]?>">
+            <input id="reg_name" class="text_input text_input_1" name="USER_NAME" required type="text" value="<?=$arResult["USER_NAME"]?>">
         </div>
         <div class="field">
             <label for="reg_last_name">Фамилия <span class="footnote">*</span></label>
-            <input id="reg_last_name" class="text_input text_input_1" name="USER_LAST_NAME" type="text" value="<?=$arResult["USER_LAST_NAME"]?>">
+            <input id="reg_last_name" class="text_input text_input_1" name="USER_LAST_NAME" required type="text" value="<?=$arResult["USER_LAST_NAME"]?>">
             <div class="helpModal">
                 Просим указывать настоящие ФИО, так как они будут необходимы в случае возврата денежных средств. Используйте кириллицу.
             </div>
@@ -67,7 +71,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
         <div class="field">
             <label for="reg_email">E-mail <span class="footnote">*</span></label>
-            <input id="reg_email" class="text_input text_input_1" name="USER_EMAIL" type="text" value="<?=$arResult["USER_EMAIL"]?>">
+            <input id="reg_email" class="text_input text_input_1" name="USER_EMAIL" required type="text" value="<?=$arResult["USER_EMAIL"]?>">
         </div>
 
         <?/*div class="field">
@@ -77,7 +81,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
         <div class="field">
             <label for="reg_new_pass">Пароль <span class="footnote">*</span></label>
-            <input id="reg_new_pass" class="text_input text_input_1 text_input_1_err" name="USER_PASSWORD" type="password" value="<?=$arResult["USER_PASSWORD"]?>">
+            <input id="reg_new_pass" class="text_input text_input_1 text_input_1_err" required name="USER_PASSWORD" type="password" value="<?=$arResult["USER_PASSWORD"]?>">
             <div class="helpModal">
                 Должен состоять минимум из 8 символов, содержать как минимум 1 цифру и 1 букву. Можно использовать любые буквы (заглавные и маленькие, кириллицу и латиницу),
                 цифры и нижнее подчеркивание. Все остальные символы, в т.ч. пробел, использовать нельзя.
@@ -86,7 +90,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
         <div class="field">
             <label for="reg_new_pass_repeat">Ещё раз пароль <span class="footnote">*</span></label>
-            <input id="reg_new_pass_repeat" class="text_input text_input_1" name="USER_CONFIRM_PASSWORD" type="password" value="<?=$arResult["USER_CONFIRM_PASSWORD"]?>">
+            <input id="reg_new_pass_repeat" class="text_input text_input_1" required name="USER_CONFIRM_PASSWORD" type="password" value="<?=$arResult["USER_CONFIRM_PASSWORD"]?>">
         </div>
 
         <div class="field">
@@ -106,7 +110,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
             <img src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" />
             <br />
             <label></label>
-            <input id="reg_chaptcha" class="text_input text_input_1" name="captcha_word" type="text" value="">
+            <input id="reg_chaptcha" class="text_input text_input_1" required name="captcha_word" type="text" value="">
         </div>
         <?
         }
@@ -120,4 +124,5 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
     <script type="text/javascript">
         document.bform.USER_NAME.focus();
     </script>
+<? endif; ?>
 </div>

@@ -2,7 +2,8 @@
     <section class="b-container" style="margin-top: 30px;">
 
         <?
-        $GLOBALS['arrNewProductsFilter']['PROPERTY_NOVINKA'] = 'true';
+        $GLOBALS['arrNewProductsFilter']['!PROPERTY_NOVINKA'] = false;
+        $GLOBALS['arrNewProductsFilter']['!DETAIL_PICTURE'] = false;
         $GLOBALS['arrNewProductsFilter'] = array_merge($GLOBALS['arrNewProductsFilter'], GetCatalogSectionFilter());
         ?>
 
@@ -66,6 +67,7 @@
 
 		<?
         $GLOBALS['arrSaleFilter']['!PROPERTY_SALE'] = false;
+        $GLOBALS['arrSaleFilter']['ACTIVE'] = 'Y';
         //$arrNewProductsFilter['!PROPERTY_NOVINKA'] = 'true';
         ?>
 
@@ -84,6 +86,7 @@
                 "ELEMENT_SORT_ORDER" => "desc",
                 "ELEMENT_COUNT" => "20",
                 "LINE_ELEMENT_COUNT" => "4",
+                "HIDE_NOT_AVAILABLE" => "N",
                 "PROPERTY_CODE" => array(
                     0 => "",
                     1 => "",
