@@ -84,7 +84,7 @@ if (defined('USER_URDER_HIDE') && $USER->IsAuthorized()){
 	".default",
 	Array(
 		"COMPONENT_TEMPLATE" => ".default",
-		"EMAIL_TO" => "info@stolnik24.ru",
+		"EMAIL_TO" => "shop@stolnik24.ru",
 		"EVENT_MESSAGE_ID" => array(0=>"47",),
 		"OK_TEXT" => "Спасибо, ваше сообщение принято.",
 		"REQUIRED_FIELDS" => array(),

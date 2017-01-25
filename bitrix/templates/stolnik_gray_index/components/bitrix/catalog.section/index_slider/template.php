@@ -62,9 +62,11 @@
 
             <li class="item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                 <a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="link" title="<?=$arItem["NAME"]?>" >
-                    <?if (strlen($arItem['LABEL']) > 0):?>
-                        <span class="<?=$arItem['LABEL']?>"></span>
-                    <?endif;?>
+                    <? if (!empty($arItem['PROPERTIES']['SALE']['VALUE'])):?>    
+                        <span class="sale"></span>
+                    <? elseif (!empty($arItem['PROPERTIES']['NOVINKA']['VALUE'])): ?>
+                            <span class="new"></span>
+                    <? endif; ?>
                     <span class="img" style="background-image: url(<?=$arItem['PICTURE']['SRC']?>)" alt="<?=$arItem["NAME"]?>" />
                     </span>
                 </a>
