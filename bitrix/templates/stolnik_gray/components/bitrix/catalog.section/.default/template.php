@@ -71,7 +71,15 @@
             <a class="title" href="<?=$arItem["DETAIL_PAGE_URL"]?>" title="<?=$arItem["NAME"]?>"><?=$arItem["NAME"]?></a>
             <div class="cost">
                 
-                <?if(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > 0 && intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > $arItem['PRICE']['VALUE']):?>
+                <? if (!empty($arItem['PRICE']['OLD'])): ?>
+                    <strike><?=$arItem['PRICE']['OLD']['PRINT_VALUE']?></strike>
+                    <i><?=$arItem['PRICE']['PRINT_VALUE']?></i>
+                <? else: ?>
+                    <strong><?=$arItem['PRICE']['PRINT_VALUE']?></strong>
+                <? endif; ?>
+
+
+                <!--<?if(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > 0 && intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']) > $arItem['PRICE']['VALUE']):?>
                     <strike><?=FormatPrice(intval($arItem['PROPERTIES']['STARYE_TSENY']['VALUE']), $arItem['CURRENCY'])?></strike>
                     <?if($arItem['PRICE']['VALUE'] > 0):?>
                         <i><?=$arItem['PRICE']['PRINT_VALUE']?></i>
@@ -80,7 +88,7 @@
                     <?if($arItem['PRICE']['VALUE'] > 0):?>
                         <strong><?=$arItem['PRICE']['PRINT_VALUE']?></strong>
                     <?endif;?>
-                <?endif;?>
+                <?endif;?>-->
             </div>
             <span class="stars">
                 <?for ($i = round(intval($arItem['PROPERTIES']['comments_sum']['VALUE']) / intval($arItem['PROPERTIES']['comments_count']['VALUE'])); $i > 0; $i--):?>

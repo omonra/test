@@ -68,6 +68,7 @@
 		<?
         $GLOBALS['arrSaleFilter']['!PROPERTY_SALE'] = false;
         $GLOBALS['arrSaleFilter']['ACTIVE'] = 'Y';
+        //$GLOBALS['arrSaleFilter']['>CATALOG_QUANTITY'] = 0;
         //$arrNewProductsFilter['!PROPERTY_NOVINKA'] = 'true';
         ?>
 
@@ -123,7 +124,7 @@
                 "USE_PRICE_COUNT" => "N",
                 "SHOW_PRICE_COUNT" => "1",
                 "PRICE_VAT_INCLUDE" => "Y",
-                "USE_PRODUCT_QUANTITY" => "N",
+                "USE_PRODUCT_QUANTITY" => "Y",
                 "FILTER_NAME" => "arrSaleFilter",
                 "CACHE_FILTER" => "Y",
                 "COMPONENT_TEMPLATE" => ".default"

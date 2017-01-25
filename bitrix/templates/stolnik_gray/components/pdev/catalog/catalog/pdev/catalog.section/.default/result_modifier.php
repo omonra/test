@@ -64,4 +64,10 @@ foreach($arResult["ITEMS"] as $cell=>$arElement){
     $arResult["ITEMS"][$cell]["COLOR"]=$arColor2;
 }
 
+if ($USER->IsAdmin()) {
+    echo "<pre>";
+print_r($arResult["ITEMS"][0]);
+    echo "</pre>";
+}
+
 ?>

@@ -17,7 +17,7 @@ $isIndexPage = $curPage == SITE_DIR . 'index.php';
         <meta http-equiv="cleartype" content="on"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta name="msvalidate.01" content="49D9B553E53FFE7DAC4D3D3ADAD40828" />
 
 
         <?ShowTemplateCss(array(

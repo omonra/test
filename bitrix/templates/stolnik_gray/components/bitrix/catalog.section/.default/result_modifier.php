@@ -11,3 +11,9 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
     $arPrices = CExFunctions::GetOptimalPrice($arItem['ID']);
     $arResult['ITEMS'][$key]['PRICE'] = $arPrices;
 }
+
+if ($USER->IsAdmin()) {
+	//echo "<pre>";
+	//print_r($arResult['ITEMS'][0]);
+	//echo "</pre>";
+}
