@@ -113,7 +113,7 @@ class CExFunctions
             
             $arResult['DISCOUNT_DIFF'] = $arResult['OLD']['VALUE'] - $arResult['VALUE'];
             $arResult['PRINT_DISCOUNT_DIFF'] = CCurrencyLang::CurrencyFormat($arResult['DISCOUNT_DIFF'], $arResult['CURRENCY']);
-            $arResult['DISCOUNT_DIFF_PERCENT'] = roundEx(100*$arResult['DISCOUNT_DIFF'] / $arResult['VALUE'], 0);
+            $arResult['DISCOUNT_DIFF_PERCENT'] = floatval(number_format($arResult['DISCOUNT_DIFF'] / $arResult['OLD']['VALUE'], 1, '.', '')) * 100;
         }
 
         return $arResult;
