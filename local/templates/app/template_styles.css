@@ -1,0 +1,129 @@
+*{
+    padding:0;
+    margin:0;
+}
+html {
+    -webkit-text-size-adjust:none;
+    background: transparent;
+}
+
+body{
+    font-family:"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-size: 1rem;
+    /*background:#fff url("images/content_bg.png");*/
+    /*background-size:42px auto;*/
+    background: transparent ;
+}
+/*body.search{padding-top: 43px}*/
+.wrap{min-width:320px; padding: 0 !important;}
+
+.btn-small {
+    display: inline-block;
+}
+
+.btn-small img {
+    width: 36px;
+    height: 36px;
+}
+
+.topbar {
+    position: fixed;
+    padding: 14px 0;
+    width: 100%;
+    border-bottom: 2px solid #f5f5f5;
+    background: #fff;
+}
+
+.topbar table {
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topbar table td {
+    vertical-align: middle;
+    padding: 0 9px;
+}
+
+.topbar table td.left {
+    text-align: left;
+}
+
+.topbar table td.right {
+    text-align: right;
+}
+
+
+.topbar table td.center {
+    text-align: center;
+}
+
+.topbar table td.center img {
+    height: 17px;
+}
+
+.topbar table td .btn-small {
+    padding: 0 4px;
+}
+
+.topbar .search {
+    display: block;
+    padding: 0 13px;
+    position: relative;
+}
+
+.topbar .search input[type=text] {
+    display: block;
+    background: #f5f5f5;
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    height: 30px;
+    padding: 0 10px;
+    box-sizing:border-box;
+    font-size: 0.8rem;
+}
+
+.topbar .search button {
+    display: block;
+    position: absolute;
+    right: 22px;
+    top: 7px;
+    width: 15px;
+    height: 15px;
+    border: none;
+}
+
+.bottombar {
+    background: #202020;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.bottombar a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.bottombar table {
+    width: 100%;
+}
+
+.bottombar td {
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 0;
+}
+
+.wrapper {
+    padding: 115px 13px 0 13px;
+    box-sizing:border-box;
+    width: 100%;
+}

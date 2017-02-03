@@ -33,3 +33,7 @@
 !/bitrix/templates/
 # исключаем служебные и ненужные папки проекта
 /upload
+/eshop_app
+/bitrix/templates/eshop_app
+/bitrix/templates/NewMobileTemplate
+/test_app
