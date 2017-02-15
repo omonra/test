@@ -11,7 +11,7 @@ $settings = array(
         "use_top_bar" => "NO"
     ),
     "statusBar" => Array (
-        "use_top_offset" => "YES"
+        "use_top_offset" => "NO"
     ),
     "buttons" =>
     array(
@@ -55,8 +55,8 @@ $settings = array(
         "row_height_large" => "63.0"//высота €чейки планшетна€
     ),
     "pull_down" => array(
-        "icon" => "/myfirst_app/img/down_arrow.png", //стрелочка дл€ пулдауна
-        "text_color" => "#A3F2CE", //цвет текста пулдауна
+        "icon" => "/app/img/down_arrow.png", //стрелочка дл€ пулдауна
+        "text_color" => "#333333", //цвет текста пулдауна
     )
 );
 
