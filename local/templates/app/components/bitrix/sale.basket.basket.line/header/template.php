@@ -1,0 +1,1 @@
+<a href="<?=$arParams['PATH_TO_BASKET']?>" class="btn-small"><?if($arResult['NUM_PRODUCTS'] > 0):?><span><?=$arResult['NUM_PRODUCTS']?></span><?endif;?><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_basket.svg" /></a>
