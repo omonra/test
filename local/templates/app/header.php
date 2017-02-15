@@ -22,7 +22,7 @@ if (CModule::IncludeModule("mobileapp"))
         </script>
 </head>
 <body id="body" class="<?=$APPLICATION->ShowProperty("BodyClass");?>">
-<?if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
+<?//if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
 <? if (!defined("NO_NAVIGATION")): ?>
     <div class="topbar">
         <table width="100%">

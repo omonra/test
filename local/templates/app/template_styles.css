@@ -563,3 +563,39 @@ body.menu-page {
 .product-item .product-photos .lSPager > li.active a {
     background: #000000;
 }
+
+.success-basket-add {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #fff;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.success-basket-add .modal {
+    width: 80%;
+    padding: 5%;
+    margin: 10rem auto 0 auto;
+    background: #fff;
+    text-align: center;
+}
+
+.success-basket-add .modal a {
+    display: inline-block;
+    text-decoration: none;
+    border: 2px solid #E0E0E0;
+    border-radius: 0.3rem;
+    padding: 0.4rem 0.5rem;
+    color: #757575;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+}
+
+.success-basket-add .modal a.orange {
+    background: #FF6D00;
+    color: #fff;
+    border: 2px solid #FF6D00;
+}

@@ -61,6 +61,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
         </tr>
     </table>
 </div>
+
 <div class="product-item">
     <div class="product-photos">
     <ul class="items">
@@ -70,6 +71,21 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
         </li>
         <? endforeach; ?>
     </ul>
+    </div>
+</div>
+
+<div class="success-basket-add" >
+    <div class="modal">
+    Товар успешно добавлен в корзину!<br/><br/>
+    <table width="100%">
+        <tr>
+            <td><a href="#" onclick="$('.success-basket-add').hide(); return false;">Продолжить покупки</a></td>
+            <td><a href="/app/personal/order/make/" class="orange">Оформить заказ</a></td>
+        </tr>
+    
+    
+    </table>
+    
     </div>
 </div>
 
@@ -129,7 +145,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                 });
             })(options);
         },
-
+                
         BasketAdd: function() {
             if (typeof offersList.SIZE == 'object') {
                 var sizes = [];
@@ -142,25 +158,22 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                     BXMobileApp.UI.SelectPicker.show({
                         values: sizes,
                         callback: function (data) {
-                            currentSize = data.values[0];
-                            var currentOffer = window.offersList['SIZE'][currentSize][currentColor]['ID'];
+                            window.currentSize = data.values[0];
+                            
+                            var currentOffer = window.offersList['SIZE'][window.currentSize][window.currentColor]['ID'];
                             if (currentOffer !== undefined) {
                                 var data = {id: currentOffer};
-                                $('.product-item').html(JSON.stringify(data));
-                                this.Query({
+
+                                MobileApp.Query({
                                     action: 'AddToBasket',
                                     data: data,
                                     success: function(response) {
-                                        $('.product-item').html(JSON.stringify(response));
                                         if (response.ok) {
-                                            // $.fancybox.open('#added-to-basket');
-                                            //stolnik.UpdateBasket(response);
-                                            $('.product-item').html(JSON.stringify(response));
+                                            $('.success-basket-add').show();
                                         }
                                     }
                                 });
                             }
-                            
                         }
                     });
 
@@ -181,7 +194,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                     BXMobileApp.UI.SelectPicker.show({
                         values: colors,
                         callback: function (data) {
-                            currentColor = data.values[0];
+                            window.currentColor = data.values[0];
                         }
                     });
 
