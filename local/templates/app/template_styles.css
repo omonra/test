@@ -599,3 +599,86 @@ body.menu-page {
     color: #fff;
     border: 2px solid #FF6D00;
 }
+
+.ajax-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #fff;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.ajax-modal > .close {
+    display: block;
+    width: 90%;
+    background: #fff;
+    color: #0277BD;
+    padding: 0.7rem 0;
+    text-align: center;
+    text-decoration: none;
+    margin: 5rem auto 0 auto;
+}
+
+.ajax-modal > .modal {
+    width: 80%;
+    padding: 5% 5%;
+    margin: 1rem auto 0 auto;
+    background: #fff;
+}
+
+.ajax-modal > .modal > .title {
+    color: #424242;
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.ajax-modal > .modal .article {
+    color: #BDBDBD;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+}
+
+.ajax-modal > .modal .characteristics {
+    
+}
+
+.ajax-modal > .modal .characteristics .title {
+    text-transform: uppercase;
+    color: #BDBDBD;
+    margin-bottom: 0.7rem;
+}
+
+.registartion {
+    
+}
+
+.form input[type=text],
+.form input[type=password] {
+    display: block;
+    border: 1px solid #E0E0E0;
+    padding: 0.6rem 0;
+    text-indent: 0.5rem;
+    color: #333;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.form .btn-orange {
+    display: inline-block;
+    background: #FF6D00;
+    color: #fff;
+    padding: 0.7rem 1rem;
+    border: none;
+    font-size: 0.9rem;
+    border-radius: 0.3rem;
+}

@@ -9,6 +9,8 @@ define('BX_PULL_SKIP_LS', true);
 if (!defined('BX_DONT_SKIP_PULL_INIT'))
 	define("BX_SKIP_PULL_INIT", true);
 
+define('BX_APP_NAME', 'BitrixMobile');
+define('BX_ANONYMOUS_USER_ID', 28123);
 define('IBLOCK_MOBILE_TYPE', 'mobile');
 define('IBLOCK_MOBILE_NAVIGATION', 63);
 ?>
