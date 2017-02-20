@@ -68,6 +68,7 @@
 		<?
         $GLOBALS['arrSaleFilter']['!PROPERTY_SALE'] = false;
         $GLOBALS['arrSaleFilter']['ACTIVE'] = 'Y';
+        $GLOBALS['arrSaleFilter']['!DETAIL_PICTURE'] = false;
         //$GLOBALS['arrSaleFilter']['>CATALOG_QUANTITY'] = 0;
         //$arrNewProductsFilter['!PROPERTY_NOVINKA'] = 'true';
         ?>
