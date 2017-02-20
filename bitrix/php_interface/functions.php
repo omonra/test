@@ -576,7 +576,7 @@ function CountSpecialProducts(&$arItem, $sectionId, $iblockId) {
                 global $CACHE_MANAGER;
                 $CACHE_MANAGER->StartTagCache('/iblock/catalog_count_products');
 
-                $arSpec = array('NEW' => 'NOVINKA', 'SALE' => 'RASPRODAZHA');
+                $arSpec = array('NEW' => 'NOVINKA', 'SALE' => 'SALE');
                 $arActions = GetActiveActions();
                 if (is_array($arActions) && count($arActions) > 0) {
                     $keys = array_keys($arActions);
@@ -587,7 +587,11 @@ function CountSpecialProducts(&$arItem, $sectionId, $iblockId) {
                     if (strlen($propCode) <= 0) {
                         continue;
                     }
-                    $arFilter['PROPERTY_' . $propCode] = 'true';
+                    if ($key2 == 'NEW')
+                        $arFilter['PROPERTY_' . $propCode] = 'true';
+                    else
+                        $arFilter['!PROPERTY_' . $propCode] = false;
+                    
                     $rsFields = CIBlockElement::GetList(array(), $arFilter, array('ACTIVE'));
                     if ($arFields = $rsFields->GetNext()) {
                         $arCurVal['COUNT_' . $key2] = $arFields['CNT'];
@@ -655,7 +659,8 @@ function CountSectionsProducts($arSectionIds, $iblockId) {
 function GetCatalogSectionFilter() {
     return array(
         // '>CATALOG_PRICE_' . GetPriceId() => '0',
-        // 'CATALOG_AVAILABLE' => 'Y',
+         'CATALOG_AVAILABLE' => 'Y',
+        '!DETAIL_PICTURE' => false
     );
 }
 
