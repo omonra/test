@@ -44,7 +44,7 @@ $APPLICATION->AddHeadScript($templateFolder."/script.js");
     <table width="100%">
         <tr>
             <td width="50%"><a href="tel:88005006964" class="call"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_phone.svg" width="20"/> Позвонить</a></td>
-            <td width="50%"><a href="" class="btn-orange">Оформить заказ</a></td>
+            <td width="50%"><a href="/app/personal/order/" class="btn-orange">Оформить заказ</a></td>
         </tr>
     </table>
 </div>
@@ -71,6 +71,7 @@ $APPLICATION->AddHeadScript($templateFolder."/script.js");
         <a href="/app/catalog/?ELEMENT_ID=<?=$arProps['CML2_LINK']['VALUE']?>" class="title"><?=$arProduct['NAME']?></a>
         <div class="sku-props"><?=$arProps['SIZE']['VALUE']?>, <?=$arProps['COLOR']['VALUE']?></div>
         <div class="price"><?=$arItem['FULL_PRICE_FORMATED']?> x <?=$arItem['QUANTITY']?> шт.</div>
+        <a href="/app/personal/cart/?basketAction=delete&id=<?=$arItem['ID']?>" class="delete"><img src="<?=SITE_TEMPLATE_PATH?>/images/ico_delete.png" /></a>
     </div>
     <? endforeach; ?>
 <? else: ?>
@@ -81,4 +82,4 @@ $APPLICATION->AddHeadScript($templateFolder."/script.js");
 <? endif; ?>
 
 </div>
-<pre><? print_r($arResult)?></pre>
+<pre><? //print_r($arResult)?></pre>

@@ -48,7 +48,7 @@ if (CModule::IncludeModule("mobileapp"))
                     "header",
                     array(
                         "PATH_TO_BASKET" => "/app/personal/cart/",
-                        "PATH_TO_ORDER" => "/app/personal/order/make/",
+                        "PATH_TO_ORDER" => "/app/personal/order/",
                         "SHOW_NUM_PRODUCTS" => "Y",
                         "SHOW_TOTAL_PRICE" => "Y",
                         "SHOW_EMPTY_VALUES" => "Y",

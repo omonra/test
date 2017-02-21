@@ -53,7 +53,7 @@ asd
             <td class="color">
                 
                 
-                <a href="" class="color">
+                <a href="" onclick="MobileApp.SelectColor();return false;" class="color">
                     <img src="<?=$productSelected['COLOR_PICTURE']?>" />
                 </a>
                
@@ -87,7 +87,7 @@ asd
     <table width="100%">
         <tr>
             <td><a href="#" onclick="$('.success-basket-add').fadeOut(); return false;">Закрыть</a></td>
-            <td><a href="/app/personal/order/make/" class="orange">Оформить заказ</a></td>
+            <td><a href="/app/personal/cart/" class="orange">Оформить заказ</a></td>
         </tr>
     
     
@@ -242,7 +242,7 @@ asd
         SelectColor: function () {
             if (typeof offersList.COLOR == 'object') {
                 var colors = [];
-                $.each(offersList.SIZE, function (key, value) {
+                $.each(offersList.COLOR, function (key, value) {
                     colors.push(key);
                 });
 

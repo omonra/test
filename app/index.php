@@ -2,7 +2,7 @@
 define('NO_BACKLINE', 'Y');
 require($_SERVER["DOCUMENT_ROOT"]."/app/headers.php");
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-//LocalRedirect('/app/reg/');
+//LocalRedirect('/app/catalog/?ELEMENT_ID=431138');
 //$APPLICATION->SetPageProperty("BodyClass", "main");
 ?>
 
