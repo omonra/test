@@ -599,3 +599,289 @@ body.menu-page {
     color: #fff;
     border: 2px solid #FF6D00;
 }
+
+.ajax-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #fff;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.ajax-modal > .close {
+    display: block;
+    width: 90%;
+    background: #fff;
+    color: #0277BD;
+    padding: 0.7rem 0;
+    text-align: center;
+    text-decoration: none;
+    margin: 5rem auto 0 auto;
+}
+
+.ajax-modal > .modal {
+    width: 80%;
+    padding: 5% 5%;
+    margin: 1rem auto 0 auto;
+    background: #fff;
+}
+
+.ajax-modal > .modal > .title {
+    color: #424242;
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.ajax-modal > .modal .article {
+    color: #BDBDBD;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+}
+
+.ajax-modal > .modal .characteristics {
+    
+}
+
+.ajax-modal > .modal .characteristics .title {
+    text-transform: uppercase;
+    color: #BDBDBD;
+    margin-bottom: 0.7rem;
+}
+
+.registartion {
+    margin-top: 1rem;
+}
+
+.form input[type=text],
+.form input[type=password],
+.form input[type=email]{
+    display: block;
+    border: 1px solid #E0E0E0;
+    padding: 0.6rem 0;
+    text-indent: 0.5rem;
+    color: #333;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.btn-orange {
+    display: inline-block;
+    background: #FF6D00;
+    color: #fff;
+    padding: 0.7rem 1rem;
+    border: none;
+    font-size: 0.9rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+}
+
+.form > label {
+    display: block;
+    margin-bottom: 0.7rem;
+}
+
+.form > label sup {
+    color: #ff0000;
+}
+
+.error-label {
+    background: #ff0000;
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    color: #fff;
+}
+
+.personal-my {
+    margin: 1rem 0;
+}
+
+.personal-my .user-info {
+    background: #F5F5F5;
+    padding: 0.8rem 1rem;
+    border-radius: 0.6rem;
+    color: #757575;
+    margin-bottom: 1rem;
+}
+
+.personal-my .user-info > b {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: #212121;
+}
+
+.personal-my .user-info > .green {
+    color: #66BB6A;
+    
+}
+
+.personal-my .bonus-history {
+    border-bottom: 1px solid #F5F5F5;
+    margin-bottom: 0.8rem;
+    padding: 0 0 0.8rem 0;
+}
+
+.personal-my .bonus-history .count {
+    color: #66BB6A;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.personal-my .bonus-history.minus .count {
+    color: #F44336;
+}
+
+.personal-my .bonus-history .comment {
+    font-size: 0.8rem;
+    color: #BDBDBD;
+}
+
+.shops {
+    margin: 1rem 0;
+}
+
+.shops > .item .title {
+    text-transform: uppercase;
+    color: #212121;
+    border-bottom: 1px solid #F5F5F5;
+    padding: 0.8rem 0;
+    text-align: center;
+}
+
+.shops > .item ul {
+    margin: 0;
+    padding: 0;
+}
+
+.shops > .item ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.shops > .item ul li a {
+    display: block;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    background: url('./images/menu-arrow-right.png') no-repeat right center;
+    padding: 0.5rem 0;
+}
+
+.shops > .item ul li a span {
+    color: #757575;
+    font-weight: normal;
+    display: block;
+    font-size: 0.8rem;
+}
+
+.shop {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.shop .title {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.shop .info {
+    color: #757575;
+    line-height: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+a.call {
+    display: inline-block;
+    border: 2px solid #E0E0E0;
+    padding: 0.6rem 1rem;
+    color: #757575;
+    text-decoration: none;
+    border-radius: 0.4rem;
+    position: relative;
+    padding-left: 2.1rem;
+    
+}
+
+.shop a.call > img {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    left: 0.6rem;
+    top: 0.7rem;
+}
+
+.basket {
+    margin: 1rem 0;
+}
+
+.basket .empty {
+    color: #424242;
+    line-height: 1.8rem;
+}
+
+.basket .item {
+    border-bottom: 1px solid #F5F5F5;
+    height: 6rem;
+    position: relative;
+    padding: 0.5rem 0 0.5rem 5rem;
+    margin-bottom: 1rem;
+    
+}
+
+.basket .item > .image {
+    width: 4rem;
+    height: 6rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.basket .item > .title {
+    color: #424242;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.basket .item > .sku-props {
+    color: #BDBDBD;
+}
+
+.basket .item > .price {
+    color: #FF6D00;
+    font-weight: bold;
+}
+
+.can-buy {
+    background: #F5F5F5;
+    border-top: 1px solid #E0E0E0;
+    position: fixed;
+    width: 100%;
+    height: 5rem;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding-top: 1rem;
+    z-index: 100;
+}
+
+.can-buy .sum {
+    color: #424242;
+    font-weight: bold;
+    font-size: 1.1rem;
+}

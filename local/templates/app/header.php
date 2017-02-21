@@ -12,6 +12,7 @@ if (CModule::IncludeModule("mobileapp"))
 	<!--<link href="<?=CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH."/template_styles.css")?>" type="text/css" rel="stylesheet" />-->
 	<?//$APPLICATION->ShowHeadStrings();?>
         <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-3.1.1.min.js");?>
+        <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.maskedinput.min.js");?>
         <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/lightslider.min.js");?>
 	<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/script.js");?>
         <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/lightslider.css");?>

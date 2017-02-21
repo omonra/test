@@ -37,7 +37,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
                 </table>
                 <hr/>
                 
-                <a href="/app/reg/" class="btn-gray" rel="nofollow">Зарегистрироваться</a>
+                <a href="/app/reg/?redirect=<?=$APPLICATION->GetCurDir()?>" class="btn-gray" rel="nofollow">Зарегистрироваться</a>
     </form>
 </div>
 

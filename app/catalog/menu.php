@@ -5,7 +5,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/app/catalog/menu.ext.php");
 
 if (isset($_REQUEST['SECTION_ID']) && isset($arSections[$_REQUEST['SECTION_ID']]))
 {
-    $arSections = 
+    $arSections = "";
 }
 
 ?>

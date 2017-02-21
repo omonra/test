@@ -28,6 +28,13 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
 
 ?>
 
+<? if ($_REQUEST['description'] == 'y'): ?>
+<? $APPLICATION->RestartBuffer(); ?>
+<script>BXMobileApp.UI.Page.TopBar.show();</script>
+asd
+<? exit; ?>
+<? endif; ?>
+
 <script>
     window.offersList = <?= CUtil::PhpToJSObject($arResult['OFFERS_LIST']) ?>;
     window.currentColor = '<?= $arResult['COLOR_SELECTED'] ?>';
@@ -40,7 +47,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td class="info">
-                <a href="">Инфо</a>
+                <a href="#" onclick="MobileApp.ProductDescription(); return false;">Инфо</a>
             </td>
             <? if (!empty($productSelected['COLOR_PICTURE'])): ?>
             <td class="color">
@@ -53,14 +60,10 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
             </td>
             <? endif; ?>
             <td>
-                <a href="">Таблица размеров</a>
+                <a href="#" onclick="MobileApp.ProductTableSizes(); return false;">Таблица размеров</a>
             </td>
-            <td class="<? if (count($arResult['OFFERS_LIST']) > 0): ?>to-cart<?else:?>not-avaliable<?endif;?>">
-                <? if (count($arResult['OFFERS_LIST']) > 0): ?>
+            <td class="to-cart">
                 <a href="#" onclick="MobileApp.BasketAdd(); return false;" class="to-cart">В корзину</a>
-                <? else: ?>
-                <a href="#" onclick="return false;" class="not-avaliable">Нет в наличии</a>
-                <? endif; ?>
             </td>
         </tr>
     </table>
@@ -83,7 +86,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
     Товар успешно добавлен в корзину!<br/><br/>
     <table width="100%">
         <tr>
-            <td><a href="#" onclick="$('.success-basket-add').hide(); return false;">Продолжить покупки</a></td>
+            <td><a href="#" onclick="$('.success-basket-add').fadeOut(); return false;">Закрыть</a></td>
             <td><a href="/app/personal/order/make/" class="orange">Оформить заказ</a></td>
         </tr>
     
@@ -93,19 +96,61 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
     </div>
 </div>
 
+<div class="ajax-modal" id="description">
+    <a href="#" class="close" onclick="$(this).parent().fadeOut(); return false;">Закрыть</a>
+    <div class="modal">
+        <div class="title"><?=$arResult['NAME']?></div>
+        <?if (strlen($arResult['PROPERTIES']['CML2_ARTICLE']['VALUE']) > 0):?>
+        <div class="article">Артикул: <?=$arResult['PROPERTIES']['CML2_ARTICLE']['VALUE']?></div>
+        <? endif; ?>
+        
+        <div class="characteristics">
+            <div class="title">Описание и характеристики</div>
+        
+        <?if (strlen($arResult['DETAIL_TEXT']) > 0):?>
+                <?if ($arResult['DETAIL_TEXT_TYPE'] == 'text'):?>
+                    <p><?=$arResult['DETAIL_TEXT']?></p>
+                <?else:?>
+                    <?=$arResult['DETAIL_TEXT']?>
+                <?endif;?>
+            <?endif;?>
+            <?if (is_array($arResult['DISPLAY_PROPERTIES']) && count($arResult['DISPLAY_PROPERTIES']) > 0):?>
+                <table>
+                    <?foreach ($arResult['DISPLAY_PROPERTIES'] as $key => $arProp):?>
+                        <tr>
+                            <td><?=$arProp['NAME']?></td>
+                            <td><?=(is_array($arProp['VALUE']) ? implode(', ', $arProp['VALUE']) : $arProp['VALUE'])?></td>
+                        </tr>
+                    <?endforeach;?>
+                </table>
+            <?endif;?>
+        </div>
+    </div>
+</div>
+
+
+<div class="ajax-modal" id="sizes">
+    <a href="#" class="close" onclick="$(this).parent().fadeOut(); return false;">Закрыть</a>
+    <div class="modal">
+        <div class="title">Таблица размеров</div>
+        <p>Нет информации</p>
+    </div>
+</div>
+
 <pre>
-    <? //print_r($arResult['OFFERS_LIST']); ?>
+    <? //print_r($firstColor); ?>
 </pre>
 
 <script>
     
     var MobileApp = {
         
-        UpdateBasket: function () {
-            
-            $.get('/app/ajax/basket.php', function (data) {
-                $("#basket-ajax").html(data);
-            });
+        ProductDescription: function () {
+            $("#description").fadeIn();
+        },
+        
+        ProductTableSizes: function () {
+            $("#sizes").fadeIn();
         },
         
         Query: function(options) {
@@ -181,8 +226,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                                     data: data,
                                     success: function(response) {
                                         if (response.ok) {
-                                            $('.success-basket-add').show();
-                                            MobileApp.UpdateBasket();
+                                            $('.success-basket-add').fadeIn();
                                         }
                                     }
                                 });
@@ -198,7 +242,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
         SelectColor: function () {
             if (typeof offersList.COLOR == 'object') {
                 var colors = [];
-                $.each(offersList.COLOR, function (key, value) {
+                $.each(offersList.SIZE, function (key, value) {
                     colors.push(key);
                 });
 
@@ -208,8 +252,6 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                         values: colors,
                         callback: function (data) {
                             window.currentColor = data.values[0];
-                            var color_picture = window.offersList['COLOR'][window.currentColor][window.currentSize]['COLOR_PICTURE'];
-                            $("#color-picture").attr('src', color_picture);
                         }
                     });
 
