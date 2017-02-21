@@ -55,8 +55,12 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
             <td>
                 <a href="">Таблица размеров</a>
             </td>
-            <td class="to-cart">
+            <td class="<? if (count($arResult['OFFERS_LIST']) > 0): ?>to-cart<?else:?>not-avaliable<?endif;?>">
+                <? if (count($arResult['OFFERS_LIST']) > 0): ?>
                 <a href="#" onclick="MobileApp.BasketAdd(); return false;" class="to-cart">В корзину</a>
+                <? else: ?>
+                <a href="#" onclick="return false;" class="not-avaliable">Нет в наличии</a>
+                <? endif; ?>
             </td>
         </tr>
     </table>
@@ -74,7 +78,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
     </div>
 </div>
 
-<div class="success-basket-add" >
+<div class="success-basket-add" style="display: none;">
     <div class="modal">
     Товар успешно добавлен в корзину!<br/><br/>
     <table width="100%">
@@ -90,12 +94,20 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
 </div>
 
 <pre>
-    <? print_r($firstColor); ?>
+    <? //print_r($arResult['OFFERS_LIST']); ?>
 </pre>
 
 <script>
     
     var MobileApp = {
+        
+        UpdateBasket: function () {
+            
+            $.get('/app/ajax/basket.php', function (data) {
+                $("#basket-ajax").html(data);
+            });
+        },
+        
         Query: function(options) {
             var defaultOptions = {
                 url: '/app/ajax/',
@@ -170,6 +182,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                                     success: function(response) {
                                         if (response.ok) {
                                             $('.success-basket-add').show();
+                                            MobileApp.UpdateBasket();
                                         }
                                     }
                                 });
@@ -185,7 +198,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
         SelectColor: function () {
             if (typeof offersList.COLOR == 'object') {
                 var colors = [];
-                $.each(offersList.SIZE, function (key, value) {
+                $.each(offersList.COLOR, function (key, value) {
                     colors.push(key);
                 });
 
@@ -195,6 +208,8 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                         values: colors,
                         callback: function (data) {
                             window.currentColor = data.values[0];
+                            var color_picture = window.offersList['COLOR'][window.currentColor][window.currentSize]['COLOR_PICTURE'];
+                            $("#color-picture").attr('src', color_picture);
                         }
                     });
 
