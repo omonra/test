@@ -531,6 +531,11 @@ body.menu-page {
     color: #fff;
 }
 
+.product-toolbar .not-avaliable {
+    background: #666;
+    color: #ccc;
+}
+
 .product-item {
     margin-top: 102px;
 }

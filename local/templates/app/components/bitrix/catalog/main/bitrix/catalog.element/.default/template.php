@@ -63,7 +63,11 @@ asd
                 <a href="#" onclick="MobileApp.ProductTableSizes(); return false;">Таблица размеров</a>
             </td>
             <td class="to-cart">
+                <? if (count($arResult['OFFERS_LIST']) > 0): ?>
                 <a href="#" onclick="MobileApp.BasketAdd(); return false;" class="to-cart">В корзину</a>
+                <? else: ?>
+                <a href="#" onclick="return false;" class="not-avaliable">Нет в наличии</a>
+                <? endif; ?>
             </td>
         </tr>
     </table>
