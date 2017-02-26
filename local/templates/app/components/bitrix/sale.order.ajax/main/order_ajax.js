@@ -4487,7 +4487,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			if (!this.result.PAY_SYSTEM || this.result.PAY_SYSTEM.length <= 0)
 				return;
 
-			var paySystemItemsContainer = BX.create('DIV', {props: {className: 'col-sm-7 bx-soa-pp-item-container'}}),
+			var paySystemItemsContainer = BX.create('DIV', {props: {className: 'bx-soa-pp-item-container'}}),
 				paySystemItemNode, i;
 
 			for (i = 0; i < this.paySystemPagination.currentPage.length; i++)
@@ -4925,7 +4925,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			if (!this.result.DELIVERY || this.result.DELIVERY.length <= 0)
 				return;
 
-			var deliveryItemsContainer = BX.create('DIV', {props: {className: 'col-sm-7 bx-soa-pp-item-container'}}),
+			var deliveryItemsContainer = BX.create('DIV', {props: {className: 'bx-soa-pp-item-container'}}),
 				deliveryItemNode, k;
 
 			for (k = 0; k < this.deliveryPagination.currentPage.length; k++)

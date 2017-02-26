@@ -23,7 +23,7 @@ if (CModule::IncludeModule("mobileapp"))
         </script>
 </head>
 <body id="body" class="<?=$APPLICATION->ShowProperty("BodyClass");?>">
-<?//if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
+<?if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
 <? if (!defined("NO_NAVIGATION")): ?>
     <div class="topbar">
         <table width="100%">
@@ -40,7 +40,7 @@ if (CModule::IncludeModule("mobileapp"))
                 </td>
                 <td class="right two">
                     <? if ($APPLICATION->GetCurDir() == "/app/"): ?>
-                     <a href="tel:+78005006964" class="btn-small"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_phone.svg" /></a>
+                     <a href="tel:+78005006964" class="btn-small hide-320px"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_phone.svg" /></a>
                      <? endif; ?>
                      
                      <?$APPLICATION->IncludeComponent(
@@ -64,7 +64,8 @@ if (CModule::IncludeModule("mobileapp"))
                         "SHOW_SUBSCRIBE" => "N",
                         "SHOW_IMAGE" => "Y",
                         "SHOW_PRICE" => "Y",
-                        "SHOW_SUMMARY" => "Y"
+                        "SHOW_SUMMARY" => "Y",
+                        "HIDE_ON_BASKET_PAGES" => "N"
                     ),
                     false
                 );?>

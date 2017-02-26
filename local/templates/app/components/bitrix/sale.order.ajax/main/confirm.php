@@ -17,6 +17,7 @@ if ($arParams["SET_TITLE"] == "Y")
 	<table class="sale_order_full_table">
 		<tr>
 			<td>
+                            <img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_success_order.svg" class="icon" />
 				<?=Loc::getMessage("SOA_ORDER_SUC", array(
 					"#ORDER_DATE#" => $arResult["ORDER"]["DATE_INSERT"],
 					"#ORDER_ID#" => $arResult["ORDER"]["ACCOUNT_NUMBER"]

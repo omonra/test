@@ -31,7 +31,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
 <? if ($_REQUEST['description'] == 'y'): ?>
 <? $APPLICATION->RestartBuffer(); ?>
 <script>BXMobileApp.UI.Page.TopBar.show();</script>
-asd
+
 <? exit; ?>
 <? endif; ?>
 
@@ -40,6 +40,7 @@ asd
     window.currentColor = '<?= $arResult['COLOR_SELECTED'] ?>';
     window.currentSize = '<?= $arResult['SIZE_SELECTED'] ?>';
     window.currentOffer = '<?= $arResult['OFFER_SELECTED'] ?>';
+    window.colors = <?= CUtil::PhpToJSObject($arResult['COLORS_PICTURE']) ?>;
 </script>
 <div class="product-toolbar">
     
@@ -53,7 +54,7 @@ asd
             <td class="color">
                 
                 
-                <a href="" onclick="MobileApp.SelectColor();return false;" class="color">
+                <a href="" onclick="MobileApp.SelectColor(this);return false;" class="color">
                     <img src="<?=$productSelected['COLOR_PICTURE']?>" />
                 </a>
                
@@ -243,19 +244,25 @@ asd
 
         },
         
-        SelectColor: function () {
+        SelectColor: function (element) {
             if (typeof offersList.COLOR == 'object') {
                 var colors = [];
                 $.each(offersList.COLOR, function (key, value) {
                     colors.push(key);
                 });
-
+                
+                
+                                   
                 if (colors.length > 0)
                 {
                     BXMobileApp.UI.SelectPicker.show({
                         values: colors,
                         callback: function (data) {
                             window.currentColor = data.values[0];
+                            if (window.colors[window.currentColor] !== undefined) {
+                                $(element).find('img').attr('src', window.colors[window.currentColor]);
+                            }
+                            
                         }
                     });
 

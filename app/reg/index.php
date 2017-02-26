@@ -10,29 +10,37 @@ $APPLICATION->SetTitle("Регистрация");
 
 if ($_POST['regform'])
 {
-    $password = rand(111111, 999999);
-    $user = new CUser;
-    $arFields = Array (
-        'NAME' => $_POST['name'],
-        'LOGIN' => $_POST['phone'],
-        'EMAIL' => $_POST['email'],
-        'PASSWORD' => $password,
-        'ACTIVE' => 'Y',
-        'GROUP_ID' => Array (12),
-        'CONFIRM_PASSWORD' => $password,
-        'PERSONAL_PHONE' => $_POST['phone'],
-        'PERSONAL_BIRTHDAY_1' => $_POST['birthday'],
-    );
-    
-    $ID = $user->Add($arFields);
-    if (intval($ID) > 0)
+    $rsUsers = CUser::GetList(($by="id"), ($order="desc"), Array ('PERSONAL_PHONE' => $_POST['phone']));
+    if (!$rsUsers->fetch())
     {
-        $redirect = !empty($_REQUEST['redirect']) ? $_REQUEST['redirect'] : $APPLICATION->GetCurDir();
-        $USER->Authorize($ID);
-        LocalRedirect($redirect);
+        $password = rand(111111, 999999);
+        $user = new CUser;
+        $arFields = Array (
+            'NAME' => $_POST['name'],
+            'LOGIN' => $_POST['phone'],
+            'EMAIL' => $_POST['email'],
+            'PASSWORD' => $password,
+            'ACTIVE' => 'Y',
+            'GROUP_ID' => Array (12),
+            'CONFIRM_PASSWORD' => $password,
+            'PERSONAL_PHONE' => $_POST['phone'],
+            'PERSONAL_BIRTHDAY_1' => $_POST['birthday'],
+        );
+
+        $ID = $user->Add($arFields);
+        if (intval($ID) > 0)
+        {
+            $redirect = !empty($_REQUEST['redirect']) ? $_REQUEST['redirect'] : $APPLICATION->GetCurDir();
+            $USER->Authorize($ID);
+            LocalRedirect($redirect);
+        }
+        else       
+            $arErrors[] = $user->LAST_ERROR;
     }
-    else       
-        $arErrors[] = $user->LAST_ERROR;
+    else
+    {
+        $arErrors[] = "Пользователь с указанным номером телефона уже зарегистрирован";
+    }
 }
 
 ?>
@@ -44,13 +52,13 @@ if ($_POST['regform'])
     <? endif; ?>
     <form method="post" class="form" target="_top" enctype="multipart/form-data">
         <label>Контактный телефон <sup>*</sup></label>
-        <input type="text" name="phone" required="required" placeholder="+7 (123) 456-78-90" />
+        <input type="text" name="phone" required="required" value="<?=$_REQUEST['phone']?>" placeholder="+7 (123) 456-78-90" />
         <label>Ваше имя <sup>*</sup></label>
-        <input type="text" name="name" required="required" placeholder="Иван" />
+        <input type="text" name="name" required="required" value="<?=$_REQUEST['name']?>" placeholder="Иван" />
         <label>Email <sup>*</sup></label>
-        <input type="email" name="email" required="required" placeholder="my@mail.ru" />
+        <input type="email" name="email" required="required" value="<?=$_REQUEST['email']?>" placeholder="my@mail.ru" />
         <label>Дата рождения <sup>*</sup></label>
-        <input type="text" name="birthday" required="required" placeholder="дд.мм.гггг" />
+        <input type="text" name="birthday" required="required" value="<?=$_REQUEST['birthday']?>" placeholder="дд.мм.гггг" />
         <button class="btn-orange" name="regform" value="y" type="submit">Зарегистрироваться</button>
     </form>
 </div>

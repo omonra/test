@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/personal/cart/index.php</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.order.ajax/main/template.php</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.order.ajax/main/styles.css</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.order.ajax/main/delivery_extra_params.php</file>
             <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.basket.basket/main/template.php</file>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/settings.php</file>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/catalog/index.php</file>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/header.php</file>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/404.php</file>
-            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/config.php</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/personal/order/index.php</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.order.ajax/main/delivery.php</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/components/bitrix/sale.order.ajax/main/order_ajax.js</file>
             <file>file:/Applications/MAMP/htdocs/Stolnik24/local/templates/app/template_styles.css</file>
+            <file>file:/Applications/MAMP/htdocs/Stolnik24/app/index.php</file>
         </group>
     </open-files>
 </project-private>
