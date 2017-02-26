@@ -12,6 +12,7 @@ if (CModule::IncludeModule("mobileapp"))
 	<!--<link href="<?=CUtil::GetAdditionalFileURL(SITE_TEMPLATE_PATH."/template_styles.css")?>" type="text/css" rel="stylesheet" />-->
 	<?//$APPLICATION->ShowHeadStrings();?>
         <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-3.1.1.min.js");?>
+        <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.maskedinput.min.js");?>
         <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/lightslider.min.js");?>
 	<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/script.js");?>
         <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/lightslider.css");?>
@@ -22,7 +23,7 @@ if (CModule::IncludeModule("mobileapp"))
         </script>
 </head>
 <body id="body" class="<?=$APPLICATION->ShowProperty("BodyClass");?>">
-<?//if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
+<?if (!CMobile::getInstance()->getDevice()) $APPLICATION->ShowPanel();?>
 <? if (!defined("NO_NAVIGATION")): ?>
     <div class="topbar">
         <table width="100%">
@@ -39,7 +40,7 @@ if (CModule::IncludeModule("mobileapp"))
                 </td>
                 <td class="right two">
                     <? if ($APPLICATION->GetCurDir() == "/app/"): ?>
-                     <a href="tel:+78005006964" class="btn-small"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_phone.svg" /></a>
+                     <a href="tel:+78005006964" class="btn-small hide-320px"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_phone.svg" /></a>
                      <? endif; ?>
                      
                      <?$APPLICATION->IncludeComponent(
@@ -47,7 +48,7 @@ if (CModule::IncludeModule("mobileapp"))
                     "header",
                     array(
                         "PATH_TO_BASKET" => "/app/personal/cart/",
-                        "PATH_TO_ORDER" => "/app/personal/order/make/",
+                        "PATH_TO_ORDER" => "/app/personal/order/",
                         "SHOW_NUM_PRODUCTS" => "Y",
                         "SHOW_TOTAL_PRICE" => "Y",
                         "SHOW_EMPTY_VALUES" => "Y",
@@ -63,7 +64,8 @@ if (CModule::IncludeModule("mobileapp"))
                         "SHOW_SUBSCRIBE" => "N",
                         "SHOW_IMAGE" => "Y",
                         "SHOW_PRICE" => "Y",
-                        "SHOW_SUMMARY" => "Y"
+                        "SHOW_SUMMARY" => "Y",
+                        "HIDE_ON_BASKET_PAGES" => "N"
                     ),
                     false
                 );?>
@@ -73,9 +75,10 @@ if (CModule::IncludeModule("mobileapp"))
             </tr>
         </table>
         <? if (!defined("NO_SEARCH")): ?>
-        <form class="search">
-            <input type="text" placeholder="Поиск по каталогу" />
+        <form class="search" action="/app/search/">
+            <input type="text" value="<?=$_REQUEST['q']?>" name="q" placeholder="Поиск по каталогу" />
             <button type="submit"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_search_input.svg" /></button>
+            <input type="hidden" name="how" value="r">
         </form>
         <? endif; ?>
         

@@ -87,7 +87,7 @@ $GLOBALS[$arParams['FILTER_NAME']] = array_merge($GLOBALS[$arParams['FILTER_NAME
 
 <?$intSectionID = $APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
-		"",
+		"main",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],

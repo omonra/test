@@ -235,7 +235,7 @@ src="https://www.facebook.com/tr?id=545296665642070&ev=PageView&noscript=1"
                         {
                             $arFields = $ob->GetFields();
                             #var_dump($arFields);
-                            $arElSelect = Array("ID", "NAME","DETAIL_PAGE_URL","DETAIL_PICTURE","PROPERTY_PRICE","PROPERTY_STARYE_TSENY","PROPERTY_MAXIMUM_PRICE","PROPERTY_comments_sum");
+                            $arElSelect = Array("ID", "NAME","DETAIL_PAGE_URL","DETAIL_PICTURE","PROPERTY_PRICE","PROPERTY_SALE","PROPERTY_NOVINKA","PROPERTY_comments_sum");
                             $arElFilter = Array("IBLOCK_ID"=>IntVal(4), "ID"=>$arFields["PROPERTY_PRODUCT_VALUE"]);
                             $resEl = CIBlockElement::GetList(Array(), $arElFilter, false, Array("nPageSize"=>1), $arElSelect);
                             while($obEl = $resEl->GetNextElement()) {
@@ -247,24 +247,26 @@ src="https://www.facebook.com/tr?id=545296665642070&ev=PageView&noscript=1"
                                 <ul class="b-list b-list_products items" style="margin-left: 35px;">
                                     <li class="item" id="bx_2125679677_395707">
                                         <a href="<?=$ar_res['DETAIL_PAGE_URL']?>" class="link" title="<?=$ar_res['NAME']?>">
-                                            <span class="new"></span>
+                                            
+                                            <? if (!empty($ar_res['PROPERTY_SALE_VALUE'])):?>    
+                                                <span class="sale"></span>
+                                            <? elseif (!empty($ar_res['PROPERTIES_NOVINKA_VALUE'])): ?>
+                                                    <span class="new"></span>
+                                            <? endif; ?>
+                                            
                                             <?$img = CFile::ResizeImageGet($ar_res['DETAIL_PICTURE'], Array("width" => 220, "height" => 276));?>
                                             <span class="img" style="background-image: url(<?=$img['src']?>)" alt="<?=$ar_res['NAME']?>">
                                     </span>
                                         </a>
                                         <a class="title" href="<?=$ar_res['DETAIL_PAGE_URL']?>" title="<?=$ar_res['NAME']?>"><?=$ar_res['NAME']?></a>
+                                        <? $ar_res['PRICE'] = CExFunctions::GetOptimalPrice($ar_res['ID']); ?>
                                         <div class="cost">
-                                            <?if((int)$ar_res["PROPERTY_STARYE_TSENY_VALUE"] > 0):?>
-                                                <strike><?=intval($ar_res["PROPERTY_STARYE_TSENY_VALUE"])?> руб.</strike>
-                                                <?if($ar_res["PROPERTY_PRICE_VALUE"]>0):?>
-                                                    <i><?=$ar_res["PROPERTY_PRICE_VALUE"]?> руб.</i>
-                                                <?endif;?>
-                                            <?else:?>
-                                                <?if($ar_res["PROPERTY_MAXIMUM_PRICE_VALUE"]>0):?>
-                                                    <?$max = explode(".",$ar_res["PROPERTY_MAXIMUM_PRICE_VALUE"]);?>
-                                                    <strong><?=$max[0]?> руб.</strong>
-                                                <?endif;?>
-                                            <?endif;?>
+                                            <? if (!empty($ar_res['PRICE']['OLD'])): ?>
+                                                <strike><?=$ar_res['PRICE']['OLD']['PRINT_VALUE']?></strike>
+                                                <i><?=$ar_res['PRICE']['PRINT_VALUE']?></i>
+                                            <? else: ?>
+                                                <strong><?=$ar_res['PRICE']['PRINT_VALUE']?></strong>
+                                            <? endif; ?>
                                         </div>
                                         <span class="stars">
                                             <?for ($i = round(intval($arItem['PROPERTY_COMMENTS_SUM_VALUE']) / intval($arItem['PROPERTY_COMMENTS_SUM_VALUE'])); $i > 0; $i--):?>
@@ -287,35 +289,60 @@ src="https://www.facebook.com/tr?id=545296665642070&ev=PageView&noscript=1"
                                     </li>
                                 </ul>
                                 <div style="clear: both"></div>
-                                <div class="jsTimer">
+                                <div class="jsTimer" id="clockdiv">
+                                    
+                                      <div class="jsTimerHour"></div>
+                                      <div class="jsTimerMinute"></div>
+                                      <div class="jsTimerSecon"></div>
                                 </div>
 
                             <?}?>
+                                
                             <script>
-                                var upgradeTime = <?=intval(MakeTimeStamp($arFields['PROPERTY_END_DATE_VALUE'], "DD.MM.YYYY HH:MI:SS")-getmicrotime())?>;
-                                var seconds = upgradeTime;
-                                function timer() {
-                                    var days        = Math.floor(seconds/24/60/60);
-                                    var hoursLeft   = Math.floor((seconds) - (days*86400));
-                                    var hours       = Math.floor(hoursLeft/3600);
-                                    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
-                                    var minutes     = Math.floor(minutesLeft/60);
-                                    var remainingSeconds = seconds % 60;
-                                    if(days<10){ days = "0"+days}
-                                    if(hours<10){ hours = "0"+hours}
-                                    if(minutes<10){ minutes = "0"+minutes}
-                                    if(remainingSeconds<10){ remainingSeconds = "0"+remainingSeconds}
-                                    document.querySelector('.jsTimer').innerHTML = '<span class="jsTimerHour">' + hours + "</span>" +
-                                        '<span class="jsTimerMinute">' + minutes + "</span><span class='jsTimerSecon'>" + remainingSeconds + "</span>";
-                                    if (seconds == 0) {
-                                        clearInterval(countdownTimer);
-                                        document.querySelector('.jsTimer').innerHTML = "Completed";
-                                    } else {
-                                        seconds--;
-                                    }
-                                }
-                                var countdownTimer = setInterval('timer()', 1000);
+                                
+                                function getTimeRemaining(endtime) {
+                                    var t = Date.parse(endtime) - Date.parse(new Date());
+                                    var seconds = Math.floor((t / 1000) % 60);
+                                    var minutes = Math.floor((t / 1000 / 60) % 60);
+                                    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+                                    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+                                    return {
+                                      'total': t,
+                                      'days': days,
+                                      'hours': hours,
+                                      'minutes': minutes,
+                                      'seconds': seconds
+                                    };
+                                  }
 
+                                  function initializeClock(id, endtime) {
+                                    var clock = document.getElementById(id);
+                                    var daysSpan = clock.querySelector('.days');
+                                    var hoursSpan = clock.querySelector('.jsTimerHour');
+                                    var minutesSpan = clock.querySelector('.jsTimerMinute');
+                                    var secondsSpan = clock.querySelector('.jsTimerSecon');
+
+                                    function updateClock() {
+                                      var t = getTimeRemaining(endtime);
+
+                                      //daysSpan.innerHTML = t.days;
+                                      hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                                      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                                      secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                                      if (t.total <= 0) {
+                                        clearInterval(timeinterval);
+                                      }
+                                    }
+
+                                    updateClock();
+                                    var timeinterval = setInterval(updateClock, 1000);
+                                  }
+
+                                  var deadline = new Date(Date.parse('<?=date("Y-m-d", MakeTimeStamp($arFields['PROPERTY_END_DATE_VALUE']))?>'));
+                                  initializeClock('clockdiv', deadline);
+                                
+                               
                             </script>
                         <?}?>
 

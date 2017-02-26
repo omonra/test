@@ -26,10 +26,11 @@ if ($arResult['NEW_DESIGN'])
     
     while ($arColor = $rsColors->fetch())
     {
-        $arColors[$arColor['NAME']] = $arColor['PREVIEW_PICTURE'];
+        $arColors[ucfirst($arColor['NAME'])] = CFile::GetPath($arColor['PREVIEW_PICTURE']);
         //print_r($arColor);
     }
-
+    
+    $arResult['COLORS_PICTURE'] = $arColors;
 
     $arResult['OFFERS_LIST'] = Array ();
     $arOffers = CCatalogSKU::getOffersList(Array ($arResult['ID']), CATALOG_IBLOCK_ID, Array('ACTIVE' => 'Y', '>CATALOG_QUANTITY' => 0), Array (
@@ -54,7 +55,7 @@ if ($arResult['NEW_DESIGN'])
 
             if (empty($arItem['PROPERTIES']['SIZE']['VALUE']) && !empty($arItem['PROPERTIES']['RAZMER']['VALUE']))
                 $arItem['PROPERTIES']['SIZE']['VALUE'] = $arItem['PROPERTIES']['RAZMER']['VALUE'];
-
+          
         if ($bFirst)
         {
             $arResult['COLOR_SELECTED'] = $arItem['PROPERTIES']['COLOR']['VALUE'];
@@ -64,10 +65,11 @@ if ($arResult['NEW_DESIGN'])
             $bFirst = false;
         }
         
+        $arItem['PROPERTIES']['COLOR']['VALUE'] = ucfirst($arItem['PROPERTIES']['COLOR']['VALUE']);
         $arFields = Array (
             'ID' => $arItem['ID'],
             'COLOR' => $arItem['PROPERTIES']['COLOR']['VALUE'],
-            'COLOR_PICTURE' => CFile::GetPath($arColors[$arItem['PROPERTIES']['COLOR']['VALUE']]),
+            'COLOR_PICTURE' => $arColors[$arItem['PROPERTIES']['COLOR']['VALUE']],
             'SIZE' => $arItem['PROPERTIES']['SIZE']['VALUE'],
             'QTY' => $arItem['CATALOG_QUANTITY']
         );

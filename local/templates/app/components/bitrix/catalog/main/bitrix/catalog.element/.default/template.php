@@ -31,7 +31,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
 <? if ($_REQUEST['description'] == 'y'): ?>
 <? $APPLICATION->RestartBuffer(); ?>
 <script>BXMobileApp.UI.Page.TopBar.show();</script>
-asd
+
 <? exit; ?>
 <? endif; ?>
 
@@ -40,6 +40,7 @@ asd
     window.currentColor = '<?= $arResult['COLOR_SELECTED'] ?>';
     window.currentSize = '<?= $arResult['SIZE_SELECTED'] ?>';
     window.currentOffer = '<?= $arResult['OFFER_SELECTED'] ?>';
+    window.colors = <?= CUtil::PhpToJSObject($arResult['COLORS_PICTURE']) ?>;
 </script>
 <div class="product-toolbar">
     
@@ -53,7 +54,7 @@ asd
             <td class="color">
                 
                 
-                <a href="" class="color">
+                <a href="" onclick="MobileApp.SelectColor(this);return false;" class="color">
                     <img src="<?=$productSelected['COLOR_PICTURE']?>" />
                 </a>
                
@@ -63,7 +64,11 @@ asd
                 <a href="#" onclick="MobileApp.ProductTableSizes(); return false;">Таблица размеров</a>
             </td>
             <td class="to-cart">
+                <? if (count($arResult['OFFERS_LIST']) > 0): ?>
                 <a href="#" onclick="MobileApp.BasketAdd(); return false;" class="to-cart">В корзину</a>
+                <? else: ?>
+                <a href="#" onclick="return false;" class="not-avaliable">Нет в наличии</a>
+                <? endif; ?>
             </td>
         </tr>
     </table>
@@ -87,7 +92,7 @@ asd
     <table width="100%">
         <tr>
             <td><a href="#" onclick="$('.success-basket-add').fadeOut(); return false;">Закрыть</a></td>
-            <td><a href="/app/personal/order/make/" class="orange">Оформить заказ</a></td>
+            <td><a href="/app/personal/cart/" class="orange">Оформить заказ</a></td>
         </tr>
     
     
@@ -239,19 +244,25 @@ asd
 
         },
         
-        SelectColor: function () {
+        SelectColor: function (element) {
             if (typeof offersList.COLOR == 'object') {
                 var colors = [];
-                $.each(offersList.SIZE, function (key, value) {
+                $.each(offersList.COLOR, function (key, value) {
                     colors.push(key);
                 });
-
+                
+                
+                                   
                 if (colors.length > 0)
                 {
                     BXMobileApp.UI.SelectPicker.show({
                         values: colors,
                         callback: function (data) {
                             window.currentColor = data.values[0];
+                            if (window.colors[window.currentColor] !== undefined) {
+                                $(element).find('img').attr('src', window.colors[window.currentColor]);
+                            }
+                            
                         }
                     });
 

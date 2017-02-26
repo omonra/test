@@ -2818,10 +2818,30 @@ a.prev.disabled {
         }
 
 .h-banner { padding-bottom: 10px; }
-.jsTimer { position: relative; margin-top: 20px; padding: 13px 5px 0px 5px; letter-spacing: 7px; text-align: center; background: url('/bitrix/templates/stolnik_gray_index/img/timer.png') no-repeat top center; background-size:241px 67px; font-size: 40px; line-height: 45px; min-height: 50px;}
-.jsTimerHour{  position: absolute; left: 49px;}
+/*.jsTimer { position: relative; margin-top: 20px; padding: 13px 5px 0px 5px; letter-spacing: 7px; text-align: center; background: url('/bitrix/templates/stolnik_gray_index/img/timer.png') no-repeat top center; background-size:241px 67px; font-size: 33px; line-height: 45px; min-height: 50px;}*/
+.jsTimer {
+    background: url('../images/timer_.png') no-repeat top left;
+    background-size:241px 67px;
+    width: 241px;
+    height: 67px;
+    margin: 10px auto 0 auto;
+    overflow: hidden;
+    padding-top: 17px;
+}
+.jsTimer > div {
+        float: left;
+    width: 80px;
+    height: 48px;
+    line-height: 42px;
+    letter-spacing: 24px;
+    font-size: 26px;
+    /* text-align: center; */
+    text-indent: 14px;
+    font-weight: bold;
+}
+/*.jsTimerHour{  position: absolute; left: 49px;}
 .jsTimerMinute { position: absolute; left: 122px;}
-.jsTimerSecon { position: absolute;     left: 196px;}
+.jsTimerSecon { position: absolute;     left: 196px;}*/
 .h-banner__title { font-size: 16px; line-height: 32px; color: #1c3316; text-transform: uppercase; text-align: center;}
 
 .jsFooterSlider { height: 195px; overflow: hidden;}

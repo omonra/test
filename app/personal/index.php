@@ -1,8 +1,10 @@
-<?php
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/app/headers.php");
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetTitle("Мой аккаунт");
+LocalRedirect('/app/personal/my/');
+?>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php")?>

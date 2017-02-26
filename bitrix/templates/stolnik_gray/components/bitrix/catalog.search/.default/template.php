@@ -46,6 +46,7 @@ if (!empty($arElements) && is_array($arElements))
 	$searchFilter = array(
 		"=ID" => $arElements,
 	);
+        $searchFilter = array_merge($searchFilter, GetCatalogSectionFilter());
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
 		".default",

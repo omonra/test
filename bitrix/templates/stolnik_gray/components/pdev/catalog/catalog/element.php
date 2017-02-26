@@ -1,5 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?$ElementID=$APPLICATION->IncludeComponent(
+<div itemscope itemtype="http://schema.org/Product">
+    <?$ElementID=$APPLICATION->IncludeComponent(
     "bitrix:catalog.element",
     "",
         
@@ -19,7 +20,7 @@
         "SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
         "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
         "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-        "CACHE_TIME" => "86400", // 1 день
+        "CACHE_TIME" => "21600", // 6 часов
         "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
         "SET_TITLE" => $arParams["SET_TITLE"],
         "SET_STATUS_404" => $arParams["SET_STATUS_404"],
@@ -49,6 +50,7 @@
     ),
     $component
 );?>
+</div>
 
 <?if($arParams["USE_REVIEW"]=="Y" && $ElementID):?>
     <div class="b-product-reviews" id="reviews_form">

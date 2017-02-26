@@ -1,7 +1,9 @@
 <div class="b-product-card g-clear item" data-id="<?=$arResult['ID']?>" data-offer-id="<?=$arResult['OFFER_ID']?>">
     <div class="b-product-card__info g-clear">
-        <h1 class="title"><?=$arResult['NAME']?></h1>
+        <h1 class="title" itemprop="name"><?=$arResult['NAME']?></h1>
         <div class="product-code"><?if (strlen($arResult['PROPERTIES']['CML2_ARTICLE']['VALUE']) > 0):?>Артикул: <?=$arResult['PROPERTIES']['CML2_ARTICLE']['VALUE']?>   |   <?endif;?><a href="<?=$arResult['SECTION']['SECTION_PAGE_URL']?>" title="<?=$arResult['SECTION']['NAME']?>"><?=$arResult['SECTION']['NAME']?></a></div>
+        
+        
         
         <div id="ajax-offers">
         
@@ -30,7 +32,8 @@
                 <strong class="value"><?=$arResult['PRICE']['PRINT_VALUE']?></strong>
                 <? endif; ?>
                 <? endif; ?>
-                
+                <span itemprop="price" style="display: none"><?=$arResult['PRICE']['VALUE']?></span>
+                <span itemprop="priceCurrency" style="display: none">RUB</span>
                 
             </div>
             <? if (count($arResult['OFFERS_LIST']['SIZE']) > 0): ?>
@@ -103,7 +106,7 @@
         <ul class="b-img-gallery js-img-gallery">
             <?foreach ($arResult['PICTURE'] as $key => $arPicture):?>
                 <li class="b-img-gallery__item">
-                    <a href="<?=$arResult['BIG_PICTURE'][$key]['SRC']?>" rel="gal" class="js-fancy"><img src="<?=$arPicture['SRC']?>" alt="<?=$arResult['NAME']?>" /><span class="zoomin">Увеличить</span></a>
+                    <a href="<?=$arResult['BIG_PICTURE'][$key]['SRC']?>" rel="gal" class="js-fancy"><img src="<?=$arPicture['SRC']?>" alt="<?=$arResult['NAME']?>" itemprop="image" /><span class="zoomin">Увеличить</span></a>
                 </li>
             <?endforeach;?>
         </ul>
@@ -112,6 +115,7 @@
         <?if (is_array($arResult['RECOMMENDED_PRODUCTS_IDS']) && count($arResult['RECOMMENDED_PRODUCTS_IDS']) > 0):?>
             <?
             $GLOBALS['arrRecommendedProductsFilter']['ID'] = $arResult['RECOMMENDED_PRODUCTS_IDS'];
+            $GLOBALS['arrRecommendedProductsFilter'] = array_merge($GLOBALS['arrRecommendedProductsFilter'], GetCatalogSectionFilter());
             ?>
             <?$APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
@@ -171,7 +175,7 @@
             <div class="b-title">
                 ОПИСАНИЕ И ХАРАКТЕРИСТИКИ
             </div>
-            <?if (strlen($arResult['DETAIL_TEXT']) > 0):?>
+            <span itemprop="description"><?if (strlen($arResult['DETAIL_TEXT']) > 0):?>
                 <?if ($arResult['DETAIL_TEXT_TYPE'] == 'text'):?>
                     <p><?=$arResult['DETAIL_TEXT']?></p>
                 <?else:?>
@@ -187,7 +191,7 @@
                         </tr>
                     <?endforeach;?>
                 </table>
-            <?endif;?>
+            <?endif;?></span>
 			<!---a href="#added-to-basket" class="b-btn button-buy double" style="background: rgb(255, 155, 0);">Добавить в корзину</a>
         </div>
     </div>
