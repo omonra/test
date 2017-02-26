@@ -75,9 +75,10 @@ if (CModule::IncludeModule("mobileapp"))
             </tr>
         </table>
         <? if (!defined("NO_SEARCH")): ?>
-        <form class="search">
-            <input type="text" placeholder="Поиск по каталогу" />
+        <form class="search" action="/app/search/">
+            <input type="text" value="<?=$_REQUEST['q']?>" name="q" placeholder="Поиск по каталогу" />
             <button type="submit"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_search_input.svg" /></button>
+            <input type="hidden" name="how" value="r">
         </form>
         <? endif; ?>
         

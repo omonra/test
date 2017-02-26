@@ -660,7 +660,8 @@ function GetCatalogSectionFilter() {
     return array(
         // '>CATALOG_PRICE_' . GetPriceId() => '0',
          'CATALOG_AVAILABLE' => 'Y',
-        '!DETAIL_PICTURE' => false
+        '!DETAIL_PICTURE' => false,
+        'ACTIVE' => 'Y'
     );
 }
 

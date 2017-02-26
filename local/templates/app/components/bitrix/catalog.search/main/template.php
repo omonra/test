@@ -12,7 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="search_page">
 <?
 $arElements = $APPLICATION->IncludeComponent(
 	"bitrix:search.page",
@@ -46,10 +45,9 @@ if (!empty($arElements) && is_array($arElements))
 	$searchFilter = array(
 		"=ID" => $arElements,
 	);
-        $searchFilter = array_merge($searchFilter, GetCatalogSectionFilter());
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
-		".default",
+		"main",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -115,9 +113,8 @@ if (!empty($arElements) && is_array($arElements))
 		array('HIDE_ICONS' => 'Y')
 	);
 }
-else
+elseif (is_array($arElements))
 {
 	echo GetMessage("CT_BCSE_NOT_FOUND");
 }
 ?>
-</div>

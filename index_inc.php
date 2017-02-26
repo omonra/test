@@ -67,7 +67,7 @@
 
 		<?
         $GLOBALS['arrSaleFilter']['!PROPERTY_SALE'] = false;
-        $GLOBALS['arrSaleFilter']['ACTIVE'] = 'Y';
+        $GLOBALS['arrSaleFilter'] = array_merge($GLOBALS['arrSaleFilter'], GetCatalogSectionFilter());
         //$GLOBALS['arrSaleFilter']['>CATALOG_QUANTITY'] = 0;
         //$arrNewProductsFilter['!PROPERTY_NOVINKA'] = 'true';
         ?>
