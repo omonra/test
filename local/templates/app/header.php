@@ -19,7 +19,14 @@ if (CModule::IncludeModule("mobileapp"))
 	<?CJSCore::Init('ajax');?>
 	<title><?$APPLICATION->ShowTitle()?></title>
         <script>
+        var lastNotification = BXMobileApp.PushManager.getLastNotification();
         
+        if (lastNotification !== undefined) 
+            BXMobileApp.PageManager.loadPageBlank({
+                url: lastNotification.params.open_page,
+                title: "Push"
+            });
+        }
         </script>
 </head>
 <body id="body" class="<?=$APPLICATION->ShowProperty("BodyClass");?>">
@@ -42,7 +49,7 @@ if (CModule::IncludeModule("mobileapp"))
                     <? if ($APPLICATION->GetCurDir() == "/app/"): ?>
                      <a href="tel:+78005006964" class="btn-small hide-320px"><img src="<?=SITE_TEMPLATE_PATH?>/images/svg/ico_topbar_phone.svg" /></a>
                      <? endif; ?>
-                     
+                     <span id="basket-header">
                      <?$APPLICATION->IncludeComponent(
                     "bitrix:sale.basket.basket.line",
                     "header",
@@ -69,6 +76,7 @@ if (CModule::IncludeModule("mobileapp"))
                     ),
                     false
                 );?>
+                     </span>
                      
                     
                 </td>

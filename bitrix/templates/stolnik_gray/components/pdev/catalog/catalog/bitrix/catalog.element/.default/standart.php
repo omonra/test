@@ -17,7 +17,7 @@
                 <span class="offer-qty">нет в наличии</span>
                 <? endif; ?>
             </div>
-            <div class="cost">
+            <div class="cost" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                 
                 <? if (!empty($arResult['PRICE']['PRINT_VALUE'])): ?>
                 <? if (!empty($arResult['PRICE']['OLD'])): ?>

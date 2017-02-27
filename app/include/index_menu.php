@@ -21,7 +21,6 @@ while ($arSection = $rsSections->fetch())
     $arNavigations[] = $arSection;
 }
 ?>
-<pre><? //print_r($arNavigations); ?></pre>
 <div class="index-menu">
     <? foreach ($arNavigations as $arNav): ?>
     <div class="item">
@@ -34,3 +33,21 @@ while ($arSection = $rsSections->fetch())
     </div>
     <? endforeach; ?>
 </div>
+<script>
+$("body").on('click', ".index-menu .item > a", function (event) {
+    var items = $(this).parent().find('.items');
+    if (items.find(">a").length > 0)
+    {
+        event.preventDefault();
+        var offsetTop = $(this).offset().top;
+        
+        items.slideDown('slow', function () {
+            
+            var body = $("html, body");
+            body.stop().animate({scrollTop:offsetTop}, '500', 'swing');
+        });
+        
+        return false;
+    }
+});
+</script>

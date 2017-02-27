@@ -6,7 +6,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_be
 $APPLICATION->IncludeComponent(
         "bitrix:sale.basket.basket.line", "header", array(
     "PATH_TO_BASKET" => "/app/personal/cart/",
-    "PATH_TO_ORDER" => "/app/personal/order/make/",
+    "PATH_TO_ORDER" => "/app/personal/order/",
     "SHOW_NUM_PRODUCTS" => "Y",
     "SHOW_TOTAL_PRICE" => "Y",
     "SHOW_EMPTY_VALUES" => "Y",

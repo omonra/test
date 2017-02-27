@@ -232,6 +232,7 @@ $productSelected = $arResult['OFFERS_LIST']['COLOR'][$arResult['COLOR_SELECTED']
                                     success: function(response) {
                                         if (response.ok) {
                                             $('.success-basket-add').fadeIn();
+                                            BX.ajax.insertToNode('/app/ajax/basket.php','basket-header');
                                         }
                                     }
                                 });
