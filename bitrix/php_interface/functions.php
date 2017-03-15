@@ -459,8 +459,8 @@ function toutf8_deep($value) {
 
 function GetAvailableSortOrder() {
     return array(
-        'price_asc' => array('PROPERTY_PRICE', 'по возрастанию цены'),
-        'price_desc' => array('PROPERTY_PRICE', 'по убыванию цены'),
+        'price_asc' => array('PROPERTY_MINIMUM_PRICE', 'по возрастанию цены'),
+        'price_desc' => array('PROPERTY_MINIMUM_PRICE', 'по убыванию цены'),
         'popularity_desc' => array('SHOW_COUNTER', 'по популярности'),
         'name_asc' => array('NAME', 'по названию'),
         'new_desc' => array('PROPERTY_NOVINKA', 'по новинкам'),
